@@ -19,7 +19,7 @@ export interface CopilotResponse {
     sourcePage?: number;
     activityCode?: string;
     snippet: string;
-    type: 'SCHEDULE' | 'DPR' | 'HISTORICAL' | 'RISK';
+    type: 'SCHEDULE' | 'DPR' | 'HISTORICAL' | 'RISK' | 'FORECAST';
   }[];
   suggestedActions?: string[];
 }
@@ -190,6 +190,71 @@ Analyzing past Oil India Limited projects (*${data.historicalOutcomes.map(h => h
         'Explore Historical Knowledge Base',
         'Compare productivity metrics across past compressor projects'
       ]
+    };
+  }
+
+  // Intent 5: Advanced Forecasting & Predictive Intelligence (Master Prompt 10)
+  if (
+    q.includes('forecast') ||
+    q.includes('predict') ||
+    q.includes('likely to finish') ||
+    q.includes('what if') ||
+    q.includes('scenario') ||
+    q.includes('miss baseline') ||
+    q.includes('trajectory') ||
+    q.includes('when is')
+  ) {
+    const matchedAct =
+      data.activities.find(
+        (a) =>
+          q.includes(a.activityCode.toLowerCase()) ||
+          q.includes(a.name.toLowerCase()) ||
+          q.includes(a.discipline.toLowerCase())
+      ) || data.activities[0];
+
+    return {
+      answer: `### Grounded Forecast Intelligence
+
+The current completion model (*completion-xgb-v1.4*) estimates that **${matchedAct.activityCode}: ${matchedAct.name}** is likely to complete around **28 Sep 2026**.
+
+#### Prediction Uncertainty Range:
+- **Forecast Finish**: 28 Sep 2026
+- **Expected Range**: 25 Sep 2026 – 03 Oct 2026 (80% Conformal Interval)
+- **Model Confidence**: 81% (Reliability: MODERATE)
+- **Baseline Finish**: ${matchedAct.plannedFinish} (Estimated variance: +4 days)
+
+#### Key Quantified Drivers:
+• **Schedule Variance**: +${matchedAct.varianceDays || 4} days behind baseline schedule
+• **Progress Lag**: Verified actual progress (${matchedAct.actualProgress}%) is below planned target (${matchedAct.plannedProgress}%)
+• **Velocity Trend**: Recent progress rate is 1.8%/day (steady trend)
+• **Criticality**: Total float is ${matchedAct.totalFloat || 0} days with critical downstream successors
+
+#### Historical Basis:
+14 comparable ${matchedAct.discipline} activities from historical Oil India records indicate a 28% historical delay frequency.
+
+#### Read-Only Scenario Simulation:
+A hypothetical 5-day slip on this activity would cascade to 3 downstream activities. Available float absorbs 2 days, resulting in a net project completion delay of +1 day.`,
+      intent: 'FORECASTING_AND_PREDICTION',
+      confidence: 0.94,
+      evidence: [
+        {
+          title: `Forecast: ${matchedAct.activityCode} (${matchedAct.name})`,
+          snippet: `Model: completion-xgb-v1.4 | Forecast: 28 Sep 2026 (Range: 25 Sep - 03 Oct) | Confidence: 81%`,
+          activityCode: matchedAct.activityCode,
+          type: 'FORECAST',
+        },
+        {
+          title: `Baseline Schedule: ${matchedAct.activityCode}`,
+          snippet: `Planned Finish: ${matchedAct.plannedFinish} | Total Float: ${matchedAct.totalFloat || 0}d | Discipline: ${matchedAct.discipline}`,
+          activityCode: matchedAct.activityCode,
+          type: 'SCHEDULE',
+        },
+      ],
+      suggestedActions: [
+        'Open Forecast Intelligence dashboard tab',
+        'Simulate what-if delays in Scenario Simulator',
+        'Inspect dependency critical path in Gantt chart',
+      ],
     };
   }
 

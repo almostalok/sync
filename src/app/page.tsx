@@ -13,6 +13,7 @@ import { RiskRadarView } from '@/components/RiskRadarView';
 import { HistoricalIntelligenceView } from '@/components/HistoricalIntelligenceView';
 import { CopilotView } from '@/components/CopilotView';
 import { VoiceReporterView } from '@/components/VoiceReporterView';
+import { ForecastIntelligenceView } from '@/components/ForecastIntelligenceView';
 import { BenchmarkView } from '@/components/BenchmarkView';
 import { AuditLogView } from '@/components/AuditLogView';
 import { DemoScriptModal } from '@/components/DemoScriptModal';
@@ -40,6 +41,7 @@ export default function Home() {
           {state.activeView === 'history' && <HistoricalIntelligenceView />}
           {state.activeView === 'copilot' && <CopilotView />}
           {state.activeView === 'voice' && <VoiceReporterView />}
+          {state.activeView === 'forecast' && <ForecastIntelligenceView />}
           {state.activeView === 'benchmark' && <BenchmarkView />}
           {state.activeView === 'audit' && <AuditLogView />}
         </main>

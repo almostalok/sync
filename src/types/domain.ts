@@ -91,11 +91,15 @@ export interface Activity {
   status: ActivityStatus;
   varianceDays: number; // positive = behind schedule, negative = ahead
   criticalPath?: boolean;
+  totalFloat?: number;
+  freeFloat?: number;
+  isMilestone?: boolean;
   aliases?: string[];
   lastUpdateDate?: string;
   isStale?: boolean;
   predecessorIds?: string[];
   successorIds?: string[];
+  updatedAt?: string;
 }
 
 export interface Dependency {
@@ -302,3 +306,4 @@ export interface BenchmarkMetrics {
 
 export * from '../../packages/types/src/copilot';
 export * from '../../packages/types/src/voice';
+export * from '../../packages/types/src/forecasting';

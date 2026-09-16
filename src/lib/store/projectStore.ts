@@ -37,7 +37,7 @@ export interface ProjectState {
   staleActivities: Activity[];
   scheduleMetrics: ScheduleMetrics;
   benchmarkMetrics: BenchmarkMetrics | null;
-  activeView: 'dashboard' | 'gantt' | 'review' | 'reports' | 'evidence' | 'risks' | 'copilot' | 'voice' | 'benchmark' | 'history' | 'audit';
+  activeView: 'dashboard' | 'gantt' | 'review' | 'reports' | 'evidence' | 'risks' | 'copilot' | 'voice' | 'forecast' | 'benchmark' | 'history' | 'audit';
   selectedActivityId: string | null;
   selectedReportId: string | null;
   selectedEventId: string | null;

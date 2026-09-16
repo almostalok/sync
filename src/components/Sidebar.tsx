@@ -15,7 +15,8 @@ import {
   Mic, 
   BarChart2, 
   BookOpen, 
-  History 
+  History,
+  TrendingUp 
 } from 'lucide-react';
 
 interface NavItem {
@@ -68,6 +69,7 @@ export const Sidebar: React.FC = () => {
           badge: highRiskCount > 0 ? `${highRiskCount} High` : undefined,
           badgeColor: 'bg-rose-500/20 text-rose-300 border border-rose-500/40'
         },
+        { id: 'forecast', label: 'Forecast & Scenarios', icon: TrendingUp, badge: 'New', badgeColor: 'bg-indigo-900/60 text-indigo-300' },
         { id: 'copilot', label: 'Grounded Copilot', icon: Sparkles, badge: 'AI', badgeColor: 'bg-purple-900/60 text-purple-300' },
         { id: 'voice', label: 'Voice Field Memo', icon: Mic, badge: 'Live', badgeColor: 'bg-emerald-900/60 text-emerald-300' },
         { id: 'benchmark', label: 'Benchmark & Baselines', icon: BarChart2 },
