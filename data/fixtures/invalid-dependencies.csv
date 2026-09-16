@@ -1,0 +1,5 @@
+Activity ID,WBS Code,Name,Description,Discipline,Location,Planned Start,Planned Finish,Duration Days,Planned Progress,Actual Progress,Status,Predecessors,Dependency Type
+ACT-A,1.1.1.1,Activity Alpha,First step,CIVIL,Site,2026-03-01,2026-03-10,10,0.0,0.0,NOT_STARTED,ACT-C,FS
+ACT-B,1.1.1.1,Activity Beta,Second step,CIVIL,Site,2026-03-11,2026-03-20,10,0.0,0.0,NOT_STARTED,ACT-A,FS
+ACT-C,1.1.1.1,Activity Gamma,Third step forming cycle,CIVIL,Site,2026-03-21,2026-03-30,10,0.0,0.0,NOT_STARTED,ACT-B,FS
+ACT-SELF,1.1.1.1,Activity Self,Self dependent,CIVIL,Site,2026-03-01,2026-03-10,10,0.0,0.0,NOT_STARTED,ACT-SELF,FS

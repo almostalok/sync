@@ -1,0 +1,11 @@
+Activity ID,WBS Code,Name,Description,Discipline,Location,Planned Start,Planned Finish,Duration Days,Planned Progress,Actual Progress,Status,Predecessors,Dependency Type
+CIV-EXC-0010,1.1.1.1,Site Excavation Pit A,Bulk soil excavation for pit A,CIVIL,Compressor Area,2026-03-01,2026-03-10,10,1.0,1.0,COMPLETED,,FS
+CIV-PCC-0010,1.1.1.1,Blinding PCC Layer,Pouring plain concrete base,CIVIL,Compressor Area,2026-03-11,2026-03-15,5,1.0,1.0,COMPLETED,CIV-EXC-0010,FS
+CIV-REINF-0010,1.1.1.1,Foundation Rebar Fixing,Fixing heavy rebar cage,CIVIL,Compressor Area,2026-03-16,2026-03-25,10,0.8,0.75,IN_PROGRESS,CIV-PCC-0010,FS
+CIV-FORM-0010,1.1.1.1,Foundation Formwork,Erecting steel shuttering,CIVIL,Compressor Area,2026-03-26,2026-04-02,8,0.0,0.0,NOT_STARTED,CIV-REINF-0010,FS
+CIV-CONC-0010,1.1.1.1,Structural Concrete Pour,Casting main compressor plinth,CIVIL,Compressor Area,2026-04-03,2026-04-12,10,0.0,0.0,NOT_STARTED,CIV-FORM-0010,FS
+MECH-POS-0010,1.3.1.1,Compressor Skid Positioning,Rigging compressor base skid,MECHANICAL,Compressor Area,2026-04-13,2026-04-20,8,0.0,0.0,NOT_STARTED,CIV-CONC-0010,FS
+PIP-FAB-0010,1.2.1.1,Suction Spool Fabrication,Cutting and welding spool pieces,PIPING,Process Area,2026-03-15,2026-04-05,22,0.9,0.9,IN_PROGRESS,,FS
+PIP-ERECT-0010,1.2.1.1,Suction Header Erection,Rigging spool to compressor nozzle,PIPING,Compressor Area,2026-04-21,2026-04-30,10,0.0,0.0,NOT_STARTED,MECH-POS-0010;PIP-FAB-0010,FS
+ELEC-CAB-0010,1.4.1.1,MV Power Cable Pulling,Pulling 6.6kV cable to skid,ELECTRICAL,Compressor Area,2026-04-25,2026-05-05,11,0.0,0.0,NOT_STARTED,MECH-POS-0010,FS
+INST-CAL-0010,1.5.1.1,Vibration Probe Calibration,Bench calibration of sensors,INSTRUMENTATION,Control Room,2026-04-20,2026-04-28,9,0.0,0.0,NOT_STARTED,,FS

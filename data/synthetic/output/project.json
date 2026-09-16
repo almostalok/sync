@@ -1,0 +1,12 @@
+{
+  "id": "proj-cse-2026",
+  "code": "CSE-2026",
+  "name": "Compressor Station Expansion",
+  "description": "Comprehensive engineering, procurement, and construction of gas booster compressor trains and utility systems.",
+  "location": "Duliajan, Assam (OIL Production Facility)",
+  "status": "ACTIVE",
+  "plannedStart": "2026-03-01T08:00:00.000Z",
+  "plannedFinish": "2026-10-27T08:00:00.000Z",
+  "plannedProgress": 0.62,
+  "actualProgress": 0.54
+}

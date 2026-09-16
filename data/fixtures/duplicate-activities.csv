@@ -1,0 +1,3 @@
+Activity ID,WBS Code,Name,Description,Discipline,Location,Planned Start,Planned Finish,Duration Days,Planned Progress,Actual Progress,Status,Predecessors,Dependency Type
+CIV-DUP-0001,1.1.1.1,Excavation North,North excavation,CIVIL,Compressor Area,2026-03-01,2026-03-10,10,0.0,0.0,NOT_STARTED,,FS
+CIV-DUP-0001,1.1.1.1,Excavation South (Duplicate ID),South excavation with duplicate ID,CIVIL,Compressor Area,2026-03-11,2026-03-20,10,0.0,0.0,NOT_STARTED,,FS

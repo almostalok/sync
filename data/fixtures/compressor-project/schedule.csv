@@ -1,0 +1,18 @@
+ActivityCode,Name,Discipline,Location,PlannedStart,PlannedFinish,PlannedDuration,CriticalPath
+CIV-EXC-042,Compressor Foundation Excavation,CIVIL,Compressor Area - North,2026-09-10,2026-09-18,8,TRUE
+CIV-PCC-043,Plain Cement Concrete (PCC) Sub-base Pouring,CIVIL,Compressor Area - North,2026-09-19,2026-09-22,3,TRUE
+CIV-REB-044,Foundation Reinforcement Steel Binding,CIVIL,Compressor Area - North,2026-09-23,2026-09-28,5,TRUE
+CIV-FRM-045,Foundation Shuttering & Formwork Installation,CIVIL,Compressor Area - North,2026-09-29,2026-10-02,3,TRUE
+CIV-CON-046,Compressor Pedestal RCC Heavy Concrete Pour,CIVIL,Compressor Area - North,2026-10-03,2026-10-08,5,TRUE
+PIP-FAB-101,Header Pipe Spool Fabrication & Cutting,PIPING,Fabrication Yard / Pipe Rack,2026-09-01,2026-09-12,11,FALSE
+PIP-WLD-102,Header Spool 12 Tie-in Joint Welding,PIPING,Interconnecting Pipe Rack - Bay 3,2026-09-12,2026-09-17,5,TRUE
+PIP-NDT-103,Radiography Testing (RT) & NDT of Header Welds,PIPING,Interconnecting Pipe Rack - Bay 3,2026-09-17,2026-09-19,2,TRUE
+PIP-HYD-104,Hydrostatic Pressure Testing of Gas Header System,PIPING,Manifold Area,2026-09-20,2026-09-25,5,TRUE
+MEC-SKD-201,Centrifugal Gas Compressor Skid Unloading & Placement,MECHANICAL,Compressor Area,2026-10-10,2026-10-15,5,TRUE
+MEC-ALN-202,Gas Turbine & Compressor Shaft Precision Alignment,MECHANICAL,Compressor Area,2026-10-16,2026-10-22,6,TRUE
+ELE-TRY-301,Cable Tray Support Fabrication & Routing,ELECTRICAL,Substation Yard,2026-09-05,2026-09-14,9,FALSE
+ELE-CAB-302,Medium Voltage 6.6kV Power Cable Pulling in Tray,ELECTRICAL,Substation Yard,2026-09-12,2026-09-18,6,FALSE
+ELE-TRM-303,6.6kV Switchgear Incomer Cable Termination & Hi-Pot,ELECTRICAL,Substation Control Room,2026-09-19,2026-09-24,5,FALSE
+INS-TRN-401,Pressure & Temperature Transmitter Field Calibration,INSTRUMENTATION,Compressor Area / Control Room,2026-09-10,2026-09-18,8,FALSE
+INS-LOP-402,Emergency Shutdown (ESD) System PLC Loop Checking,INSTRUMENTATION,Control Room,2026-09-25,2026-10-05,10,TRUE
+HSE-ENV-501,Perimeter Drainage Trench Earthwork & Bunding,HSE,Perimeter Boundary,2026-09-08,2026-09-15,7,FALSE

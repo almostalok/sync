@@ -1,0 +1,1402 @@
+[
+  {
+    "eventId": "evt-proj-cse-2026-00001",
+    "groundTruthActivityId": null,
+    "difficultyLevel": 7
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00002",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-rein-0060",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-civ-rein-0004",
+      "proj-cse-2026-act-civ-rein-0012",
+      "proj-cse-2026-act-civ-rein-0020"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00003",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-hydr-0047",
+    "difficultyLevel": 4,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00004",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-grou-0120",
+    "difficultyLevel": 6,
+    "subScope": "North Section / Bay 1"
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00005",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-hydr-0055",
+    "difficultyLevel": 3,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00006",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-grou-0016",
+    "difficultyLevel": 3,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00007",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-fabr-0026",
+    "difficultyLevel": 3,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00008",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-back-0047",
+    "difficultyLevel": 2,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00009",
+    "groundTruthActivityId": null,
+    "difficultyLevel": 7
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00010",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-form-0021",
+    "difficultyLevel": 1,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00011",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-insu-0041",
+    "difficultyLevel": 2,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00012",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-pcc-0107",
+    "difficultyLevel": 4,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00013",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-grou-0104",
+    "difficultyLevel": 4,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00014",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-erec-0019",
+    "difficultyLevel": 3,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00015",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-rein-0020",
+    "difficultyLevel": 1,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00016",
+    "groundTruthActivityId": null,
+    "difficultyLevel": 7
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00017",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-fabr-0050",
+    "difficultyLevel": 6,
+    "subScope": "Block A Level 1"
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00018",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-weld-0045",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-pip-weld-0005",
+      "proj-cse-2026-act-pip-weld-0013",
+      "proj-cse-2026-act-pip-weld-0021"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00019",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-exca-0066",
+    "difficultyLevel": 1,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00020",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-form-0077",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-civ-form-0005",
+      "proj-cse-2026-act-civ-form-0013",
+      "proj-cse-2026-act-civ-form-0021"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00021",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-fabr-0026",
+    "difficultyLevel": 1,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00022",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-insu-0065",
+    "difficultyLevel": 1,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00023",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-form-0133",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-civ-form-0005",
+      "proj-cse-2026-act-civ-form-0013",
+      "proj-cse-2026-act-civ-form-0021"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00024",
+    "groundTruthActivityId": null,
+    "difficultyLevel": 7
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00025",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-grou-0104",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-civ-grou-0008",
+      "proj-cse-2026-act-civ-grou-0016",
+      "proj-cse-2026-act-civ-grou-0024"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00026",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-hydr-0023",
+    "difficultyLevel": 4,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00027",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-grou-0128",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-civ-grou-0008",
+      "proj-cse-2026-act-civ-grou-0016",
+      "proj-cse-2026-act-civ-grou-0024"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00028",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-fitu-0052",
+    "difficultyLevel": 3,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00029",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-conc-0102",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-civ-conc-0006",
+      "proj-cse-2026-act-civ-conc-0014",
+      "proj-cse-2026-act-civ-conc-0022"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00030",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-ndt-0014",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-pip-ndt-0006",
+      "proj-cse-2026-act-pip-ndt-0014",
+      "proj-cse-2026-act-pip-ndt-0022"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00031",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-pcc-0075",
+    "difficultyLevel": 1,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00032",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-insu-0001",
+    "difficultyLevel": 2,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00033",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-conc-0046",
+    "difficultyLevel": 4,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00034",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-grou-0024",
+    "difficultyLevel": 3,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00035",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-clea-0001",
+    "difficultyLevel": 6,
+    "subScope": "Block A Level 1"
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00036",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-conc-0118",
+    "difficultyLevel": 2,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00037",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-hydr-0039",
+    "difficultyLevel": 1,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00038",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-back-0055",
+    "difficultyLevel": 1,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00039",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-pcc-0051",
+    "difficultyLevel": 6,
+    "subScope": "Zone East"
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00040",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-conc-0126",
+    "difficultyLevel": 6,
+    "subScope": "Zone East"
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00041",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-clea-0121",
+    "difficultyLevel": 6,
+    "subScope": "Zone East"
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00042",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-grou-0104",
+    "difficultyLevel": 1,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00043",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-pcc-0075",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-civ-pcc-0003",
+      "proj-cse-2026-act-civ-pcc-0011",
+      "proj-cse-2026-act-civ-pcc-0019"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00044",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-conc-0006",
+    "difficultyLevel": 6,
+    "subScope": "Block A Level 1"
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00045",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-clea-0105",
+    "difficultyLevel": 1,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00046",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-erec-0035",
+    "difficultyLevel": 4,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00047",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-fitu-0028",
+    "difficultyLevel": 2,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00048",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-erec-0011",
+    "difficultyLevel": 4,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00049",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-conc-0094",
+    "difficultyLevel": 2,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00050",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-flus-0056",
+    "difficultyLevel": 6,
+    "subScope": "North Section / Bay 1"
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00051",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-erec-0027",
+    "difficultyLevel": 6,
+    "subScope": "North Section / Bay 1"
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00052",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-rein-0092",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-civ-rein-0004",
+      "proj-cse-2026-act-civ-rein-0012",
+      "proj-cse-2026-act-civ-rein-0020"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00053",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-rein-0036",
+    "difficultyLevel": 3,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00054",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-conc-0062",
+    "difficultyLevel": 4,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00055",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-clea-0041",
+    "difficultyLevel": 6,
+    "subScope": "Block A Level 1"
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00056",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-ndt-0006",
+    "difficultyLevel": 3,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00057",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-clea-0017",
+    "difficultyLevel": 6,
+    "subScope": "South Section / Bay 2"
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00058",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-ndt-0014",
+    "difficultyLevel": 1,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00059",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-back-0015",
+    "difficultyLevel": 4,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00060",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-conc-0054",
+    "difficultyLevel": 4,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00061",
+    "groundTruthActivityId": null,
+    "difficultyLevel": 7
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00062",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-hydr-0063",
+    "difficultyLevel": 6,
+    "subScope": "Block A Level 1"
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00063",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-form-0085",
+    "difficultyLevel": 4,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00064",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-clea-0017",
+    "difficultyLevel": 4,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00065",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-exca-0034",
+    "difficultyLevel": 3,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00066",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-clea-0089",
+    "difficultyLevel": 6,
+    "subScope": "Zone East"
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00067",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-back-0015",
+    "difficultyLevel": 6,
+    "subScope": "Block A Level 1"
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00068",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-rein-0132",
+    "difficultyLevel": 1,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00069",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-weld-0037",
+    "difficultyLevel": 4,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00070",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-pcc-0123",
+    "difficultyLevel": 4,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00071",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-pcc-0075",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-civ-pcc-0003",
+      "proj-cse-2026-act-civ-pcc-0011",
+      "proj-cse-2026-act-civ-pcc-0019"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00072",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-exca-0066",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-civ-exca-0002",
+      "proj-cse-2026-act-civ-exca-0010",
+      "proj-cse-2026-act-civ-exca-0018"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00073",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-conc-0070",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-civ-conc-0006",
+      "proj-cse-2026-act-civ-conc-0014",
+      "proj-cse-2026-act-civ-conc-0022"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00074",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-conc-0014",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-civ-conc-0006",
+      "proj-cse-2026-act-civ-conc-0014",
+      "proj-cse-2026-act-civ-conc-0022"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00075",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-rein-0036",
+    "difficultyLevel": 2,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00076",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-flus-0040",
+    "difficultyLevel": 3,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00077",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-conc-0006",
+    "difficultyLevel": 4,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00078",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-hydr-0023",
+    "difficultyLevel": 3,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00079",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-exca-0082",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-civ-exca-0002",
+      "proj-cse-2026-act-civ-exca-0010",
+      "proj-cse-2026-act-civ-exca-0018"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00080",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-grou-0096",
+    "difficultyLevel": 1,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00081",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-conc-0134",
+    "difficultyLevel": 6,
+    "subScope": "Zone East"
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00082",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-back-0015",
+    "difficultyLevel": 6,
+    "subScope": "South Section / Bay 2"
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00083",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-form-0037",
+    "difficultyLevel": 3,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00084",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-rein-0020",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-civ-rein-0004",
+      "proj-cse-2026-act-civ-rein-0012",
+      "proj-cse-2026-act-civ-rein-0020"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00085",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-insu-0025",
+    "difficultyLevel": 1,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00086",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-form-0133",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-civ-form-0005",
+      "proj-cse-2026-act-civ-form-0013",
+      "proj-cse-2026-act-civ-form-0021"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00087",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-conc-0070",
+    "difficultyLevel": 4,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00088",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-exca-0122",
+    "difficultyLevel": 2,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00089",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-grou-0080",
+    "difficultyLevel": 4,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00090",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-erec-0043",
+    "difficultyLevel": 3,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00091",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-rein-0084",
+    "difficultyLevel": 3,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00092",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-clea-0081",
+    "difficultyLevel": 1,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00093",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-form-0037",
+    "difficultyLevel": 3,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00094",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-exca-0050",
+    "difficultyLevel": 6,
+    "subScope": "Zone East"
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00095",
+    "groundTruthActivityId": null,
+    "difficultyLevel": 7
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00096",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-rein-0060",
+    "difficultyLevel": 4,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00097",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-back-0135",
+    "difficultyLevel": 3,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00098",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-rein-0108",
+    "difficultyLevel": 2,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00099",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-exca-0050",
+    "difficultyLevel": 6,
+    "subScope": "North Section / Bay 1"
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00100",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-grou-0120",
+    "difficultyLevel": 4,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00101",
+    "groundTruthActivityId": null,
+    "difficultyLevel": 7
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00102",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-erec-0003",
+    "difficultyLevel": 3,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00103",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-grou-0024",
+    "difficultyLevel": 1,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00104",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-pcc-0043",
+    "difficultyLevel": 3,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00105",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-clea-0009",
+    "difficultyLevel": 2,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00106",
+    "groundTruthActivityId": null,
+    "difficultyLevel": 7
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00107",
+    "groundTruthActivityId": null,
+    "difficultyLevel": 7
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00108",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-rein-0076",
+    "difficultyLevel": 4,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00109",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-hydr-0007",
+    "difficultyLevel": 4,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00110",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-fabr-0002",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-pip-fabr-0002",
+      "proj-cse-2026-act-pip-fabr-0010",
+      "proj-cse-2026-act-pip-fabr-0018"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00111",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-fabr-0042",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-pip-fabr-0002",
+      "proj-cse-2026-act-pip-fabr-0010",
+      "proj-cse-2026-act-pip-fabr-0018"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00112",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-conc-0110",
+    "difficultyLevel": 2,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00113",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-fitu-0044",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-pip-fitu-0004",
+      "proj-cse-2026-act-pip-fitu-0012",
+      "proj-cse-2026-act-pip-fitu-0020"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00114",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-weld-0053",
+    "difficultyLevel": 4,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00115",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-exca-0074",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-civ-exca-0002",
+      "proj-cse-2026-act-civ-exca-0010",
+      "proj-cse-2026-act-civ-exca-0018"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00116",
+    "groundTruthActivityId": null,
+    "difficultyLevel": 7
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00117",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-pcc-0059",
+    "difficultyLevel": 4,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00118",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-ndt-0038",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-pip-ndt-0006",
+      "proj-cse-2026-act-pip-ndt-0014",
+      "proj-cse-2026-act-pip-ndt-0022"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00119",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-fitu-0060",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-pip-fitu-0004",
+      "proj-cse-2026-act-pip-fitu-0012",
+      "proj-cse-2026-act-pip-fitu-0020"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00120",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-exca-0058",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-civ-exca-0002",
+      "proj-cse-2026-act-civ-exca-0010",
+      "proj-cse-2026-act-civ-exca-0018"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00121",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-conc-0030",
+    "difficultyLevel": 2,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00122",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-hydr-0055",
+    "difficultyLevel": 3,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00123",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-fitu-0028",
+    "difficultyLevel": 1,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00124",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-rein-0068",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-civ-rein-0004",
+      "proj-cse-2026-act-civ-rein-0012",
+      "proj-cse-2026-act-civ-rein-0020"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00125",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-conc-0110",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-civ-conc-0006",
+      "proj-cse-2026-act-civ-conc-0014",
+      "proj-cse-2026-act-civ-conc-0022"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00126",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-form-0029",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-civ-form-0005",
+      "proj-cse-2026-act-civ-form-0013",
+      "proj-cse-2026-act-civ-form-0021"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00127",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-clea-0057",
+    "difficultyLevel": 6,
+    "subScope": "North Section / Bay 1"
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00128",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-weld-0045",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-pip-weld-0005",
+      "proj-cse-2026-act-pip-weld-0013",
+      "proj-cse-2026-act-pip-weld-0021"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00129",
+    "groundTruthActivityId": null,
+    "difficultyLevel": 7
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00130",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-insu-0065",
+    "difficultyLevel": 1,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00131",
+    "groundTruthActivityId": null,
+    "difficultyLevel": 7
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00132",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-back-0039",
+    "difficultyLevel": 6,
+    "subScope": "Zone East"
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00133",
+    "groundTruthActivityId": null,
+    "difficultyLevel": 7
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00134",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-clea-0065",
+    "difficultyLevel": 6,
+    "subScope": "North Section / Bay 1"
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00135",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-fitu-0004",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-pip-fitu-0004",
+      "proj-cse-2026-act-pip-fitu-0012",
+      "proj-cse-2026-act-pip-fitu-0020"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00136",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-fabr-0034",
+    "difficultyLevel": 3,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00137",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-conc-0078",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-civ-conc-0006",
+      "proj-cse-2026-act-civ-conc-0014",
+      "proj-cse-2026-act-civ-conc-0022"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00138",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-grou-0096",
+    "difficultyLevel": 4,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00139",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-form-0117",
+    "difficultyLevel": 4,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00140",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-grou-0096",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-civ-grou-0008",
+      "proj-cse-2026-act-civ-grou-0016",
+      "proj-cse-2026-act-civ-grou-0024"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00141",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-conc-0086",
+    "difficultyLevel": 6,
+    "subScope": "Block A Level 1"
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00142",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-rein-0020",
+    "difficultyLevel": 6,
+    "subScope": "Block A Level 1"
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00143",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-flus-0016",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-pip-flus-0008",
+      "proj-cse-2026-act-pip-flus-0016",
+      "proj-cse-2026-act-pip-flus-0024"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00144",
+    "groundTruthActivityId": null,
+    "difficultyLevel": 7
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00145",
+    "groundTruthActivityId": null,
+    "difficultyLevel": 7
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00146",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-back-0127",
+    "difficultyLevel": 4,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00147",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-form-0093",
+    "difficultyLevel": 4,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00148",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-fabr-0010",
+    "difficultyLevel": 1,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00149",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-rein-0092",
+    "difficultyLevel": 3,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00150",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-grou-0048",
+    "difficultyLevel": 3,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00151",
+    "groundTruthActivityId": null,
+    "difficultyLevel": 7
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00152",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-back-0087",
+    "difficultyLevel": 4,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00153",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-conc-0126",
+    "difficultyLevel": 6,
+    "subScope": "North Section / Bay 1"
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00154",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-conc-0086",
+    "difficultyLevel": 4,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00155",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-back-0111",
+    "difficultyLevel": 3,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00156",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-weld-0021",
+    "difficultyLevel": 6,
+    "subScope": "Block A Level 1"
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00157",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-hydr-0031",
+    "difficultyLevel": 4,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00158",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-conc-0054",
+    "difficultyLevel": 3,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00159",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-rein-0020",
+    "difficultyLevel": 2,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00160",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-flus-0024",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-pip-flus-0008",
+      "proj-cse-2026-act-pip-flus-0016",
+      "proj-cse-2026-act-pip-flus-0024"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00161",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-grou-0056",
+    "difficultyLevel": 1,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00162",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-clea-0121",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-civ-clea-0001",
+      "proj-cse-2026-act-civ-clea-0009",
+      "proj-cse-2026-act-civ-clea-0017"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00163",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-fitu-0020",
+    "difficultyLevel": 4,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00164",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-grou-0040",
+    "difficultyLevel": 2,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00165",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-erec-0043",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-pip-erec-0003",
+      "proj-cse-2026-act-pip-erec-0011",
+      "proj-cse-2026-act-pip-erec-0019"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00166",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-conc-0062",
+    "difficultyLevel": 3,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00167",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-grou-0120",
+    "difficultyLevel": 2,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00168",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-clea-0081",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-civ-clea-0001",
+      "proj-cse-2026-act-civ-clea-0009",
+      "proj-cse-2026-act-civ-clea-0017"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00169",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-grou-0112",
+    "difficultyLevel": 6,
+    "subScope": "North Section / Bay 1"
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00170",
+    "groundTruthActivityId": null,
+    "difficultyLevel": 7
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00171",
+    "groundTruthActivityId": null,
+    "difficultyLevel": 7
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00172",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-pcc-0043",
+    "difficultyLevel": 4,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00173",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-pcc-0051",
+    "difficultyLevel": 1,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00174",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-back-0063",
+    "difficultyLevel": 2,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00175",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-form-0005",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-civ-form-0005",
+      "proj-cse-2026-act-civ-form-0013",
+      "proj-cse-2026-act-civ-form-0021"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00176",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-flus-0032",
+    "difficultyLevel": 4,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00177",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-fitu-0036",
+    "difficultyLevel": 4,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00178",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-form-0101",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-civ-form-0005",
+      "proj-cse-2026-act-civ-form-0013",
+      "proj-cse-2026-act-civ-form-0021"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00179",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-conc-0046",
+    "difficultyLevel": 2,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00180",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-pcc-0075",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-civ-pcc-0003",
+      "proj-cse-2026-act-civ-pcc-0011",
+      "proj-cse-2026-act-civ-pcc-0019"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00181",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-clea-0081",
+    "difficultyLevel": 6,
+    "subScope": "North Section / Bay 1"
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00182",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-form-0117",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-civ-form-0005",
+      "proj-cse-2026-act-civ-form-0013",
+      "proj-cse-2026-act-civ-form-0021"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00183",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-back-0023",
+    "difficultyLevel": 3,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00184",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-rein-0052",
+    "difficultyLevel": 4,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00185",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-pcc-0011",
+    "difficultyLevel": 3,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00186",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-pcc-0107",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-civ-pcc-0003",
+      "proj-cse-2026-act-civ-pcc-0011",
+      "proj-cse-2026-act-civ-pcc-0019"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00187",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-rein-0108",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-civ-rein-0004",
+      "proj-cse-2026-act-civ-rein-0012",
+      "proj-cse-2026-act-civ-rein-0020"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00188",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-exca-0130",
+    "difficultyLevel": 1,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00189",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-form-0101",
+    "difficultyLevel": 6,
+    "subScope": "South Section / Bay 2"
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00190",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-pcc-0003",
+    "difficultyLevel": 4,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00191",
+    "groundTruthActivityId": null,
+    "difficultyLevel": 7
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00192",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-conc-0054",
+    "difficultyLevel": 1,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00193",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-clea-0009",
+    "difficultyLevel": 4,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00194",
+    "groundTruthActivityId": null,
+    "difficultyLevel": 7
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00195",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-rein-0020",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-civ-rein-0004",
+      "proj-cse-2026-act-civ-rein-0012",
+      "proj-cse-2026-act-civ-rein-0020"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00196",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-exca-0050",
+    "difficultyLevel": 1,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00197",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-back-0063",
+    "difficultyLevel": 2,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00198",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-fitu-0036",
+    "difficultyLevel": 1,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00199",
+    "groundTruthActivityId": "proj-cse-2026-act-civ-conc-0046",
+    "groundTruthCandidateActivityIds": [
+      "proj-cse-2026-act-civ-conc-0006",
+      "proj-cse-2026-act-civ-conc-0014",
+      "proj-cse-2026-act-civ-conc-0022"
+    ],
+    "difficultyLevel": 5,
+    "subScope": null
+  },
+  {
+    "eventId": "evt-proj-cse-2026-00200",
+    "groundTruthActivityId": "proj-cse-2026-act-pip-weld-0045",
+    "difficultyLevel": 6,
+    "subScope": "Block A Level 1"
+  }
+]

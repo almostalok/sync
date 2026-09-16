@@ -1,0 +1,46 @@
+{
+  "project": {
+    "code": "CSE-JSON-01",
+    "name": "Compressor Station Package 1 (JSON Import)",
+    "description": "Ingested via canonical JSON schedule format",
+    "location": "Duliajan, Assam"
+  },
+  "activities": [
+    {
+      "activityCode": "CIV-JSON-0001",
+      "wbsCode": "1.1.1.1",
+      "name": "Trench Excavation for Flare Line",
+      "description": "Civil trenching for emergency flare line",
+      "discipline": "CIVIL",
+      "location": "Process Area",
+      "plannedStart": "2026-03-01T08:00:00.000Z",
+      "plannedFinish": "2026-03-10T17:00:00.000Z",
+      "plannedDuration": 10,
+      "plannedProgress": 1.0,
+      "actualProgress": 1.0,
+      "status": "COMPLETED"
+    },
+    {
+      "activityCode": "PIP-JSON-0001",
+      "wbsCode": "1.2.1.1",
+      "name": "Flare Line Spool Installation",
+      "description": "Rigging and installing 18-inch flare spools",
+      "discipline": "PIPING",
+      "location": "Process Area",
+      "plannedStart": "2026-03-11T08:00:00.000Z",
+      "plannedFinish": "2026-03-22T17:00:00.000Z",
+      "plannedDuration": 12,
+      "plannedProgress": 0.5,
+      "actualProgress": 0.45,
+      "status": "IN_PROGRESS"
+    }
+  ],
+  "dependencies": [
+    {
+      "predecessorCode": "CIV-JSON-0001",
+      "successorCode": "PIP-JSON-0001",
+      "type": "FS",
+      "lag": 0
+    }
+  ]
+}

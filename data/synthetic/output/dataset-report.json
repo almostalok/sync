@@ -1,0 +1,33 @@
+{
+  "scenario": "compressor-station-expansion",
+  "generatorVersion": "1.0.0",
+  "seed": 42,
+  "generatedAt": "2026-09-16T14:13:36.768Z",
+  "counts": {
+    "projects": 1,
+    "wbsNodes": 937,
+    "activities": 200,
+    "dependencies": 500,
+    "fieldReports": 100,
+    "events": 200,
+    "historicalOutcomes": 50
+  },
+  "splits": {
+    "train": 140,
+    "validation": 30,
+    "test": 30
+  },
+  "difficultyDistribution": {
+    "UNMATCHED": 20,
+    "AMBIGUOUS": 44,
+    "NOISY": 37,
+    "GRANULARITY_MISMATCH": 29,
+    "PARAPHRASE": 27,
+    "MINOR_VARIATION": 18,
+    "EXACT": 25
+  },
+  "disciplineDistribution": {
+    "CIVIL": 135,
+    "PIPING": 65
+  }
+}

@@ -1,0 +1,72 @@
+[
+  {
+    "id": "TEST-01",
+    "rawText": "Compressor Foundation Excavation is 80% complete.",
+    "groundTruthActivityId": "CIV-EXC-042",
+    "difficulty": "LEVEL_1_EXACT",
+    "split": "TEST"
+  },
+  {
+    "id": "TEST-02",
+    "rawText": "Excavation work at compressor foundation has reached 80%.",
+    "groundTruthActivityId": "CIV-EXC-042",
+    "difficulty": "LEVEL_2_PARAPHRASE",
+    "split": "TEST"
+  },
+  {
+    "id": "TEST-03",
+    "rawText": "Comp. fdn. exctn approx 80%.",
+    "groundTruthActivityId": "CIV-EXC-042",
+    "difficulty": "LEVEL_3_NOISY",
+    "split": "TEST"
+  },
+  {
+    "id": "TEST-04",
+    "rawText": "Excavation near compressor base is progressing.",
+    "groundTruthActivityId": "CIV-EXC-042",
+    "difficulty": "LEVEL_4_CONTEXTUAL",
+    "split": "TEST"
+  },
+  {
+    "id": "TEST-05",
+    "rawText": "Foundation excavation progressing well.",
+    "groundTruthActivityId": "CIV-EXC-042",
+    "difficulty": "LEVEL_5_AMBIGUOUS",
+    "split": "TEST"
+  },
+  {
+    "id": "TEST-06",
+    "rawText": "North section complete. South section approx 40%.",
+    "groundTruthActivityId": "CIV-EXC-042",
+    "difficulty": "LEVEL_6_GRANULARITY",
+    "split": "TEST"
+  },
+  {
+    "id": "TEST-07",
+    "rawText": "Temporary drainage channel completed near compressor area.",
+    "groundTruthActivityId": "UNMATCHED",
+    "difficulty": "LEVEL_7_UNMATCHED",
+    "split": "TEST"
+  },
+  {
+    "id": "TEST-08",
+    "rawText": "Tie-in joint welding at Header Spool 12 reached 90% completion.",
+    "groundTruthActivityId": "PIP-WLD-102",
+    "difficulty": "LEVEL_1_EXACT",
+    "split": "TEST"
+  },
+  {
+    "id": "TEST-09",
+    "rawText": "MV cable pulling in tray at Substation Yard reached 45% completion.",
+    "groundTruthActivityId": "ELE-CAB-302",
+    "difficulty": "LEVEL_2_PARAPHRASE",
+    "split": "TEST"
+  },
+  {
+    "id": "TEST-10",
+    "rawText": "Perimeter drainage trench earthwork ongoing near perimeter 75% completed.",
+    "groundTruthActivityId": "HSE-ENV-501",
+    "difficulty": "LEVEL_3_NOISY",
+    "split": "TEST"
+  }
+]
