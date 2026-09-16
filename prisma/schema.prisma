@@ -1,0 +1,443 @@
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [pgvector(map: "vector")]
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+enum Role {
+  ADMIN
+  PLANNER
+  PROJECT_MANAGER
+  SUPERVISOR
+  VIEWER
+}
+
+enum Discipline {
+  CIVIL
+  PIPING
+  MECHANICAL
+  ELECTRICAL
+  INSTRUMENTATION
+  HSE
+  GENERAL
+}
+
+enum ActivityStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
+  DELAYED
+  BLOCKED
+  EXPECTED
+}
+
+enum EventStatus {
+  PLANNED
+  STARTED
+  IN_PROGRESS
+  COMPLETED
+  BLOCKED
+  EXPECTED
+  UNKNOWN
+}
+
+enum DependencyType {
+  FS
+  SS
+  FF
+  SF
+}
+
+enum MatchDecision {
+  AUTO_LINKED
+  REVIEW_REQUIRED
+  PENDING_REVIEW
+  ACCEPTED
+  REJECTED
+  REASSIGNED
+  UNMATCHED
+  SUPERSEDED
+}
+
+model User {
+  id           String   @id @default(uuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         Role     @default(PLANNER)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  auditLogs      AuditLog[]
+  projectMembers ProjectMember[]
+
+  @@map("users")
+}
+
+model Project {
+  id              String    @id @default(uuid())
+  projectCode     String    @unique
+  name            String
+  description     String
+  location        String
+  plannedStart    DateTime
+  plannedFinish   DateTime
+  actualStart     DateTime?
+  actualFinish    DateTime?
+  status          String    @default("ACTIVE")
+  plannedProgress Float     @default(0.0)
+  actualProgress  Float     @default(0.0)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  projectMembers     ProjectMember[]
+  wbsNodes           WBSNode[]
+  activities         Activity[]
+  dependencies       Dependency[]
+  fieldReports       FieldReport[]
+  historicalOutcomes HistoricalOutcome[]
+  auditLogs          AuditLog[]
+  processingJobs     ProcessingJob[]
+  scheduleVersions   ScheduleVersion[]
+
+  @@map("projects")
+}
+
+model ScheduleVersion {
+  id              String   @id @default(uuid())
+  projectId       String
+  version         Int      @default(1)
+  name            String
+  description     String?
+  isBaseline      Boolean  @default(false)
+  fileHash        String?
+  sourceType      String   @default("MANUAL")
+  activityCount   Int      @default(0)
+  dependencyCount Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@unique([projectId, version])
+  @@map("schedule_versions")
+}
+
+model ProjectMember {
+  id        String   @id @default(uuid())
+  projectId String
+  userId    String
+  role      Role     @default(PLANNER)
+  createdAt DateTime @default(now())
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([projectId, userId])
+  @@map("project_members")
+}
+
+model WBSNode {
+  id         String     @id @default(uuid())
+  projectId  String
+  parentId   String?
+  code       String
+  name       String
+  level      Int
+  discipline Discipline @default(GENERAL)
+  path       String
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+
+  project    Project    @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  parent     WBSNode?   @relation("WBSHierarchy", fields: [parentId], references: [id])
+  children   WBSNode[]  @relation("WBSHierarchy")
+  activities Activity[]
+
+  @@map("wbs_nodes")
+}
+
+model Activity {
+  id              String         @id @default(uuid())
+  projectId       String
+  wbsNodeId       String
+  activityCode    String
+  name            String
+  description     String
+  discipline      Discipline
+  location        String
+  wbsPath         String
+  plannedStart    DateTime
+  plannedFinish   DateTime
+  actualStart     DateTime?
+  actualFinish    DateTime?
+  plannedDuration Int
+  actualDuration  Int?
+  plannedProgress Float          @default(0.0)
+  actualProgress  Float          @default(0.0)
+  status          ActivityStatus @default(NOT_STARTED)
+  varianceDays    Int            @default(0)
+  criticalPath    Boolean        @default(false)
+  aliases         String[]
+  lastUpdateDate  DateTime?
+  isStale         Boolean        @default(false)
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  project         Project          @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  wbsNode         WBSNode          @relation(fields: [wbsNodeId], references: [id])
+  progressUpdates ProgressUpdate[]
+  activityMatches ActivityMatch[]
+
+  @@unique([projectId, activityCode])
+  @@index([discipline])
+  @@index([status])
+  @@map("activities")
+}
+
+model Dependency {
+  id             String         @id @default(uuid())
+  projectId      String
+  predecessorId  String
+  successorId    String
+  dependencyType DependencyType @default(FS)
+  lag            Int            @default(0)
+  createdAt      DateTime       @default(now())
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@unique([predecessorId, successorId])
+  @@map("dependencies")
+}
+
+model FieldReport {
+  id                  String   @id @default(uuid())
+  projectId           String
+  sourceType          String
+  fileName            String
+  storageKey          String
+  checksum            String?
+  reportDate          DateTime
+  discipline          Discipline?
+  uploadedBy          String
+  processingStatus    String   @default("UPLOADED")
+  rawText             String
+  pageCount           Int      @default(1)
+  extractedEventCount Int      @default(0)
+  matchedEventCount   Int      @default(0)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  project         Project          @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  extractedEvents ExtractedEvent[]
+  evidenceList    Evidence[]
+  processingJobs  ProcessingJob[]
+
+  @@map("field_reports")
+}
+
+model ExtractedEvent {
+  id                    String      @id @default(uuid())
+  fieldReportId         String
+  reportFileName        String
+  description           String
+  normalizedDescription String
+  eventDate             DateTime
+  discipline            Discipline?
+  location              String?
+  progress              Float?
+  status                EventStatus @default(UNKNOWN)
+  quantity              Float?
+  unit                  String?
+  sourceText            String
+  sourcePage            Int?
+  characterStart        Int?
+  characterEnd          Int?
+  extractionConfidence  Float       @default(0.8)
+  difficulty            String?
+  groundTruthActivityId String?
+  createdAt             DateTime    @default(now())
+
+  fieldReport   FieldReport    @relation(fields: [fieldReportId], references: [id], onDelete: Cascade)
+  activityMatch ActivityMatch?
+  evidence      Evidence?
+
+  @@map("extracted_events")
+}
+
+model ActivityMatch {
+  id                  String        @id @default(uuid())
+  eventId             String        @unique
+  activityId          String
+  selectedActivityId  String?
+  rank                Int           @default(1)
+  candidateRank       Int           @default(1)
+  candidateMargin     Float         @default(0.0)
+  semanticScore       Float         @default(0.0)
+  disciplineScore     Float         @default(0.0)
+  locationScore       Float         @default(0.0)
+  wbsScore            Float         @default(0.0)
+  temporalScore       Float         @default(0.0)
+  dependencyScore     Float         @default(0.0)
+  entityScore         Float         @default(0.0)
+  finalScore          Float         @default(0.0)
+  confidence          Float         @default(0.0)
+  decision            MatchDecision @default(PENDING_REVIEW)
+  decisionReason      String
+  explanation         String?
+  matcherVersion      String        @default("1.0.0")
+  embeddingVersion    String        @default("1.0.0")
+  granularityMismatch Boolean       @default(false)
+  isAmbiguous         Boolean       @default(false)
+  reviewedBy          String?
+  reviewedAt          DateTime?
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @updatedAt
+
+  event           ExtractedEvent   @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  activity        Activity         @relation(fields: [activityId], references: [id], onDelete: Cascade)
+  reviewDecisions ReviewDecision[]
+
+  @@map("activity_matches")
+}
+
+model Evidence {
+  id             String   @id @default(uuid())
+  eventId        String   @unique
+  fieldReportId  String
+  projectId      String?
+  sourceType     String   @default("TEXT")
+  sourceLocator  String?
+  sourceText     String
+  page           Int?
+  section        String?
+  sheetName      String?
+  cellRange      String?
+  timestamp      Float?
+  characterStart Int?
+  characterEnd   Int?
+  metadata       Json?
+  createdAt      DateTime @default(now())
+
+  event       ExtractedEvent @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  fieldReport FieldReport    @relation(fields: [fieldReportId], references: [id], onDelete: Cascade)
+
+  @@map("evidence")
+}
+
+model ProgressUpdate {
+  id               String         @id @default(uuid())
+  projectId        String?
+  activityId       String
+  activityCode     String
+  eventId          String?
+  sourceEventId    String?
+  reviewDecisionId String?
+  progress         Float
+  previousProgress Float
+  newProgress      Float?
+  status           ActivityStatus
+  effectiveDate    DateTime
+  reportedDate     DateTime?
+  actualStartDate  DateTime?
+  actualEndDate    DateTime?
+  sourceReport     String
+  verified         Boolean        @default(true)
+  verifiedBy       String
+  verifiedAt       DateTime       @default(now())
+  evidenceId       String?
+  notes            String?
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @default(now()) @updatedAt
+
+  activity Activity @relation(fields: [activityId], references: [id], onDelete: Cascade)
+
+  @@map("progress_updates")
+}
+
+model ReviewDecision {
+  id                 String   @id @default(uuid())
+  matchId            String
+  projectId          String?
+  eventId            String
+  activityId         String?
+  selectedActivityId String?
+  reviewerId         String
+  reviewerName       String
+  decision           String
+  previousStatus     String?
+  newStatus          String?
+  reason             String?
+  comment            String?
+  createdAt          DateTime @default(now())
+
+  activityMatch ActivityMatch @relation(fields: [matchId], references: [id], onDelete: Cascade)
+
+  @@map("review_decisions")
+}
+
+model HistoricalOutcome {
+  id                 String     @id @default(uuid())
+  projectId          String
+  projectName        String
+  activityType       String
+  discipline         Discipline
+  plannedDuration    Int
+  actualDuration     Int
+  delayDays          Int        @default(0)
+  delayCause         String
+  productivityMetric String
+  lessonsLearned     String
+  createdAt          DateTime   @default(now())
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@map("historical_outcomes")
+}
+
+model AuditLog {
+  id          String   @id @default(uuid())
+  projectId   String
+  userId      String?
+  userName    String?
+  actorId     String?
+  actorName   String?
+  actorType   String   @default("USER")
+  entityType  String
+  entityId    String
+  action      String
+  beforeState Json?
+  afterState  Json?
+  reason      String?
+  explanation String
+  metadata    Json?
+  timestamp   DateTime @default(now())
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user    User?   @relation(fields: [userId], references: [id])
+
+  @@map("audit_logs")
+}
+
+model ProcessingJob {
+  id          String    @id @default(uuid())
+  projectId   String
+  reportId    String?
+  jobType     String
+  status      String    @default("QUEUED")
+  attempts    Int       @default(0)
+  error       String?
+  startedAt   DateTime?
+  completedAt DateTime?
+  createdAt   DateTime  @default(now())
+
+  project     Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  fieldReport FieldReport? @relation(fields: [reportId], references: [id])
+
+  @@map("processing_jobs")
+}
