@@ -209,6 +209,13 @@ export class HistoricalOutcomeService {
   }
 
   /**
+   * Retrieves all historical outcomes.
+   */
+  public async getAll(): Promise<HistoricalOutcomeDTO[]> {
+    return [...this.inMemoryOutcomes];
+  }
+
+  /**
    * Retrieves a single historical outcome by ID.
    */
   public async getOutcomeById(id: string): Promise<HistoricalOutcomeDTO | null> {

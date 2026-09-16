@@ -2,33 +2,17 @@ import { NextResponse } from 'next/server';
 import { generateSyntheticProject } from '@/lib/data/syntheticGenerator';
 import { calculateScheduleMetrics } from '@/lib/schedule/graphEngine';
 import { copilotService } from '@/../apps/api/src/modules/copilot';
-import { validateCopilotQuery } from '@sitesync/validation';
 
-export async function POST(
-  req: Request,
+export async function GET(
+  _req: Request,
   { params }: { params: { id: string } }
 ) {
   try {
-    const body = await req.json();
-    const validation = validateCopilotQuery({
-      ...body,
-      projectId: params.id,
-    });
-
-    if (!validation.valid || !validation.data) {
-      return NextResponse.json(
-        { success: false, errors: validation.errors },
-        { status: 400 }
-      );
-    }
-
     const data = generateSyntheticProject();
     const { risks } = calculateScheduleMetrics(data.activities, data.dependencies);
 
-    const response = await copilotService.query(validation.data, {
-      project: data.project,
+    const questions = copilotService.generateSuggestedQuestions({
       activities: data.activities,
-      dependencies: data.dependencies,
       reports: data.fieldReports,
       events: data.initialEvents,
       risks,
@@ -38,7 +22,7 @@ export async function POST(
     return NextResponse.json({
       success: true,
       projectId: params.id,
-      data: response,
+      data: questions,
     });
   } catch (error: any) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });

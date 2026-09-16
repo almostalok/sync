@@ -299,3 +299,5 @@ export interface BenchmarkMetrics {
     sitesyncHybrid: { top1: number; top3: number; f1: number; falseAuto: number };
   };
 }
+
+export * from '../../packages/types/src/copilot';
