@@ -117,3 +117,79 @@ python scripts/evaluate_benchmarks.py
 ```bash
 npm run test:copilot
 ```
+
+---
+
+## End-to-End Integration & Production Hardening (Master Prompt 11)
+
+SiteSync operates as **one integrated Planning-to-Execution intelligence platform**:
+
+```text
+                    SITESYNC
+                        │
+         ┌──────────────┴──────────────┐
+         │                             │
+   PLANNED WORLD                  ACTUAL WORLD
+         │                             │
+ Primavera/MSP                 DPR / Excel / PDF
+         │                         Voice / Text
+         └──────────────┬──────────────┘
+                        ↓
+                  INGESTION
+                        ↓
+                 NORMALIZATION
+                        ↓
+                   EXTRACTION
+                        ↓
+               HYBRID MATCHING
+                        ↓
+                CONFIDENCE ENGINE
+                   /         \
+             AUTO-LINK      REVIEW
+                   \         /
+                    ↓       ↓
+                 VERIFIED STATE
+                        ↓
+             ┌──────────┼──────────┐
+             ↓          ↓          ↓
+          SCHEDULE     RISK      FORECAST
+             │          │          │
+             └──────────┼──────────┘
+                        ↓
+                PROJECT INTELLIGENCE
+                   /            \
+                  ↓              ↓
+             COMMAND CENTER   COPILOT
+                  │              │
+                  └──────┬───────┘
+                         ↓
+                  HUMAN DECISION
+```
+
+> **Final Product Principle:** SiteSync supports project decisions; it does not autonomously make them.
+
+### Production Capabilities Added:
+1. **Canonical State & Domain Event Bus:** Centralized outbox pattern, correlation IDs across all flows, consumer deduplication, and dead letter queue.
+2. **ScheduleSynchronizationService:** Enforces baseline immutability (`ScheduleVersion`) while managing verified execution actuals.
+3. **Health & Liveness Probes:**
+   - `GET /api/v1/health`: Detailed telemetry, DB latency, and storage readiness.
+   - `GET /api/v1/health/live`: Container liveness probe.
+   - `GET /api/v1/health/ready`: Dependency readiness check.
+4. **Golden Demo Lifecycle:**
+   - `pnpm demo:reset`: Restores the canonical 1,000-activity Oil India demo state deterministically.
+   - `pnpm demo:seed`: Seeds baseline synthetic models.
+   - `pnpm demo:clean`: Clears ephemeral caches.
+5. **Full System Automated Verification:**
+   - 18-step End-to-End Integration test suite covering the entire lifecycle from Schedule Import to Copilot Citation and Historical Closure.
+
+```bash
+# Run 18-step E2E integration test
+npm run test:e2e-integration
+
+# Run all 11 test suites
+npm test
+
+# Reset canonical demo project
+npm run demo:reset
+```
+

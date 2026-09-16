@@ -1,11 +1,1 @@
-import { NextResponse } from 'next/server';
-
-export async function GET() {
-  return NextResponse.json({
-    status: 'ok',
-    service: 'sitesync-api',
-    version: '1.0.0',
-    timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV || 'development',
-  });
-}
+export { GET } from '../api/v1/health/route';

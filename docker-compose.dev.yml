@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: sitesync-dev-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: sitesync
+      POSTGRES_PASSWORD: sitesync_password
+      POSTGRES_DB: sitesync_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdevdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sitesync -d sitesync_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: sitesync-dev-redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redisdevdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdevdata:
+  redisdevdata:

@@ -44,6 +44,9 @@ venv/
 # Testing
 coverage/
 
+# Audio artifacts
+data/audio/
+
 # Prisma
 prisma/migrations/
 

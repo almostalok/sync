@@ -4,26 +4,31 @@
 
 1. **`activities`**: Activity CRUD, code uniqueness, WBS linkage, progress tracking.
 2. **`dependencies`**: Predecessor-successor relationships, lag calculation, cycle detection.
-3. **`schedules`**: CSV/JSON ingestion, SHA256 checksum, versioned snapshots.
-4. **`events`**: Field report text extraction, normalization, tokenization.
+3. **`schedules`**: CSV/JSON/P6 ingestion, SHA256 checksum, versioned snapshots (`ScheduleVersion`).
+4. **`events`**: Canonical domain event catalog, standard envelope, outbox pattern, and consumer deduplication.
 5. **`matching`**: 7-signal hybrid scorer, confidence calibration, ambiguity detection.
-6. **`review`**: Human review queue, accept/reject/reassign actions, idempotency keys.
-7. **`progress`**: Progress updates, monotonicity enforcement, schedule variance calculation.
-8. **`risk`**: Deterministic risk rules (`SCHEDULE_DELAY`, `PROGRESS_LAG`, `STALE_UPDATE`).
-9. **`history`**: Institutional memory, benchmark percentiles (P25, Median, P75), delay taxonomy.
-10. **`copilot`**: 18-intent classification, entity extraction, context budget assembly, grounding validation, prompt injection defense, project-scoped conversation persistence.
+6. **`review`**: Human review queue workstation, accept/reject/reassign actions, idempotency keys.
+7. **`progress`**: Authoritative verified progress updates, monotonicity enforcement.
+8. **`schedule-sync`**: Centralized `ScheduleSynchronizationService` preserving baseline immutability, calculating variance, and driving cascade invalidations.
+9. **`risk`**: Deterministic risk rules (`SCHEDULE_DELAY`, `PROGRESS_LAG`, `STALE_UPDATE`).
+10. **`forecasting`**: Multi-signal XGBoost-style feature scoring, 4 deterministic baselines, conformal prediction bounds, read-only scenario simulation.
+11. **`history`**: Institutional memory, benchmark percentiles (P25, Median, P75), delay taxonomy.
+12. **`voice`**: Supervisor voice audio upload, SHA-256 storage, sentence alignment, Hinglish normalization, negation detection gate.
+13. **`copilot`**: 18-intent classification, entity extraction, context budget assembly, grounding validation, prompt injection defense, project-isolated conversation persistence.
+14. **`pipeline`**: Central `EndToEndPipelineService` orchestrating the full 18-step canonical project lifecycle.
 
-## 2. Copilot Module Service Boundaries
+## 2. Event & Integration Architecture
 
 ```text
-apps/api/src/modules/copilot/
-├── copilot.config.ts                   # Context budgets, weights, mutation verbs
-├── intent-classifier.service.ts        # 18-intent classifier + entity extractor
-├── deterministic-analytics.service.ts  # Schedule, progress, change, dependency analytics
-├── retrieval-orchestrator.service.ts   # Hybrid structured + semantic + historical + evidence retrieval
-├── context-assembler.service.ts        # Context budgeting & Level 1-5 hierarchy
-├── grounding-validator.service.ts      # Citation ID existence, numerical check, mutation refusal
-├── copilot-conversation.service.ts     # Project-isolated conversation memory
-├── copilot.service.ts                  # Master 12-step pipeline orchestrator
-└── index.ts                            # Module exports & singletons
+apps/api/src/modules/events/
+├── domain-events.ts          # Centralized event catalog, envelope interfaces, error classifications
+└── event-bus.service.ts      # Pub/sub broker, transactional outbox, consumer deduplication, DLQ
+
+apps/api/src/modules/schedule-sync/
+├── schedule-sync.service.ts      # Authoritative actuals sync, baseline immutability, event emission
+├── schedule-variance.service.ts  # Start/finish variance calculations
+└── dependency-impact.service.ts  # Critical path & downstream slippage cascade
+
+apps/api/src/modules/pipeline/
+└── e2e-pipeline.service.ts   # 18-step full system lifecycle orchestrator
 ```
