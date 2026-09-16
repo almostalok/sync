@@ -1,0 +1,45 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./src/*"],
+      "@sitesync/types": ["./packages/types/src/index.ts"],
+      "@sitesync/types/*": ["./packages/types/src/*"],
+      "@sitesync/config": ["./packages/config/src/index.ts"],
+      "@sitesync/config/*": ["./packages/config/src/*"],
+      "@sitesync/validation": ["./packages/validation/src/index.ts"],
+      "@sitesync/validation/*": ["./packages/validation/src/*"],
+      "@sitesync/events": ["./packages/events/src/index.ts"],
+      "@sitesync/events/*": ["./packages/events/src/*"],
+      "@sitesync/utils": ["./packages/utils/src/index.ts"],
+      "@sitesync/utils/*": ["./packages/utils/src/*"],
+      "@sitesync/api/*": ["./apps/api/src/*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "packages/**/*.ts",
+    "apps/**/*.ts"
+  ],
+  "exclude": ["node_modules"]
+}
