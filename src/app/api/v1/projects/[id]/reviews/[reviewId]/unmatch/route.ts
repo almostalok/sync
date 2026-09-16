@@ -1,0 +1,42 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { ReviewService } from '@sitesync/api/modules/review/review.service';
+import { ReviewAction, UserRole } from '@sitesync/types';
+
+export async function POST(
+  request: NextRequest,
+  { params }: { params: { id: string; reviewId: string } }
+) {
+  try {
+    const { id: projectId, reviewId } = params;
+    const body = await request.json().catch(() => ({}));
+
+    const reviewerId = body.reviewerId || 'usr-planner-01';
+    const reviewerName = body.reviewerName || 'Lead Planner';
+    const reviewerRole = (body.reviewerRole || UserRole.PLANNER) as UserRole;
+    const reason = body.reason || 'Event classified as out-of-scope / unmatched';
+    const comment = body.comment;
+    const requestId = request.headers.get('x-request-id') || body.requestId;
+
+    const reviewService = new ReviewService();
+    const result = await reviewService.markUnmatched({
+      projectId,
+      reviewId,
+      action: ReviewAction.MARK_UNMATCHED,
+      reviewerId,
+      reviewerName,
+      reviewerRole,
+      reason,
+      comment,
+      requestId,
+    });
+
+    return NextResponse.json({
+      success: true,
+      data: result,
+    });
+  } catch (err: unknown) {
+    const msg = err instanceof Error ? err.message : String(err);
+    const status = msg.includes('not authorized') ? 403 : msg.includes('not found') ? 404 : 400;
+    return NextResponse.json({ success: false, error: msg }, { status });
+  }
+}
