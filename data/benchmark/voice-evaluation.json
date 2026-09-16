@@ -1,0 +1,945 @@
+{
+  "totalTranscripts": 100,
+  "items": [
+    {
+      "id": "VOICE-EN-01",
+      "category": "CLEAN_ENGLISH",
+      "transcriptText": "Completed excavation for compressor foundation area B today. Reinforcement is 85 percent complete.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false,
+      "expectedStatus": "COMPLETED"
+    },
+    {
+      "id": "VOICE-EN-02",
+      "category": "CLEAN_ENGLISH",
+      "transcriptText": "Piping team completed 120 meters of underground pipe near station three today.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false,
+      "expectedStatus": "IN_PROGRESS"
+    },
+    {
+      "id": "VOICE-EN-03",
+      "category": "CLEAN_ENGLISH",
+      "transcriptText": "Structural steel erection for compressor shelter reached 60 percent progress.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false,
+      "expectedStatus": "IN_PROGRESS"
+    },
+    {
+      "id": "VOICE-EN-04",
+      "category": "CLEAN_ENGLISH",
+      "transcriptText": "Welding of 8 inch header spool completed and passed visual inspection.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false,
+      "expectedStatus": "IN_PROGRESS"
+    },
+    {
+      "id": "VOICE-EN-05",
+      "category": "CLEAN_ENGLISH",
+      "transcriptText": "Cable tray installation along main pipe rack is 100 percent finished.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false,
+      "expectedStatus": "COMPLETED"
+    },
+    {
+      "id": "VOICE-EN-06",
+      "category": "CLEAN_ENGLISH",
+      "transcriptText": "Plain cement concrete pouring for transformer plinth completed this morning.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false,
+      "expectedStatus": "IN_PROGRESS"
+    },
+    {
+      "id": "VOICE-EN-07",
+      "category": "CLEAN_ENGLISH",
+      "transcriptText": "Installed three suction control valves at manifold area today.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false,
+      "expectedStatus": "IN_PROGRESS"
+    },
+    {
+      "id": "VOICE-EN-08",
+      "category": "CLEAN_ENGLISH",
+      "transcriptText": "Hydrostatic testing of cooling water line completed with zero pressure drop.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false,
+      "expectedStatus": "IN_PROGRESS"
+    },
+    {
+      "id": "VOICE-EN-09",
+      "category": "CLEAN_ENGLISH",
+      "transcriptText": "Earthwork grading for substation yard achieved 90 percent completion.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false,
+      "expectedStatus": "IN_PROGRESS"
+    },
+    {
+      "id": "VOICE-EN-10",
+      "category": "CLEAN_ENGLISH",
+      "transcriptText": "Fabrication of pipe supports in site workshop reached 75 percent progress.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false,
+      "expectedStatus": "IN_PROGRESS"
+    },
+    {
+      "id": "VOICE-EN-11",
+      "category": "CLEAN_ENGLISH",
+      "transcriptText": "Cable pulling for low voltage motor feeders completed up to battery limit.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false,
+      "expectedStatus": "IN_PROGRESS"
+    },
+    {
+      "id": "VOICE-EN-12",
+      "category": "CLEAN_ENGLISH",
+      "transcriptText": "Excavation for flare knock out drum foundation reached target depth of three meters.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false,
+      "expectedStatus": "IN_PROGRESS"
+    },
+    {
+      "id": "VOICE-EN-13",
+      "category": "CLEAN_ENGLISH",
+      "transcriptText": "Grouting beneath compressor skid finished and curing initiated.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false,
+      "expectedStatus": "COMPLETED"
+    },
+    {
+      "id": "VOICE-EN-14",
+      "category": "CLEAN_ENGLISH",
+      "transcriptText": "Erected two nitrogen storage vessels onto concrete foundations.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false,
+      "expectedStatus": "IN_PROGRESS"
+    },
+    {
+      "id": "VOICE-EN-15",
+      "category": "CLEAN_ENGLISH",
+      "transcriptText": "Terminated 24 instrument signal cables inside local junction box four.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false,
+      "expectedStatus": "IN_PROGRESS"
+    },
+    {
+      "id": "VOICE-EN-16",
+      "category": "CLEAN_ENGLISH",
+      "transcriptText": "Completed perimeter security fencing around compressor station boundary.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false,
+      "expectedStatus": "COMPLETED"
+    },
+    {
+      "id": "VOICE-EN-17",
+      "category": "CLEAN_ENGLISH",
+      "transcriptText": "Pump alignment between motor and pump shaft achieved within tolerance.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false,
+      "expectedStatus": "IN_PROGRESS"
+    },
+    {
+      "id": "VOICE-EN-18",
+      "category": "CLEAN_ENGLISH",
+      "transcriptText": "Conducted dielectric insulation resistance testing on main switchgear busbars.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false,
+      "expectedStatus": "IN_PROGRESS"
+    },
+    {
+      "id": "VOICE-EN-19",
+      "category": "CLEAN_ENGLISH",
+      "transcriptText": "Applied anti corrosive primer coating on all welded pipe joints today.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false,
+      "expectedStatus": "IN_PROGRESS"
+    },
+    {
+      "id": "VOICE-EN-20",
+      "category": "CLEAN_ENGLISH",
+      "transcriptText": "Rebar tying for compressor foundation slab reached 50 percent milestone.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false,
+      "expectedStatus": "IN_PROGRESS"
+    },
+    {
+      "id": "VOICE-HI-01",
+      "category": "HINDI_HINGLISH",
+      "transcriptText": "Aaj compressor station mein foundation excavation complete ho gaya hai, reinforcement 85 percent hai.",
+      "language": "hinglish",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-HI-02",
+      "category": "HINDI_HINGLISH",
+      "transcriptText": "Piping team ne underground pipe ka kaam khatam kar diya hai near compressor station three.",
+      "language": "hinglish",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-HI-03",
+      "category": "HINDI_HINGLISH",
+      "transcriptText": "Compressor shelter ka structural steel erection 60 percent progress tak pahuch gaya hai.",
+      "language": "hinglish",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-HI-04",
+      "category": "HINDI_HINGLISH",
+      "transcriptText": "8 inch header spool ka welding pura ho gaya aur inspection bhi pass ho gaya.",
+      "language": "hinglish",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-HI-05",
+      "category": "HINDI_HINGLISH",
+      "transcriptText": "Substation yard mein cable tray installation 100 percent finished ho chuka hai.",
+      "language": "hinglish",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-HI-06",
+      "category": "HINDI_HINGLISH",
+      "transcriptText": "Transformer plinth ke liye PCC pouring aaj subah complete ho gaya.",
+      "language": "hinglish",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-HI-07",
+      "category": "HINDI_HINGLISH",
+      "transcriptText": "Manifold area mein teen suction control valves install kar diye gaye hain.",
+      "language": "hinglish",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-HI-08",
+      "category": "HINDI_HINGLISH",
+      "transcriptText": "Cooling water line ka hydro test complete ho gaya bina kisi leakage ke.",
+      "language": "hinglish",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-HI-09",
+      "category": "HINDI_HINGLISH",
+      "transcriptText": "Substation yard mein mitti ki khudai aur grading 90 percent ho chuki hai.",
+      "language": "hinglish",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-HI-10",
+      "category": "HINDI_HINGLISH",
+      "transcriptText": "Workshop mein pipe support fabrication ka kaam 75 percent chal raha hai.",
+      "language": "hinglish",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-HI-11",
+      "category": "HINDI_HINGLISH",
+      "transcriptText": "Low voltage motor feeders ka cable pulling complete ho gaya hai.",
+      "language": "hinglish",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-HI-12",
+      "category": "HINDI_HINGLISH",
+      "transcriptText": "Flare knock out drum foundation ki khudai teen meter depth tak ho gayi hai.",
+      "language": "hinglish",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-HI-13",
+      "category": "HINDI_HINGLISH",
+      "transcriptText": "Compressor skid ke niche grouting ka kaam khatam ho gaya hai.",
+      "language": "hinglish",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-HI-14",
+      "category": "HINDI_HINGLISH",
+      "transcriptText": "Do nitrogen storage vessels ko concrete foundation par erect kar diya hai.",
+      "language": "hinglish",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-HI-15",
+      "category": "HINDI_HINGLISH",
+      "transcriptText": "Junction box number four mein 24 signal cables terminate ho chuki hain.",
+      "language": "hinglish",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-HI-16",
+      "category": "HINDI_HINGLISH",
+      "transcriptText": "Boundary wall ke pass security fencing ka kaam pura ho gaya.",
+      "language": "hinglish",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-HI-17",
+      "category": "HINDI_HINGLISH",
+      "transcriptText": "Motor aur pump shaft ka alignment tolerance ke andar achieve ho gaya hai.",
+      "language": "hinglish",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-HI-18",
+      "category": "HINDI_HINGLISH",
+      "transcriptText": "Main switchgear busbars par megger test complete kar liya gaya hai.",
+      "language": "hinglish",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-HI-19",
+      "category": "HINDI_HINGLISH",
+      "transcriptText": "Welded joints par primer paint lagane ka kaam aaj pura ho gaya.",
+      "language": "hinglish",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-HI-20",
+      "category": "HINDI_HINGLISH",
+      "transcriptText": "Foundation slab ke sariya baandhne ka kaam 50 percent ho chuka hai.",
+      "language": "hinglish",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-TERM-01",
+      "category": "TERMINOLOGY_HEAVY",
+      "transcriptText": "NDT radiography testing completed on 16 butt welds of main gas header.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-TERM-02",
+      "category": "TERMINOLOGY_HEAVY",
+      "transcriptText": "Hydrotest pressure held at 150 bar for 4 hours with zero pressure decay on spool SP-42.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-TERM-03",
+      "category": "TERMINOLOGY_HEAVY",
+      "transcriptText": "Installed 600 pound rating globe valve on discharge bypass manifold.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-TERM-04",
+      "category": "TERMINOLOGY_HEAVY",
+      "transcriptText": "Cable meggering on 11 kV switchgear incomer completed with insulation greater than 100 megaohms.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-TERM-05",
+      "category": "TERMINOLOGY_HEAVY",
+      "transcriptText": "Dye penetrant inspection conducted on fillet welds of suction nozzle.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-TERM-06",
+      "category": "TERMINOLOGY_HEAVY",
+      "transcriptText": "Poured 45 cubic meters of M35 grade RCC for heavy reciprocating compressor base.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-TERM-07",
+      "category": "TERMINOLOGY_HEAVY",
+      "transcriptText": "Loop check from field pressure transmitter PT-104 to DCS console verified successfully.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-TERM-08",
+      "category": "TERMINOLOGY_HEAVY",
+      "transcriptText": "Erected structural pipe rack modules PR-01 and PR-02 using 100-ton hydraulic crane.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-TERM-09",
+      "category": "TERMINOLOGY_HEAVY",
+      "transcriptText": "Flange alignment on suction line checked for parallel gap within 0.5 mm tolerance.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-TERM-10",
+      "category": "TERMINOLOGY_HEAVY",
+      "transcriptText": "Terminated optical fiber backbone cable in telecom patch panel at control room.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-TERM-11",
+      "category": "TERMINOLOGY_HEAVY",
+      "transcriptText": "Installed cathodic protection sacrificial zinc anodes along buried flowline trench.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-TERM-12",
+      "category": "TERMINOLOGY_HEAVY",
+      "transcriptText": "Torqued all foundation anchor bolts to 850 Newton meters using calibrated hydraulic torque wrench.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-TERM-13",
+      "category": "TERMINOLOGY_HEAVY",
+      "transcriptText": "Conducted spark testing on external three-layer polyethylene coating of line pipe.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-TERM-14",
+      "category": "TERMINOLOGY_HEAVY",
+      "transcriptText": "Installed motor-operated valve MOV-201 with actuator limit switch calibration.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-TERM-15",
+      "category": "TERMINOLOGY_HEAVY",
+      "transcriptText": "Poured sulfur resistant cement concrete grout under turbine base frame.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-NOISE-01",
+      "category": "NOISY_FRAGMENTED",
+      "transcriptText": "Yeah hello, compressor... excavation done... eighty percent rebar done... lots of background noise here.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-NOISE-02",
+      "category": "NOISY_FRAGMENTED",
+      "transcriptText": "Site update... pipe line 120 meter... welder generator stopped... valve came late.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-NOISE-03",
+      "category": "NOISY_FRAGMENTED",
+      "transcriptText": "Shelter steel... crane was waiting... finished around sixty percent today.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-NOISE-04",
+      "category": "NOISY_FRAGMENTED",
+      "transcriptText": "Header weld... NDT guys coming night shift... joint prep complete.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-NOISE-05",
+      "category": "NOISY_FRAGMENTED",
+      "transcriptText": "Substation cable tray... finished full... waiting for inspector signoff.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-NOISE-06",
+      "category": "NOISY_FRAGMENTED",
+      "transcriptText": "Water in trench... pump running... concrete tomorrow morning.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-NOISE-07",
+      "category": "NOISY_FRAGMENTED",
+      "transcriptText": "Three valves fixed... gasket missing for fourth valve.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-NOISE-08",
+      "category": "NOISY_FRAGMENTED",
+      "transcriptText": "Pressure test okay... cooling water line cleared.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-NOISE-09",
+      "category": "NOISY_FRAGMENTED",
+      "transcriptText": "Grading machine breakdown... ninety percent earthwork done.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-NOISE-10",
+      "category": "NOISY_FRAGMENTED",
+      "transcriptText": "Fabrication shop... 75 percent supports ready... paint drying.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-TEMP-01",
+      "category": "TEMPORAL_EXPRESSIONS",
+      "transcriptText": "Yesterday we finished underground piping. Today we are backfilling.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false,
+      "expectedTemporalResolution": "2026-09-15"
+    },
+    {
+      "id": "VOICE-TEMP-02",
+      "category": "TEMPORAL_EXPRESSIONS",
+      "transcriptText": "Concrete pour is planned for tomorrow morning at compressor foundation.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false,
+      "expectedTemporalResolution": "2026-09-17"
+    },
+    {
+      "id": "VOICE-TEMP-03",
+      "category": "TEMPORAL_EXPRESSIONS",
+      "transcriptText": "Excavation completed two days ago and dewatering has been active since Monday.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false,
+      "expectedTemporalResolution": "2026-09-16"
+    },
+    {
+      "id": "VOICE-TEMP-04",
+      "category": "TEMPORAL_EXPRESSIONS",
+      "transcriptText": "Valve delivery was delayed yesterday by supplier logistics.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false,
+      "expectedTemporalResolution": "2026-09-16"
+    },
+    {
+      "id": "VOICE-TEMP-05",
+      "category": "TEMPORAL_EXPRESSIONS",
+      "transcriptText": "Planned hydrotest tomorrow afternoon after radiography clearance.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false,
+      "expectedTemporalResolution": "2026-09-17"
+    },
+    {
+      "id": "VOICE-TEMP-06",
+      "category": "TEMPORAL_EXPRESSIONS",
+      "transcriptText": "Cable laying started yesterday and continued through today shift.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false,
+      "expectedTemporalResolution": "2026-09-16"
+    },
+    {
+      "id": "VOICE-TEMP-07",
+      "category": "TEMPORAL_EXPRESSIONS",
+      "transcriptText": "Tomorrow team will start shuttering for the second lift of foundation.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false,
+      "expectedTemporalResolution": "2026-09-16"
+    },
+    {
+      "id": "VOICE-TEMP-08",
+      "category": "TEMPORAL_EXPRESSIONS",
+      "transcriptText": "PCC was completed yesterday; rebar installation started today.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false,
+      "expectedTemporalResolution": "2026-09-16"
+    },
+    {
+      "id": "VOICE-TEMP-09",
+      "category": "TEMPORAL_EXPRESSIONS",
+      "transcriptText": "Yesterday night shift completed radiographic testing on all field joints.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false,
+      "expectedTemporalResolution": "2026-09-15"
+    },
+    {
+      "id": "VOICE-TEMP-10",
+      "category": "TEMPORAL_EXPRESSIONS",
+      "transcriptText": "Delivery of motor expected tomorrow; skid alignment on hold until then.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false,
+      "expectedTemporalResolution": "2026-09-17"
+    },
+    {
+      "id": "VOICE-NEG-01",
+      "category": "NEGATION",
+      "transcriptText": "Compressor foundation concrete pour has NOT started yet.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": true,
+      "expectedSelfCorrection": false,
+      "expectedStatus": "BLOCKED"
+    },
+    {
+      "id": "VOICE-NEG-02",
+      "category": "NEGATION",
+      "transcriptText": "Piping welding has not commenced due to rain.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": true,
+      "expectedSelfCorrection": false,
+      "expectedStatus": "BLOCKED"
+    },
+    {
+      "id": "VOICE-NEG-03",
+      "category": "NEGATION",
+      "transcriptText": "No structural steel was erected on shift today.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": true,
+      "expectedSelfCorrection": false,
+      "expectedStatus": "BLOCKED"
+    },
+    {
+      "id": "VOICE-NEG-04",
+      "category": "NEGATION",
+      "transcriptText": "Cable pulling has not begun because trays are pending inspection.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": true,
+      "expectedSelfCorrection": false,
+      "expectedStatus": "BLOCKED"
+    },
+    {
+      "id": "VOICE-NEG-05",
+      "category": "NEGATION",
+      "transcriptText": "Foundation excavation is NOT complete; water seepage stopped work.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": true,
+      "expectedSelfCorrection": false,
+      "expectedStatus": "BLOCKED"
+    },
+    {
+      "id": "VOICE-NEG-06",
+      "category": "NEGATION",
+      "transcriptText": "Valve installation abhi tak shuru nahi hua hai.",
+      "language": "hinglish",
+      "expectedEventsCount": 1,
+      "expectedNegation": true,
+      "expectedSelfCorrection": false,
+      "expectedStatus": "BLOCKED"
+    },
+    {
+      "id": "VOICE-NEG-07",
+      "category": "NEGATION",
+      "transcriptText": "No material has arrived from the central warehouse today.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": true,
+      "expectedSelfCorrection": false,
+      "expectedStatus": "BLOCKED"
+    },
+    {
+      "id": "VOICE-NEG-08",
+      "category": "NEGATION",
+      "transcriptText": "Hydrostatic testing did not start because blind flanges were missing.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": true,
+      "expectedSelfCorrection": false,
+      "expectedStatus": "BLOCKED"
+    },
+    {
+      "id": "VOICE-NEG-09",
+      "category": "NEGATION",
+      "transcriptText": "Grouting work has not started beneath compressor base.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": true,
+      "expectedSelfCorrection": false,
+      "expectedStatus": "BLOCKED"
+    },
+    {
+      "id": "VOICE-NEG-10",
+      "category": "NEGATION",
+      "transcriptText": "Reinforcement steel tying nahi hua hai today.",
+      "language": "hinglish",
+      "expectedEventsCount": 1,
+      "expectedNegation": true,
+      "expectedSelfCorrection": false,
+      "expectedStatus": "BLOCKED"
+    },
+    {
+      "id": "VOICE-SELF-01",
+      "category": "SELF_CORRECTION",
+      "transcriptText": "Foundation excavation progress is 80—sorry, 70 percent complete today.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": true
+    },
+    {
+      "id": "VOICE-SELF-02",
+      "category": "SELF_CORRECTION",
+      "transcriptText": "We welded 15—actually 12 pipe joints on the header today.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": true
+    },
+    {
+      "id": "VOICE-SELF-03",
+      "category": "SELF_CORRECTION",
+      "transcriptText": "Progress is 90 percent—no make that 85 percent on cable trays.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": true
+    },
+    {
+      "id": "VOICE-SELF-04",
+      "category": "SELF_CORRECTION",
+      "transcriptText": "Erected 4—sorry 3 structural columns for compressor shelter.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": true
+    },
+    {
+      "id": "VOICE-SELF-05",
+      "category": "SELF_CORRECTION",
+      "transcriptText": "Foundation depth is 4 meters—actually 3.5 meters verified by surveyor.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": true
+    },
+    {
+      "id": "VOICE-AMBIG-01",
+      "category": "AMBIGUOUS",
+      "transcriptText": "Some work was done near the compressor area today.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-AMBIG-02",
+      "category": "AMBIGUOUS",
+      "transcriptText": "Workers did miscellaneous civil maintenance around the site.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-AMBIG-03",
+      "category": "AMBIGUOUS",
+      "transcriptText": "Piping guys worked on several lines across the yard.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-AMBIG-04",
+      "category": "AMBIGUOUS",
+      "transcriptText": "Checked electrical connections in one of the panels.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-AMBIG-05",
+      "category": "AMBIGUOUS",
+      "transcriptText": "Site preparation active with a few laborers present.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-DUP-01",
+      "category": "DUPLICATE",
+      "transcriptText": "Compressor foundation excavation is 80 percent complete today.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-DUP-02",
+      "category": "DUPLICATE",
+      "transcriptText": "Compressor foundation excavation is 80 percent complete today.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-DUP-03",
+      "category": "DUPLICATE",
+      "transcriptText": "Piping team completed 120 meters of underground pipe today.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-DUP-04",
+      "category": "DUPLICATE",
+      "transcriptText": "Piping team completed 120 meters of underground pipe today.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    },
+    {
+      "id": "VOICE-DUP-05",
+      "category": "DUPLICATE",
+      "transcriptText": "Cable tray installation in substation yard is 100 percent complete.",
+      "language": "en",
+      "expectedEventsCount": 1,
+      "expectedNegation": false,
+      "expectedSelfCorrection": false
+    }
+  ]
+}

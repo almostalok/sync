@@ -301,3 +301,4 @@ export interface BenchmarkMetrics {
 }
 
 export * from '../../packages/types/src/copilot';
+export * from '../../packages/types/src/voice';

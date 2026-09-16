@@ -8,8 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "type-check": "tsc --noEmit",
-    "test": "tsx tests/domain.test.ts && tsx tests/synthetic-generator.test.ts && tsx tests/schedule-ingestion.test.ts && tsx tests/matching-engine.test.ts && tsx tests/review-workflow.test.ts && tsx tests/dashboard-and-risk.test.ts && tsx tests/historical-intelligence.test.ts && tsx tests/copilot.test.ts",
-
+    "test": "tsx tests/domain.test.ts && tsx tests/synthetic-generator.test.ts && tsx tests/schedule-ingestion.test.ts && tsx tests/matching-engine.test.ts && tsx tests/review-workflow.test.ts && tsx tests/dashboard-and-risk.test.ts && tsx tests/historical-intelligence.test.ts && tsx tests/copilot.test.ts && tsx tests/voice-agent.test.ts",
+    "test:voice": "tsx tests/voice-agent.test.ts",
+    "voice:benchmark": "tsx scripts/generate-voice-benchmark.ts",
     "copilot:test": "tsx tests/copilot.test.ts",
     "test:copilot": "tsx tests/copilot.test.ts",
     "ai:test": "tsx tests/matching-engine.test.ts",
