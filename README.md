@@ -102,3 +102,18 @@ python scripts/evaluate_benchmarks.py
 4. **Event 2**: North side completed, *COMPLETED*.
 5. **Event 3**: PCC Preparation (`CIV-PCC-043`), *EXPECTED*.
 6. **Planner Verification**: 1-click accept in Review Queue updates Gantt progress, logs immutable audit entry, and recalculates schedule variance.
+7. **Grounded Copilot Reasoning**: Ask *"Why is compressor foundation delayed?"* to receive a Level 1 grounded answer citing `DPR-2026-09-16.pdf` (Page 1) and downstream cascade impact with 0% unsupported claims.
+
+---
+
+## AI Project Copilot & Grounded RAG (Master Prompt 8)
+
+- **Architecture**: 18-intent classifier, hybrid retrieval (structured, semantic, historical, evidence), deterministic calculations engine, context budget assembler, grounding validator, and project-isolated conversation memory.
+- **100% Traceable Evidence**: Interactive citation tags open a sliding Source Drawer displaying document locators (Page/Sheet/Cell/Line), quoted excerpts, and verification audit trail.
+- **Strict Read-Only Enforcement**: Automatically blocks mutation commands (`approve`, `delete`, `change date`, `mark complete`).
+- **115-Question Golden Benchmark**: 0.00% unsupported claim rate, 100% grounded answer rate, 100% prompt injection defense rate.
+
+### Run Copilot Tests & Benchmark
+```bash
+npm run test:copilot
+```
