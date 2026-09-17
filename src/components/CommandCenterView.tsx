@@ -7,7 +7,6 @@ import {
   AttentionRequiredDTO,
   DataFreshnessDTO,
   DependencyGraphDTO,
-  Discipline,
   DisciplinePerformanceDTO,
   ExecutiveMetricsDTO,
   ProjectHeaderDTO,
@@ -26,7 +25,7 @@ import { RecentUpdatesFeed } from './dashboard/RecentUpdatesFeed';
 import { DataFreshnessWidget } from './dashboard/DataFreshnessWidget';
 import { ActivityDetailDrawer } from './gantt/ActivityDetailDrawer';
 import { DependencyImpactView } from './gantt/DependencyImpactView';
-import { Play, Sparkles, AlertTriangle, RefreshCw, AlertOctagon } from 'lucide-react';
+import { Play, AlertTriangle, RefreshCw, AlertOctagon, Compass, Layers } from 'lucide-react';
 
 export const CommandCenterView: React.FC<{ onOpenDemoModal: () => void }> = ({ onOpenDemoModal }) => {
   const { state, setActiveView, selectActivity } = useProject();
@@ -122,71 +121,72 @@ export const CommandCenterView: React.FC<{ onOpenDemoModal: () => void }> = ({ o
 
   if (loading && !metrics) {
     return (
-      <div className="p-12 text-center space-y-4">
-        <RefreshCw className="w-8 h-8 text-cyan-400 animate-spin mx-auto" />
-        <div className="text-base font-bold text-white">Initializing Operational Project Command Center...</div>
-        <div className="text-xs text-slate-400">Loading verified execution data, schedule floats, and risk radar...</div>
+      <div className="p-12 text-center space-y-3 bg-white rounded-lg border border-slate-200">
+        <RefreshCw className="w-6 h-6 text-slate-600 animate-spin mx-auto" />
+        <div className="text-sm font-bold text-slate-800">Loading Operational Project Command Center...</div>
+        <div className="text-xs text-slate-500">Reconciling verified execution data, schedule floats, and risk signals...</div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6 pb-16">
-      {/* Top Banner with SIH Demo Callout */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-cyan-950/60 via-slate-900/90 to-blue-950/50 border border-cyan-500/20 p-5 md:p-6 shadow-xl">
-        <div className="absolute top-0 right-0 -mt-8 -mr-8 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-          <div className="space-y-1.5 max-w-2xl">
+    <div className="space-y-5 pb-16">
+      {/* Operational Control Header Strip */}
+      <div className="bg-white rounded-none border-[1.5px] border-slate-900 p-4 shadow-[2px_2px_0px_#0f172a] font-mono">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          <div className="space-y-1 max-w-3xl">
             <div className="flex items-center gap-2">
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
-                Project Control Room Active
+              <span className="px-2 py-0.5 rounded-none text-[9px] font-bold tracking-widest uppercase bg-stone-100 text-slate-900 border border-slate-900">
+                [PROJECT_CONTROL_ROOM]
               </span>
-              <span className="text-xs text-slate-400">Oil India Limited • Problem Statement SIH26122</span>
+              <span className="text-[10px] text-slate-600 font-mono">
+                // OIL_INDIA_LTD :: PROBLEM_STMT_SIH26122
+              </span>
             </div>
-            <h2 className="text-xl md:text-2xl font-bold tracking-tight text-white">
-              Connecting Messy Field Reality with Structured Schedules
+            <h2 className="text-base md:text-lg font-black tracking-tight text-slate-950 uppercase font-mono">
+              CONNECTING FIELD EXECUTION REALITY WITH MASTER SCHEDULE BASELINES
             </h2>
-            <p className="text-xs md:text-sm text-slate-300/90 leading-relaxed">
-              SiteSync extracts daily execution events from unstructured DPRs, executes 7-signal hybrid matching against L5/L6 activities, and enforces human-in-the-loop verification to eliminate schedule drift.
+            <p className="text-xs text-slate-700 font-sans leading-relaxed">
+              Extracts execution events from unstructured field DPRs, performs 7-signal deterministic matching against L5/L6 activities, and mandates human planner verification to eliminate schedule drift.
             </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-2.5 shrink-0">
             <button
               onClick={onOpenDemoModal}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white text-xs font-bold shadow-lg shadow-cyan-500/25 transition transform active:scale-95"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-none bg-black hover:bg-slate-800 text-white text-xs font-bold uppercase tracking-wider border-[1.5px] border-black shadow-[2px_2px_0px_#0f172a] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition"
             >
-              <Play className="w-4 h-4 fill-white" />
-              <span>Launch SIH Demo Narrative</span>
+              <Play className="w-3 h-3 fill-white" />
+              <span>[LAUNCH_DEMO]</span>
             </button>
 
             <button
               onClick={() => setActiveView('review')}
-              className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/40 text-amber-300 text-xs font-semibold transition"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-none bg-amber-300 hover:bg-amber-400 border-[1.5px] border-slate-900 text-black text-xs font-bold uppercase tracking-wider shadow-[2px_2px_0px_#0f172a] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition"
             >
-              <AlertTriangle className="w-4 h-4" />
-              <span>Review Queue ({attention?.totalReviewCount || 37})</span>
+              <AlertTriangle className="w-3.5 h-3.5 text-black" />
+              <span>[REVIEW_QUEUE: {attention?.totalReviewCount || 37}]</span>
             </button>
 
             <button
               onClick={() => setActiveView('copilot')}
-              className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-purple-950/60 hover:bg-purple-900/60 border border-purple-700/50 text-purple-200 text-xs font-semibold transition"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-none bg-stone-100 hover:bg-stone-200 border-[1.5px] border-slate-900 text-slate-900 text-xs font-bold uppercase tracking-wider shadow-[2px_2px_0px_#0f172a] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition"
             >
-              <Sparkles className="w-4 h-4 text-purple-400" />
-              <span>Ask Copilot</span>
+              <Compass className="w-3.5 h-3.5 text-slate-900" />
+              <span>[DOSSIER_INTEL]</span>
             </button>
           </div>
         </div>
       </div>
 
       {error && (
-        <div className="p-3.5 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-300 text-xs flex items-center gap-2">
-          <AlertOctagon className="w-4 h-4 text-rose-400 shrink-0" />
+        <div className="p-3.5 rounded border border-red-200 bg-red-50 text-red-800 text-xs flex items-center gap-2">
+          <AlertOctagon className="w-4 h-4 text-red-600 shrink-0" />
           <span>{error}</span>
         </div>
       )}
 
-      {/* 1. Project Header */}
+      {/* 1. Project Header Record Card */}
       {header && (
         <ProjectHeader
           header={header}
@@ -195,7 +195,7 @@ export const CommandCenterView: React.FC<{ onOpenDemoModal: () => void }> = ({ o
         />
       )}
 
-      {/* 2. Executive Metrics (8 High-Value Cards) */}
+      {/* 2. Executive Metrics (Enterprise KPI Grid) */}
       {metrics && (
         <ExecutiveMetrics
           metrics={metrics}
@@ -209,7 +209,7 @@ export const CommandCenterView: React.FC<{ onOpenDemoModal: () => void }> = ({ o
       )}
 
       {/* 3. Progress S-Curve & Schedule Health Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
         <div className="lg:col-span-2">
           {timeSeries && <ProgressScurveChart timeSeries={timeSeries} />}
         </div>
@@ -255,7 +255,7 @@ export const CommandCenterView: React.FC<{ onOpenDemoModal: () => void }> = ({ o
       )}
 
       {/* 7. Recent Field Updates & Data Freshness */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
         <div className="lg:col-span-2">
           <RecentUpdatesFeed
             onSelectActivity={(code) => handleInspectActivity(code)}

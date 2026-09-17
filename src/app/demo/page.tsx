@@ -19,7 +19,6 @@ import {
   Activity as ActivityIcon, 
   HelpCircle, 
   Clock, 
-  Sparkles, 
   Mic, 
   Sliders, 
   ExternalLink,
@@ -29,7 +28,6 @@ import {
   Search,
   Check
 } from 'lucide-react';
-import confetti from 'canvas-confetti';
 import { queryGroundedCopilot } from '@/lib/ai/copilotEngine';
 import { traceDownstreamCascade } from '@/lib/schedule/graphEngine';
 
@@ -146,7 +144,6 @@ export default function DemoPage() {
       case 'MATCH_ACCEPTED':
         setDemoState('PROGRESS_UPDATED');
         addLog('ACTUAL_PROGRESS_MUTATED', 'Domain service updated MECH-L5-042: Status=COMPLETED, Actual Finish=16-Sep-2026, Variance=0 days.', 'EXECUTION');
-        confetti({ particleCount: 50, spread: 60, origin: { y: 0.7 } });
         break;
 
       case 'PROGRESS_UPDATED':

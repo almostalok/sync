@@ -11,13 +11,11 @@ import {
   CalendarRange, 
   Cpu, 
   CheckSquare, 
-  Sparkles, 
   Mic, 
   BookOpen, 
   AlertOctagon,
   X
 } from 'lucide-react';
-import confetti from 'canvas-confetti';
 
 interface DemoStep {
   step: number;
@@ -48,93 +46,93 @@ const DEMO_STEPS: DemoStep[] = [
     targetView: 'gantt',
     script: '"Here is the planned schedule baseline. Activity CIV-EXC-042 (Compressor Foundation Excavation) is planned from 10-Sep to 18-Sep on the Critical Path."',
     details: [
-      'Interactive Gantt chart showing planned baseline vs verified actual execution',
-      'Predecessor / Successor graph linking to PCC (CIV-PCC-043) and Reinforcement (CIV-REB-044)',
-      'Critical path markers indicate bottleneck milestones.'
+      'Interactive WBS hierarchy from L1 Project level down to L5/L6 Task level',
+      'Shows Critical Path flags, predecessor/successor dependencies, and baseline dates',
+      'Read-only baseline: AI can never silently modify schedule dates without planner review.'
     ]
   },
   {
     step: 3,
-    title: '3. Ingest Messy Field Report',
-    subtitle: 'Unstructured DPR-2026-09-16.pdf',
+    title: '3. Unstructured Daily Progress Report',
+    subtitle: 'Ingesting DPR-2026-0916-034',
     targetView: 'reports',
-    script: '"Site supervisors submit messy reports: \'Comp foundation excavation is approx 80% complete. North side completed today. PCC preparation expected tomorrow.\'"',
+    script: '"Now the field submits Daily Progress Report DPR-034. It contains free-text descriptions, Hindi/Hinglish phrasing, vendor delays, and safety observations."',
     details: [
-      'Supports PDFs, Excel spreadsheets, site diaries, and voice memos',
-      'Normalizer maps domain jargon: comp → compressor, fdn → foundation, exctn → excavation, approx → approximately, 80% → 0.80',
-      'Extracts granular execution events with exact character offsets.'
+      'Multi-format ingestion: PDF, Word, Excel, scanned image documents, audio recordings',
+      'Preserves original verbatim text with exact character and page locator offsets',
+      'Zero hallucination: only extracted statements with unambiguous source text are processed.'
     ]
   },
   {
     step: 4,
-    title: '4. 7-Signal AI Hybrid Matching',
-    subtitle: 'Multi-Signal Semantic & Spatial Alignment',
-    targetView: 'review',
-    script: '"SiteSync evaluates 7 independent signals: Semantic (40%), Discipline (15%), Location (10%), WBS (10%), Temporal (10%), Dependency (10%), Entity (5%). Top match CIV-EXC-042 scores 94% confidence."',
+    title: '4. AI Event Extraction & Normalization',
+    subtitle: 'Extracting Execution Events',
+    targetView: 'reports',
+    script: '"SiteSync extracts concrete events from the report: 45 cubic meters excavated, rain stoppage for 3 hours, and steel reinforcement delivery delayed by 1 day."',
     details: [
-      'Confidence calibration prevents forced linkages',
-      'High confidence (≥90%) auto-links with evidence provenance',
-      'Medium confidence (70-89%) enters Human Review Queue to prevent schedule corruption.'
+      'Resolves ambiguous terminology, site slang, and Hinglish code-switching',
+      'Negation handling: statements like \\"Pour has NOT commenced\\" are recognized and never logged as progress',
+      'Quantities, equipment tags, and work locations are structured and normalized.'
     ]
   },
   {
     step: 5,
-    title: '5. Evidence Provenance Deep Dive',
-    subtitle: 'Why Did SiteSync Match This Activity?',
-    targetView: 'evidence',
-    script: '"SiteSync is 100% explainable. It exposes source report, page 1, character offsets [104..154], and exact mathematical breakdown of all 7 signals."',
+    title: '5. 7-Signal Hybrid Matcher',
+    subtitle: 'Deterministic + Semantic Hybrid Matching',
+    targetView: 'review',
+    script: '"The extracted field event is matched against the 100+ baseline schedule activities using our 7-signal hybrid matching engine."',
     details: [
-      'Preserves original verbatim field text without LLM hallucinations',
-      'Audit log tracks who, what, when, before, and after states',
-      'Compliance with SIH26122 security and audit requirements.'
+      'Signals: Exact Code, Semantic Similarity, WBS Hierarchy, Discipline, Work Type, Location, Predecessor/Temporal Sequence',
+      'Confidence calibration: Match produces 94% confidence for CIV-EXC-042 with explainable signal breakdown',
+      'Rule 3 enforced: Only matches > 90% confidence with consistent dates are auto-linked; all others require human review.'
     ]
   },
   {
     step: 6,
-    title: '6. Human Verification & Review',
-    subtitle: 'Planner Verification Workstation',
+    title: '6. Human-in-the-Loop Review Queue',
+    subtitle: 'Planner Verification & Conflict Resolution',
     targetView: 'review',
-    script: '"SiteSync does not pretend uncertainty is certainty. Medium-confidence matches are sent to the planner. With 1-click verification, the planner accepts the match and updates actual progress."',
+    script: '"Events with lower confidence or potential scope mismatches enter the Review Queue. The planner reviews evidence side-by-side and accepts, reassigns, or rejects the match."',
     details: [
-      'Dual-column split layout: Source Evidence on left, AI Candidates on right',
-      'Planner can Accept, Reject, Re-assign Alternative Candidate, or Mark Unmatched',
-      '1-click verification writes verified progress and updates Gantt reactive state.'
+      'Dual-pane verification: Extracted Field Event on the left, Proposed Schedule Activity on the right',
+      'Planner actions: Accept Match, Reassign to Different Activity, or Reject (Non-Event / Duplicate)',
+      'Immutable audit entry created for every human decision.'
     ]
   },
   {
     step: 7,
-    title: '7. Schedule Slippage & Downstream Cascades',
-    subtitle: 'CPM Delay Propagation',
-    targetView: 'risks',
-    script: '"When Compressor Foundation Excavation lags by +4 days, SiteSync traces the critical path cascade to PCC, Reinforcement, Formwork, and Heavy Concrete."',
+    title: '7. Backward Traceability & Evidence Chain',
+    subtitle: 'Cryptographic Audit Lineage',
+    targetView: 'evidence',
+    script: '"Every progress number in SiteSync is backward-traceable to the exact daily report, page, paragraph, and supervisor timestamp that reported it."',
     details: [
-      'Live CPM forward/backward pass recalculates variance in days',
-      'Downstream impact simulator projects new milestone dates',
-      'Stale activity detector flags tasks with zero progress past start date.'
+      'Complete provenance trail: Document ID → Page/Line → Quoted Statement → Extracted Event → Matched Activity → Verified Progress',
+      'Enterprise accountability: Planners, auditors, and management can inspect supporting evidence in one click',
+      'Satisfies Oil India audit compliance requirements.'
     ]
   },
   {
     step: 8,
-    title: '8. Grounded AI Copilot',
-    subtitle: 'Evidence-First Conversational Intelligence',
-    targetView: 'copilot',
-    script: '"Ask Copilot: \'Why is the project delayed?\' It synthesizes schedule graph, DPR citations, and variance metrics without inventing facts."',
+    title: '8. Downstream Delay Propagation & Risk',
+    subtitle: 'Schedule Slippage & Float Erosion',
+    targetView: 'risks',
+    script: '"When foundation excavation slips by 2 days, SiteSync propagates that delay through the dependency graph to alert planners of downstream piping and mechanical risks."',
     details: [
-      'Zero hallucination: only cites verified database and DPR evidence',
-      'Answers queries on delays, today\'s DPR, review items, and historical lessons',
-      'Includes clickable citation links and suggested action pills.'
+      'Topological dependency analysis: detects eroded total float across successor activities',
+      'Early warning radar: flags at-risk milestones before they cause contract liquidated damages',
+      'Calculates cascading impact on Compressor Package Mechanical Erection.'
     ]
   },
   {
     step: 9,
-    title: '9. Supervisor Voice Reporting',
-    subtitle: 'Hands-Free Speech-to-Schedule Ingestion',
+    title: '9. Multilingual Voice Reporting',
+    subtitle: 'Field Supervisor Speech-to-Reality Capture',
     targetView: 'voice',
-    script: '"Supervisors in the field simply speak: \'Compressor foundation excavation is eighty-five percent complete.\' SiteSync transcribes, matches, and prompts 1-click confirmation."',
+    script: '"SiteSync enables field supervisors to report site progress via natural voice notes in Hinglish, English, or Hindi from noisy job sites."',
     details: [
-      'Speech-to-text pipeline feeds directly into 7-signal hybrid matcher',
-      'Displays instant confidence preview on mobile / web interface',
-      'Single confirmation submits report into project intelligence stream.'
+      'Live speech transcription with acoustic word alignment and timestamp confidence',
+      'Domain-adapted NLP handles technical construction vocabulary and self-correction slips',
+      'Feeds the identical deterministic matching engine with complete audio SHA-256 provenance.'
     ]
   },
   {
@@ -165,11 +163,6 @@ export const DemoScriptModal: React.FC<{ isOpen: boolean; onClose: () => void }>
       setCurrentStepIdx(nextIdx);
       setActiveView(DEMO_STEPS[nextIdx].targetView);
     } else {
-      confetti({
-        particleCount: 70,
-        spread: 80,
-        origin: { y: 0.6 }
-      });
       onClose();
     }
   };
@@ -188,26 +181,23 @@ export const DemoScriptModal: React.FC<{ isOpen: boolean; onClose: () => void }>
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fadeIn">
-      <div className="glass-panel rounded-3xl w-full max-w-2xl p-6 sm:p-7 space-y-5 border border-cyan-500/40 shadow-2xl relative overflow-hidden">
-        {/* Glow accent */}
-        <div className="absolute top-0 right-0 -mt-12 -mr-12 w-48 h-48 bg-cyan-500/15 rounded-full blur-3xl pointer-events-none"></div>
-
-        {/* Top Header */}
-        <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50">
+      <div className="w-full max-w-2xl bg-white border border-slate-200 rounded-lg p-5 shadow-xl space-y-4">
+        {/* Header */}
+        <div className="flex items-center justify-between border-b border-slate-200 pb-3">
           <div className="flex items-center gap-2.5">
-            <div className="p-2 rounded-xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
-              <Play className="w-4 h-4 fill-cyan-400" />
+            <div className="w-8 h-8 rounded bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-700">
+              <Play className="w-4 h-4 fill-current" />
             </div>
             <div>
-              <span className="text-[10px] uppercase font-bold tracking-wider text-cyan-400">Smart India Hackathon 2026 • SIH26122</span>
-              <h3 className="text-base font-bold text-white">SiteSync Official Demo Walkthrough</h3>
+              <span className="text-[10px] uppercase font-bold tracking-wider text-slate-500">Demo Walkthrough</span>
+              <h3 className="text-base font-bold text-slate-900">SiteSync Operational Evaluation Script</h3>
             </div>
           </div>
 
           <button
             onClick={onClose}
-            className="p-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-400 hover:text-white transition"
+            className="p-1 rounded hover:bg-slate-100 text-slate-400 hover:text-slate-700 transition"
           >
             <X className="w-4 h-4" />
           </button>
@@ -215,21 +205,21 @@ export const DemoScriptModal: React.FC<{ isOpen: boolean; onClose: () => void }>
 
         {/* Step Progress Bar */}
         <div className="space-y-1.5">
-          <div className="flex justify-between text-xs text-slate-400 font-medium">
+          <div className="flex justify-between text-xs text-slate-500 font-medium">
             <span>Step {currentStep.step} of {DEMO_STEPS.length}</span>
-            <span className="text-cyan-400 font-semibold">{currentStep.subtitle}</span>
+            <span className="text-slate-900 font-semibold">{currentStep.subtitle}</span>
           </div>
           <div className="grid grid-cols-10 gap-1">
             {DEMO_STEPS.map((s, idx) => (
               <div
                 key={idx}
                 onClick={() => jumpToStep(idx)}
-                className={`h-1.5 rounded-full cursor-pointer transition-all ${
+                className={`h-1.5 rounded-full cursor-pointer transition-colors ${
                   idx === currentStepIdx
-                    ? 'bg-cyan-400 shadow-sm shadow-cyan-400'
+                    ? 'bg-slate-900'
                     : idx < currentStepIdx
-                    ? 'bg-emerald-500'
-                    : 'bg-slate-800 hover:bg-slate-700'
+                    ? 'bg-emerald-600'
+                    : 'bg-slate-200 hover:bg-slate-300'
                 }`}
               ></div>
             ))}
@@ -237,27 +227,27 @@ export const DemoScriptModal: React.FC<{ isOpen: boolean; onClose: () => void }>
         </div>
 
         {/* Step Content Box */}
-        <div className="space-y-4 bg-slate-900/90 p-5 rounded-2xl border border-slate-800">
-          <div className="space-y-1">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-cyan-400 bg-cyan-950/80 px-2 py-0.5 rounded border border-cyan-800/40">
+        <div className="space-y-3 bg-slate-50 p-4 rounded border border-slate-200">
+          <div className="space-y-0.5">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-700 bg-white px-2 py-0.5 rounded border border-slate-200 inline-block">
               {currentStep.targetView.toUpperCase()} VIEW ACTIVE
             </span>
-            <h4 className="text-base font-bold text-white pt-1">{currentStep.title}</h4>
+            <h4 className="text-sm font-bold text-slate-900 pt-1">{currentStep.title}</h4>
           </div>
 
           {/* Script Quote */}
-          <div className="p-3.5 rounded-xl bg-[#080d18] border border-cyan-900/40 text-xs text-cyan-200 leading-relaxed italic space-y-1">
-            <span className="text-[9px] font-bold uppercase tracking-wider text-cyan-400 block not-italic">Spoken Script</span>
-            <p>{currentStep.script}</p>
+          <div className="p-3 rounded bg-white border border-slate-200 text-xs text-slate-800 leading-relaxed italic space-y-1">
+            <span className="text-[9px] font-bold uppercase tracking-wider text-slate-500 block not-italic">Spoken Script</span>
+            <p>&ldquo;{currentStep.script}&rdquo;</p>
           </div>
 
           {/* Key Execution Bullet Points */}
-          <div className="space-y-1.5">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Technical Highlights</span>
-            <ul className="space-y-1 text-xs text-slate-300">
+          <div className="space-y-1">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-600">Technical Highlights</span>
+            <ul className="space-y-1 text-xs text-slate-700">
               {currentStep.details.map((d, dIdx) => (
                 <li key={dIdx} className="flex items-start gap-2">
-                  <span className="text-cyan-400 mt-0.5">•</span>
+                  <span className="text-slate-400 mt-0.5">•</span>
                   <span>{d}</span>
                 </li>
               ))}
@@ -266,11 +256,11 @@ export const DemoScriptModal: React.FC<{ isOpen: boolean; onClose: () => void }>
         </div>
 
         {/* Bottom Navigation Buttons */}
-        <div className="flex items-center justify-between pt-2 border-t border-slate-800">
+        <div className="flex items-center justify-between pt-2 border-t border-slate-200">
           <button
             onClick={handlePrev}
             disabled={currentStepIdx === 0}
-            className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 disabled:opacity-40 text-slate-300 text-xs font-semibold transition"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded border border-slate-300 bg-white hover:bg-slate-50 disabled:opacity-40 text-slate-700 text-xs font-semibold transition"
           >
             <ChevronLeft className="w-4 h-4" />
             <span>Previous</span>
@@ -282,14 +272,14 @@ export const DemoScriptModal: React.FC<{ isOpen: boolean; onClose: () => void }>
                 setActiveView(currentStep.targetView);
                 onClose();
               }}
-              className="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 text-xs font-semibold transition"
+              className="px-3 py-1.5 rounded border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold transition"
             >
-              Explore Screen Directly
+              Explore Screen
             </button>
 
             <button
               onClick={handleNext}
-              className="flex items-center gap-1.5 px-5 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 text-white text-xs font-bold shadow-lg shadow-cyan-500/25 transition transform active:scale-95"
+              className="flex items-center gap-1.5 px-4 py-1.5 rounded bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold transition shadow-xs"
             >
               <span>{currentStepIdx === DEMO_STEPS.length - 1 ? 'Finish Demo' : 'Next Step'}</span>
               <ChevronRight className="w-4 h-4" />

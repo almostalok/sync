@@ -6,7 +6,6 @@ import { FieldReport, DisciplineType } from '@/types/domain';
 import { 
   FileText, 
   UploadCloud, 
-  Sparkles, 
   CheckCircle2, 
   Clock, 
   FileSpreadsheet, 
@@ -14,7 +13,8 @@ import {
   Search, 
   Plus, 
   ArrowRight,
-  ShieldCheck
+  ShieldCheck,
+  X
 } from 'lucide-react';
 
 export const ReportsView: React.FC = () => {
@@ -57,24 +57,27 @@ Comp foundation excavation is approx 80% complete. North side completed today. P
   };
 
   return (
-    <div className="space-y-5 pb-12">
+    <div className="space-y-5 pb-16">
       {/* Top Bar */}
-      <div className="glass-card rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="bg-white rounded-lg border border-slate-200 p-5 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
-              Field Intelligence Ingestion
+            <span className="px-2 py-0.5 rounded text-[10px] font-bold tracking-wider uppercase bg-blue-50 text-blue-800 border border-blue-200">
+              Document Management
             </span>
-            <span className="text-xs text-slate-400">{state.fieldReports.length} Reports Ingested</span>
+            <span className="text-xs text-slate-500 font-medium">{state.fieldReports.length} Reports Ingested</span>
           </div>
-          <h2 className="text-base md:text-lg font-bold text-slate-200">
-            Unstructured DPRs, Spreadsheets & Field Logs
-          </h2>
+          <h1 className="text-lg md:text-xl font-bold tracking-tight text-slate-900">
+            Unstructured Daily Progress Reports (DPR), Spreadsheets & Field Logs
+          </h1>
+          <p className="text-xs text-slate-600">
+            Ingest unstructured site documentation from PDFs, Excel sheets, and supervisor notes to extract verified progress events.
+          </p>
         </div>
 
         <button
           onClick={() => setShowUploadModal(true)}
-          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white text-xs font-bold shadow-lg shadow-cyan-500/25 transition shrink-0"
+          className="flex items-center gap-1.5 px-3.5 py-2 rounded bg-[#0f2744] hover:bg-[#1a365d] text-white text-xs font-semibold shadow-sm transition shrink-0"
         >
           <Plus className="w-4 h-4" />
           <span>Upload Field Report</span>
@@ -82,12 +85,15 @@ Comp foundation excavation is approx 80% complete. North side completed today. P
       </div>
 
       {/* Grid Layout: Left List vs Right Document View */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
         {/* Left 4 cols: Reports List */}
-        <div className="lg:col-span-4 glass-card rounded-2xl p-4 space-y-3">
-          <span className="text-xs font-bold text-slate-300 uppercase tracking-wider block border-b border-slate-800 pb-2">
-            Uploaded Field Documents
-          </span>
+        <div className="lg:col-span-4 bg-white rounded-lg border border-slate-200 p-4 space-y-3 shadow-sm">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-2">
+            <span className="text-xs font-bold text-slate-800 uppercase tracking-wider">
+              Ingested Documents
+            </span>
+            <span className="text-[11px] font-mono text-slate-500">{state.fieldReports.length} Files</span>
+          </div>
 
           <div className="space-y-2 max-h-[580px] overflow-y-auto pr-1">
             {state.fieldReports.map(rep => {
@@ -101,32 +107,32 @@ Comp foundation excavation is approx 80% complete. North side completed today. P
                     setSelectedReportId(rep.id);
                     selectReport(rep.id);
                   }}
-                  className={`p-3 rounded-xl cursor-pointer transition border space-y-2 ${
+                  className={`p-3 rounded cursor-pointer transition border space-y-1.5 text-xs ${
                     isSelected
-                      ? 'bg-slate-800/90 border-cyan-500/80 shadow-md shadow-cyan-950'
-                      : 'bg-slate-900/50 hover:bg-slate-800/50 border-slate-800/80'
+                      ? 'bg-blue-50/70 border-blue-600 shadow-xs'
+                      : 'bg-white border-slate-200 hover:border-slate-300 hover:bg-slate-50'
                   }`}
                 >
                   <div className="flex items-center justify-between gap-2">
                     <div className="flex items-center gap-2 truncate">
-                      {rep.sourceType === 'PDF' && <FileText className="w-4 h-4 text-rose-400 shrink-0" />}
-                      {rep.sourceType === 'XLSX' && <FileSpreadsheet className="w-4 h-4 text-emerald-400 shrink-0" />}
-                      {rep.sourceType === 'TXT' && <FileText className="w-4 h-4 text-cyan-400 shrink-0" />}
-                      {rep.sourceType === 'AUDIO' && <Mic className="w-4 h-4 text-purple-400 shrink-0" />}
-                      <span className="text-xs font-bold text-slate-200 truncate">{rep.fileName}</span>
+                      {rep.sourceType === 'PDF' && <FileText className="w-4 h-4 text-slate-600 shrink-0" />}
+                      {rep.sourceType === 'XLSX' && <FileSpreadsheet className="w-4 h-4 text-emerald-700 shrink-0" />}
+                      {rep.sourceType === 'TXT' && <FileText className="w-4 h-4 text-blue-700 shrink-0" />}
+                      {rep.sourceType === 'AUDIO' && <Mic className="w-4 h-4 text-purple-700 shrink-0" />}
+                      <span className="font-semibold text-slate-900 truncate">{rep.fileName}</span>
                     </div>
 
-                    <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-950 text-emerald-300 border border-emerald-800 shrink-0">
+                    <span className="px-1.5 py-0.2 rounded text-[10px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 shrink-0">
                       PROCESSED
                     </span>
                   </div>
 
-                  <div className="flex justify-between text-[10px] text-slate-400">
+                  <div className="flex justify-between text-[11px] text-slate-500">
                     <span>Date: {rep.reportDate}</span>
-                    <span className="text-cyan-400 font-semibold">{evCount} Events Extracted</span>
+                    <span className="text-blue-700 font-mono font-bold">{evCount} Events</span>
                   </div>
 
-                  <div className="text-[10px] text-slate-500 truncate">
+                  <div className="text-[10px] text-slate-400 truncate">
                     Uploaded by: {rep.uploadedBy}
                   </div>
                 </div>
@@ -137,17 +143,17 @@ Comp foundation excavation is approx 80% complete. North side completed today. P
 
         {/* Right 8 cols: Document Viewer & Extracted Events Breakdown */}
         {currentReport && (
-          <div className="lg:col-span-8 glass-card rounded-2xl p-5 space-y-5">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-3">
+          <div className="lg:col-span-8 bg-white rounded-lg border border-slate-200 p-5 space-y-5 shadow-sm">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 pb-3">
               <div>
-                <span className="text-[10px] uppercase font-bold tracking-wider text-cyan-400">Document Inspector</span>
-                <h3 className="text-base font-bold text-white">{currentReport.fileName}</h3>
-                <span className="text-xs text-slate-400">Submitted by {currentReport.uploadedBy} • {currentReport.reportDate}</span>
+                <span className="text-[10px] uppercase font-bold tracking-wider text-slate-500">Document Inspector</span>
+                <h3 className="text-base font-bold text-slate-900">{currentReport.fileName}</h3>
+                <span className="text-xs text-slate-500">Submitted by {currentReport.uploadedBy} • {currentReport.reportDate}</span>
               </div>
 
               <button
                 onClick={() => setActiveView('review')}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/40 text-amber-300 text-xs font-bold self-start sm:self-auto"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded bg-amber-50 hover:bg-amber-100 border border-amber-300 text-amber-900 text-xs font-semibold transition self-start sm:self-auto"
               >
                 <span>Go to Review Queue →</span>
               </button>
@@ -155,19 +161,19 @@ Comp foundation excavation is approx 80% complete. North side completed today. P
 
             {/* Raw Text Box */}
             <div className="space-y-1.5">
-              <span className="text-xs font-bold text-slate-300 uppercase tracking-wider">Raw Field Report Content</span>
-              <div className="p-4 rounded-xl bg-[#080d18] border border-slate-800 font-mono text-xs text-slate-300 leading-relaxed whitespace-pre-wrap">
+              <span className="text-xs font-bold text-slate-700 uppercase tracking-wider">Raw Field Report Content</span>
+              <div className="p-3.5 rounded bg-slate-50 border border-slate-200 font-mono text-xs text-slate-800 leading-relaxed whitespace-pre-wrap max-h-60 overflow-y-auto">
                 {currentReport.rawText}
               </div>
             </div>
 
             {/* Extracted Events Section */}
             <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-slate-300 uppercase tracking-wider">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-2">
+                <span className="text-xs font-bold text-slate-800 uppercase tracking-wider">
                   Extracted Execution Events ({reportEvents.length})
                 </span>
-                <span className="text-xs text-slate-500">Click an event to view AI match breakdown</span>
+                <span className="text-[11px] text-slate-500">Click an event to view match breakdown</span>
               </div>
 
               <div className="space-y-2">
@@ -183,34 +189,34 @@ Comp foundation excavation is approx 80% complete. North side completed today. P
                         selectEvent(ev.id);
                         setActiveView('review');
                       }}
-                      className="p-3 rounded-xl bg-slate-900/60 hover:bg-slate-800/60 border border-slate-800 transition cursor-pointer space-y-2"
+                      className="p-3 rounded border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition cursor-pointer space-y-2 text-xs"
                     >
                       <div className="flex items-center justify-between gap-2">
                         <div className="flex items-center gap-2 truncate">
-                          <span className="w-5 h-5 rounded-full bg-slate-800 flex items-center justify-center text-[10px] font-bold text-cyan-400">
+                          <span className="w-5 h-5 rounded bg-slate-100 text-slate-700 flex items-center justify-center text-[10px] font-bold font-mono">
                             {idx + 1}
                           </span>
-                          <span className="text-xs font-bold text-slate-200 truncate">{ev.description}</span>
+                          <span className="font-semibold text-slate-900 truncate">{ev.description}</span>
                         </div>
 
-                        <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
-                          decision === 'ACCEPTED' ? 'bg-emerald-950 text-emerald-300 border border-emerald-800' :
-                          decision === 'AUTO_LINKED' ? 'bg-cyan-950 text-cyan-300 border border-cyan-800' :
-                          decision === 'PENDING_REVIEW' ? 'bg-amber-950 text-amber-300 border border-amber-800 animate-pulse' :
-                          'bg-slate-800 text-slate-400'
+                        <span className={`px-2 py-0.5 rounded text-[10px] font-semibold uppercase tracking-wider border ${
+                          decision === 'ACCEPTED' ? 'bg-emerald-50 text-emerald-800 border-emerald-300' :
+                          decision === 'AUTO_LINKED' ? 'bg-blue-50 text-blue-800 border-blue-300' :
+                          decision === 'PENDING_REVIEW' ? 'bg-amber-50 text-amber-900 border-amber-300' :
+                          'bg-slate-100 text-slate-700 border-slate-300'
                         }`}>
-                          {decision} ({conf}%)
+                          {decision.replace(/_/g, ' ')} ({conf}%)
                         </span>
                       </div>
 
-                      <p className="text-[11px] text-slate-400 italic bg-slate-950/40 p-2 rounded border border-slate-800/60">
-                        "{ev.sourceText}"
+                      <p className="text-[11px] text-slate-600 italic bg-slate-50 p-2 rounded border border-slate-200">
+                        “{ev.sourceText}”
                       </p>
 
-                      <div className="grid grid-cols-3 gap-2 text-[10px] text-slate-400 pt-1">
-                        <div>Progress: <strong className="text-emerald-400">{ev.progress !== undefined ? `${ev.progress}%` : 'N/A'}</strong></div>
-                        <div>Status: <strong className="text-cyan-300">{ev.status}</strong></div>
-                        <div>Target: <strong className="text-slate-200">{match?.activityCode || 'None'}</strong></div>
+                      <div className="grid grid-cols-3 gap-2 text-[11px] text-slate-500 pt-1 font-mono">
+                        <div>Progress: <strong className="text-slate-800">{ev.progress !== undefined ? `${ev.progress}%` : 'N/A'}</strong></div>
+                        <div>Status: <strong className="text-slate-800">{ev.status}</strong></div>
+                        <div>Target: <strong className="text-blue-700">{match?.activityCode || 'None'}</strong></div>
                       </div>
                     </div>
                   );
@@ -223,99 +229,111 @@ Comp foundation excavation is approx 80% complete. North side completed today. P
 
       {/* Upload Modal */}
       {showUploadModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-          <div className="glass-panel rounded-2xl w-full max-w-xl p-6 space-y-4 border border-cyan-500/30 shadow-2xl">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-              <h3 className="text-base font-bold text-white flex items-center gap-2">
-                <UploadCloud className="w-5 h-5 text-cyan-400" />
-                <span>Upload & Process Field Report</span>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50">
+          <div className="bg-white rounded-lg border border-slate-300 w-full max-w-xl p-6 space-y-4 shadow-xl text-xs">
+            <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+              <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                <UploadCloud className="w-4 h-4 text-blue-700" />
+                <span>Upload &amp; Process Field Report</span>
               </h3>
-              <button onClick={() => setShowUploadModal(false)} className="text-slate-400 hover:text-white">
-                ✕
+              <button onClick={() => setShowUploadModal(false)} className="text-slate-400 hover:text-slate-700">
+                <X className="w-4 h-4" />
               </button>
             </div>
 
-            <form onSubmit={handleUploadSubmit} className="space-y-4 text-xs">
-              <div className="flex justify-between items-center">
-                <span className="text-slate-400">Need a test sample?</span>
+            <form onSubmit={handleUploadSubmit} className="space-y-4">
+              <div className="flex justify-between items-center bg-slate-50 p-2 rounded border border-slate-200">
+                <span className="text-slate-600">Need a demonstration sample?</span>
                 <button
                   type="button"
                   onClick={loadSampleDPR}
-                  className="px-2.5 py-1 rounded-lg bg-cyan-950/80 border border-cyan-700/60 text-cyan-300 hover:bg-cyan-900 text-xs font-semibold"
+                  className="px-2.5 py-1 rounded bg-white border border-slate-300 text-blue-700 font-semibold hover:bg-slate-50"
                 >
-                  Load SIH Acceptance Sample
+                  Load Sample DPR
                 </button>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="text-slate-300 block mb-1 font-medium">Document Name</label>
+                <div className="space-y-1">
+                  <label className="text-[11px] font-semibold text-slate-700 uppercase">Document Name</label>
                   <input
                     type="text"
-                    placeholder="e.g. DPR-2026-09-16.pdf"
                     value={fileName}
                     onChange={e => setFileName(e.target.value)}
-                    className="w-full p-2.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-200 focus:outline-none focus:border-cyan-500"
+                    placeholder="DPR-2026-09-16.pdf"
+                    className="w-full px-3 py-1.5 rounded border border-slate-300 bg-white text-slate-800 focus:outline-none focus:border-blue-600"
                   />
                 </div>
 
-                <div>
-                  <label className="text-slate-300 block mb-1 font-medium">Format Type</label>
+                <div className="space-y-1">
+                  <label className="text-[11px] font-semibold text-slate-700 uppercase">Format</label>
                   <select
                     value={sourceType}
                     onChange={e => setSourceType(e.target.value as any)}
-                    className="w-full p-2.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-200 focus:outline-none focus:border-cyan-500"
+                    className="w-full px-3 py-1.5 rounded border border-slate-300 bg-white text-slate-800 focus:outline-none focus:border-blue-600"
                   >
-                    <option value="PDF">PDF Daily Progress Report</option>
-                    <option value="XLSX">Excel Spreadsheet (XLSX)</option>
-                    <option value="CSV">CSV Log</option>
-                    <option value="TXT">Text Note / Diary</option>
+                    <option value="PDF">PDF Daily Report</option>
+                    <option value="XLSX">Excel Spreadsheet (.xlsx)</option>
+                    <option value="CSV">CSV Data Log</option>
+                    <option value="TXT">Plain Text Site Diary</option>
+                    <option value="AUDIO">Voice Recording Transcript</option>
                   </select>
                 </div>
               </div>
 
-              <div>
-                <label className="text-slate-300 block mb-1 font-medium">Discipline</label>
-                <select
-                  value={discipline}
-                  onChange={e => setDiscipline(e.target.value as any)}
-                  className="w-full p-2.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-200 focus:outline-none focus:border-cyan-500"
-                >
-                  <option value="CIVIL">Civil Works</option>
-                  <option value="PIPING">Piping Systems</option>
-                  <option value="MECHANICAL">Mechanical Equipment</option>
-                  <option value="ELECTRICAL">Electrical Distribution</option>
-                  <option value="INSTRUMENTATION">Instrumentation & Control</option>
-                  <option value="HSE">HSE</option>
-                  <option value="GENERAL">General Site</option>
-                </select>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="space-y-1">
+                  <label className="text-[11px] font-semibold text-slate-700 uppercase">Primary Discipline</label>
+                  <select
+                    value={discipline}
+                    onChange={e => setDiscipline(e.target.value as any)}
+                    className="w-full px-3 py-1.5 rounded border border-slate-300 bg-white text-slate-800 focus:outline-none focus:border-blue-600"
+                  >
+                    <option value="CIVIL">Civil</option>
+                    <option value="PIPING">Piping</option>
+                    <option value="MECHANICAL">Mechanical</option>
+                    <option value="ELECTRICAL">Electrical</option>
+                    <option value="INSTRUMENTATION">Instrumentation</option>
+                    <option value="HSE">HSE</option>
+                  </select>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-[11px] font-semibold text-slate-700 uppercase">Uploaded By</label>
+                  <input
+                    type="text"
+                    value={uploadedBy}
+                    onChange={e => setUploadedBy(e.target.value)}
+                    className="w-full px-3 py-1.5 rounded border border-slate-300 bg-white text-slate-800 focus:outline-none focus:border-blue-600"
+                  />
+                </div>
               </div>
 
-              <div>
-                <label className="text-slate-300 block mb-1 font-medium">Field Report Text Content</label>
+              <div className="space-y-1">
+                <label className="text-[11px] font-semibold text-slate-700 uppercase">Report Content / Excerpt Text</label>
                 <textarea
-                  rows={5}
-                  placeholder="Paste free-text supervisor report or DPR summary here..."
+                  rows={4}
                   value={rawText}
                   onChange={e => setRawText(e.target.value)}
-                  className="w-full p-3 rounded-xl bg-slate-900 border border-slate-700 text-slate-200 font-mono text-xs focus:outline-none focus:border-cyan-500"
-                  required
+                  placeholder="Paste unstructured daily report log here..."
+                  className="w-full p-2.5 rounded border border-slate-300 bg-white font-mono text-slate-800 focus:outline-none focus:border-blue-600"
                 />
               </div>
 
-              <div className="flex justify-end gap-2 pt-2 border-t border-slate-800">
+              <div className="flex justify-end gap-2 pt-2 border-t border-slate-200">
                 <button
                   type="button"
                   onClick={() => setShowUploadModal(false)}
-                  className="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 font-semibold"
+                  className="px-3 py-1.5 rounded border border-slate-300 hover:bg-slate-50 text-slate-700 font-semibold"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 text-white font-bold shadow-lg shadow-cyan-500/25"
+                  disabled={!rawText.trim()}
+                  className="px-4 py-1.5 rounded bg-[#0f2744] hover:bg-[#1a365d] text-white font-semibold shadow-sm disabled:opacity-50"
                 >
-                  Extract & Match Events
+                  Ingest &amp; Extract Events
                 </button>
               </div>
             </form>
