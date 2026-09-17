@@ -6,13 +6,14 @@ import {
   Building2, 
   Calendar, 
   Clock, 
-  ShieldAlert, 
   CheckCircle2, 
   AlertTriangle, 
   AlertOctagon, 
   User, 
-  Activity as ActivityIcon,
-  RefreshCw
+  RefreshCw,
+  MapPin,
+  Layers,
+  ShieldCheck
 } from 'lucide-react';
 
 interface ProjectHeaderProps {
@@ -30,124 +31,116 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({
     switch (status) {
       case ProjectStatus.ON_TRACK:
         return (
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
-            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-            ON TRACK
+          <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-none text-[10px] font-bold uppercase tracking-wider bg-emerald-100 text-emerald-950 border border-emerald-900 font-mono">
+            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-950" />
+            [ON_TRACK]
           </span>
         );
       case ProjectStatus.AT_RISK:
         return (
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-amber-500/15 text-amber-300 border border-amber-500/30">
-            <AlertTriangle className="w-3.5 h-3.5 text-amber-400" />
-            AT RISK
+          <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-none text-[10px] font-bold uppercase tracking-wider bg-amber-200 text-amber-950 border border-amber-900 font-mono">
+            <AlertTriangle className="w-3.5 h-3.5 text-amber-950" />
+            [AT_RISK]
           </span>
         );
       case ProjectStatus.DELAYED:
         return (
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-orange-500/15 text-orange-300 border border-orange-500/30">
-            <Clock className="w-3.5 h-3.5 text-orange-400" />
-            DELAYED
+          <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-none text-[10px] font-bold uppercase tracking-wider bg-amber-300 text-black border border-slate-900 font-mono">
+            <Clock className="w-3.5 h-3.5 text-black" />
+            [DELAYED]
           </span>
         );
       case ProjectStatus.CRITICAL:
         return (
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-rose-500/15 text-rose-300 border border-rose-500/30 animate-pulse">
-            <AlertOctagon className="w-3.5 h-3.5 text-rose-400" />
-            CRITICAL
+          <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-none text-[10px] font-bold uppercase tracking-wider bg-red-200 text-red-950 border border-red-900 font-mono">
+            <AlertOctagon className="w-3.5 h-3.5 text-red-950" />
+            [CRITICAL_ALERT]
           </span>
         );
       default:
         return (
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-500/15 text-slate-300 border border-slate-500/30">
-            {status}
+          <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-none text-[10px] font-bold uppercase tracking-wider bg-stone-100 text-slate-900 border border-slate-900 font-mono">
+            [{status}]
           </span>
         );
     }
   };
 
   const formatUpdateDate = (dateStr: string | null) => {
-    if (!dateStr) return 'No verified updates';
+    if (!dateStr) return '// NO_VERIFIED_UPDATES';
     try {
       const d = new Date(dateStr);
-      return `${d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })} · ${d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+      return `${d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }).toUpperCase()} · ${d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
     } catch {
       return dateStr;
     }
   };
 
   return (
-    <div className="rounded-2xl bg-slate-900/90 border border-slate-800 p-5 md:p-6 shadow-xl relative overflow-hidden backdrop-blur-md">
-      <div className="absolute top-0 right-0 w-80 h-80 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none" />
-
-      <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+    <div className="rounded-none bg-white border-[1.5px] border-slate-900 p-4 shadow-[2px_2px_0px_#0f172a] font-mono">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         {/* Left Section: Project Title & Identity */}
         <div className="space-y-2 max-w-3xl">
-          <div className="flex flex-wrap items-center gap-2.5 text-xs text-slate-400">
-            <span className="px-2.5 py-0.5 rounded-md font-mono font-bold bg-cyan-950/80 text-cyan-400 border border-cyan-800/60">
-              {header.projectCode}
+          <div className="flex flex-wrap items-center gap-2 text-xs text-slate-600 font-mono">
+            <span className="px-1.5 py-0.5 rounded-none font-mono font-bold bg-amber-100/60 text-slate-950 border border-slate-400">
+              [{header.projectCode}]
             </span>
-            <span>•</span>
-            <span className="flex items-center gap-1 text-slate-300 font-medium">
-              <Building2 className="w-3.5 h-3.5 text-slate-400" />
-              Oil India Limited
+            <span>|</span>
+            <span className="flex items-center gap-1 text-slate-900 font-bold uppercase">
+              <Building2 className="w-3.5 h-3.5 text-slate-700" />
+              OIL INDIA LIMITED
             </span>
-            <span>•</span>
-            <span className="text-slate-400">Duliajan Gas Processing Terminal, Assam</span>
+            <span>|</span>
+            <span className="flex items-center gap-1 text-slate-600 uppercase">
+              <MapPin className="w-3.5 h-3.5 text-slate-600" />
+              DULIAJAN GAS PROCESSING TERMINAL, ASSAM
+            </span>
           </div>
 
-          <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-white">
+          <h1 className="text-base md:text-xl font-black tracking-tight text-slate-950 uppercase font-mono">
             {header.projectName}
           </h1>
 
-          <p className="text-xs md:text-sm text-slate-300/80 line-clamp-2">
-            {header.description}
-          </p>
-
-          <div className="flex flex-wrap items-center gap-4 pt-1 text-xs text-slate-400">
-            <div className="flex items-center gap-1.5">
-              <User className="w-3.5 h-3.5 text-cyan-400" />
-              <span className="text-slate-200 font-medium">{header.projectManager}</span>
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-600 pt-1 font-mono">
+            <div>
+              <span className="text-slate-500 uppercase font-bold text-[10px]">DIR: </span>
+              <strong className="text-slate-950 uppercase font-bold">{header.projectManager}</strong>
             </div>
-            <div className="flex items-center gap-1.5">
-              <Calendar className="w-3.5 h-3.5 text-slate-400" />
-              <span>Start: <strong className="text-slate-200">{header.startDate}</strong></span>
+            <span>|</span>
+            <div>
+              <span className="text-slate-500 uppercase font-bold text-[10px]">TIMELINE: </span>
+              <span className="text-slate-950 font-bold">
+                {header.startDate} → {header.plannedCompletion}
+              </span>
             </div>
-            <div className="flex items-center gap-1.5">
-              <Calendar className="w-3.5 h-3.5 text-cyan-400" />
-              <span>Planned Completion: <strong className="text-slate-100">{header.plannedCompletion}</strong></span>
+            <span>|</span>
+            <div>
+              <span className="text-slate-500 uppercase font-bold text-[10px]">NODES: </span>
+              <span className="text-slate-950 font-bold">[{header.totalActivitiesCount} ACTIVITIES]</span>
+            </div>
+            <span>|</span>
+            <div>
+              <span className="text-slate-500 uppercase font-bold text-[10px]">SYNC: </span>
+              <span className="text-slate-950 font-bold">{formatUpdateDate(header.lastVerifiedUpdate)}</span>
             </div>
           </div>
         </div>
 
-        {/* Right Section: Deterministic Status & Live Timestamp */}
-        <div className="flex flex-col sm:flex-row lg:flex-col items-start lg:items-end justify-between gap-3 shrink-0 bg-slate-950/60 p-4 rounded-xl border border-slate-800/80">
-          <div className="flex items-center gap-3">
-            <div className="text-left lg:text-right">
-              <div className="text-[10px] uppercase font-bold tracking-wider text-slate-400">Current Status</div>
-              <div className="mt-1">{getStatusBadge(header.currentStatus)}</div>
-            </div>
+        {/* Right Section: Operational Status & Controls */}
+        <div className="flex flex-wrap items-center gap-3 shrink-0">
+          <div>{getStatusBadge(header.currentStatus)}</div>
 
-            {onRefresh && (
-              <button
-                onClick={onRefresh}
-                disabled={isRefreshing}
-                title="Refresh project control room metrics"
-                className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition active:scale-95 disabled:opacity-50"
-              >
-                <RefreshCw className={`w-4 h-4 ${isRefreshing ? 'animate-spin text-cyan-400' : ''}`} />
-              </button>
-            )}
-          </div>
-
-          <div className="text-left lg:text-right space-y-1">
-            <div className="text-[10px] uppercase font-bold tracking-wider text-slate-400">Last Verified Update</div>
-            <div className="text-xs font-mono font-semibold text-cyan-300">
-              {formatUpdateDate(header.lastVerifiedUpdate)}
-            </div>
-            <div className="text-[11px] text-slate-400 max-w-xs truncate" title={header.statusReason}>
-              {header.statusReason}
-            </div>
-          </div>
+          {onRefresh && (
+            <button
+              onClick={onRefresh}
+              disabled={isRefreshing}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-none border-[1.5px] border-slate-900 bg-white hover:bg-stone-100 text-slate-900 text-xs font-bold uppercase tracking-wider shadow-[2px_2px_0px_#0f172a] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition"
+              title="Refresh project telemetry"
+            >
+              <RefreshCw className={`w-3.5 h-3.5 ${isRefreshing ? 'animate-spin text-red-600' : ''}`} />
+              <span className="hidden sm:inline">[SYNC_TELEMETRY]</span>
+            </button>
+          )}
         </div>
       </div>
     </div>

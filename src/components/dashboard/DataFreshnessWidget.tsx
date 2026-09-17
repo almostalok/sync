@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { DataFreshnessDTO } from '@sitesync/types';
-import { Zap, Clock, FileText, CheckCircle2, AlertTriangle } from 'lucide-react';
+import { Clock, FileText, CheckCircle2, ShieldCheck } from 'lucide-react';
 
 interface DataFreshnessWidgetProps {
   freshness: DataFreshnessDTO;
@@ -10,76 +10,61 @@ interface DataFreshnessWidgetProps {
 
 export const DataFreshnessWidget: React.FC<DataFreshnessWidgetProps> = ({ freshness }) => {
   return (
-    <div className="rounded-2xl bg-slate-900/90 border border-slate-800 p-5 space-y-4 shadow-xl">
-      <div className="flex items-center justify-between">
-        <div className="space-y-0.5">
-          <div className="flex items-center gap-2">
-            <span className="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-400">
-              <Zap className="w-4 h-4" />
-            </span>
-            <h2 className="text-base font-bold text-white tracking-tight">
-              Operational Data Freshness
+    <div className="rounded-none bg-white border-[1.5px] border-slate-900 p-4 space-y-4 shadow-[2px_2px_0px_#0f172a] h-full flex flex-col justify-between font-mono">
+      <div>
+        <div className="flex items-center justify-between border-b-[1.5px] border-slate-900 pb-2">
+          <div>
+            <h2 className="text-xs font-black text-slate-950 uppercase tracking-wider font-mono">
+              // DATA_FRESHNESS_TELEMETRY
             </h2>
+            <p className="text-[10px] text-slate-600 font-mono">
+              DPR ingestion cadence and verification throughput
+            </p>
           </div>
-          <p className="text-xs text-slate-400">
-            Real-time DPR ingestion cadence and verification throughput
-          </p>
+          <span
+            className={`text-[9px] font-mono font-bold px-1.5 py-0.5 rounded-none border ${
+              freshness.isLive
+                ? 'bg-emerald-100 text-emerald-950 border-emerald-900'
+                : 'bg-stone-100 text-slate-900 border-slate-900'
+            }`}
+          >
+            [{freshness.statusLabel.toUpperCase()}]
+          </span>
         </div>
-        <span className={`text-xs font-mono font-bold px-2.5 py-1 rounded-full border ${
-          freshness.isLive
-            ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30'
-            : 'bg-slate-800 text-slate-300 border-slate-700'
-        }`}>
-          {freshness.statusLabel}
-        </span>
+
+        <div className="grid grid-cols-2 gap-2 pt-2.5">
+          <div className="p-2.5 rounded-none border border-slate-400 bg-stone-50 space-y-1">
+            <div className="flex items-center justify-between text-slate-600 text-[9px] font-bold uppercase">
+              <span>LAST_INGESTION</span>
+              <Clock className="w-3.5 h-3.5 text-slate-700" />
+            </div>
+            <div className="text-sm font-black font-mono text-slate-950">
+              {freshness.lastFieldUpdateMinutesAgo !== null
+                ? `[${freshness.lastFieldUpdateMinutesAgo}M AGO]`
+                : '[14M AGO]'}
+            </div>
+            <div className="text-[9px] text-slate-500 font-mono">16-SEP-2026 · 14:32</div>
+          </div>
+
+          <div className="p-2.5 rounded-none border border-slate-400 bg-stone-50 space-y-1">
+            <div className="flex items-center justify-between text-slate-600 text-[9px] font-bold uppercase">
+              <span>REPORTS_TODAY</span>
+              <FileText className="w-3.5 h-3.5 text-slate-700" />
+            </div>
+            <div className="text-sm font-black font-mono text-slate-950">
+              [{freshness.reportsToday}]
+            </div>
+            <div className="text-[9px] text-slate-500 font-mono">DPRS INGESTED</div>
+          </div>
+        </div>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-1">
-        <div className="p-3 rounded-xl bg-slate-950/50 border border-slate-800 space-y-1">
-          <div className="flex items-center justify-between text-slate-400 text-[11px]">
-            <span>Last Field Update</span>
-            <Clock className="w-3.5 h-3.5 text-cyan-400" />
-          </div>
-          <div className="text-base font-bold font-mono text-cyan-300">
-            {freshness.lastFieldUpdateMinutesAgo !== null
-              ? `${freshness.lastFieldUpdateMinutesAgo}m ago`
-              : '14m ago'}
-          </div>
-          <div className="text-[10px] text-slate-500">16 Sep 2026 · 14:32</div>
-        </div>
-
-        <div className="p-3 rounded-xl bg-slate-950/50 border border-slate-800 space-y-1">
-          <div className="flex items-center justify-between text-slate-400 text-[11px]">
-            <span>Reports Ingested Today</span>
-            <FileText className="w-3.5 h-3.5 text-blue-400" />
-          </div>
-          <div className="text-base font-bold font-mono text-white">
-            {freshness.reportsToday}
-          </div>
-          <div className="text-[10px] text-slate-500">DPRs & Site Diaries</div>
-        </div>
-
-        <div className="p-3 rounded-xl bg-slate-950/50 border border-slate-800 space-y-1">
-          <div className="flex items-center justify-between text-slate-400 text-[11px]">
-            <span>Verified Today</span>
-            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-          </div>
-          <div className="text-base font-bold font-mono text-emerald-400">
-            {freshness.verifiedToday}
-          </div>
-          <div className="text-[10px] text-slate-500">Authoritative Updates</div>
-        </div>
-
-        <div className="p-3 rounded-xl bg-slate-950/50 border border-slate-800 space-y-1">
-          <div className="flex items-center justify-between text-slate-400 text-[11px]">
-            <span>Pending Verification</span>
-            <AlertTriangle className="w-3.5 h-3.5 text-amber-400" />
-          </div>
-          <div className="text-base font-bold font-mono text-amber-400">
-            {freshness.pendingVerification}
-          </div>
-          <div className="text-[10px] text-slate-500">In Review Queue</div>
-        </div>
+      {/* Safety Invariant Tag */}
+      <div className="p-2 rounded-none border border-slate-900 bg-stone-100 text-[10px] text-slate-900 flex items-center gap-2 font-mono">
+        <ShieldCheck className="w-4 h-4 text-slate-900 shrink-0" />
+        <span className="leading-tight font-bold">
+          [INVARIANT]: ZERO SILENT SCHEDULE MUTATIONS.
+        </span>
       </div>
     </div>
   );

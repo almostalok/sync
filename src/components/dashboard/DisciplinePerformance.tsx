@@ -13,118 +13,75 @@ export const DisciplinePerformance: React.FC<DisciplinePerformanceProps> = ({
   performance,
   onSelectDiscipline,
 }) => {
-  const getDisciplineColor = (disc: Discipline) => {
-    switch (disc) {
-      case Discipline.CIVIL:
-        return { bar: 'bg-emerald-500', text: 'text-emerald-400', border: 'border-emerald-500/30', bg: 'bg-emerald-500/10' };
-      case Discipline.PIPING:
-        return { bar: 'bg-cyan-500', text: 'text-cyan-400', border: 'border-cyan-500/30', bg: 'bg-cyan-500/10' };
-      case Discipline.MECHANICAL:
-        return { bar: 'bg-blue-500', text: 'text-blue-400', border: 'border-blue-500/30', bg: 'bg-blue-500/10' };
-      case Discipline.ELECTRICAL:
-        return { bar: 'bg-amber-500', text: 'text-amber-400', border: 'border-amber-500/30', bg: 'bg-amber-500/10' };
-      case Discipline.INSTRUMENTATION:
-        return { bar: 'bg-purple-500', text: 'text-purple-400', border: 'border-purple-500/30', bg: 'bg-purple-500/10' };
-      case Discipline.HSE:
-        return { bar: 'bg-teal-500', text: 'text-teal-400', border: 'border-teal-500/30', bg: 'bg-teal-500/10' };
-      default:
-        return { bar: 'bg-slate-500', text: 'text-slate-400', border: 'border-slate-500/30', bg: 'bg-slate-500/10' };
-    }
-  };
-
   return (
-    <div className="rounded-2xl bg-slate-900/90 border border-slate-800 p-5 space-y-4 shadow-xl">
-      <div className="flex items-center justify-between">
-        <div className="space-y-0.5">
-          <div className="flex items-center gap-2">
-            <span className="p-1.5 rounded-lg bg-blue-500/10 text-blue-400">
-              <Layers className="w-4 h-4" />
-            </span>
-            <h2 className="text-base font-bold text-white tracking-tight">
-              Discipline Performance & Schedule Variance
-            </h2>
-          </div>
-          <p className="text-xs text-slate-400">
+    <div className="rounded-none bg-white border-[1.5px] border-slate-900 p-4 space-y-3 shadow-[2px_2px_0px_#0f172a] font-mono">
+      <div className="flex items-center justify-between border-b-[1.5px] border-slate-900 pb-2.5">
+        <div>
+          <h2 className="text-xs font-black text-slate-950 uppercase tracking-wider font-mono">
+            // DISCIPLINE_PERFORMANCE_&_FLOAT_VARIANCE
+          </h2>
+          <p className="text-[10px] text-slate-600 font-mono">
             Verified actuals vs planned baseline progress by engineering work package
           </p>
         </div>
       </div>
 
-      <div className="space-y-3 pt-1">
+      <div className="space-y-2 pt-1">
         {performance.disciplines.map((item) => {
-          const colors = getDisciplineColor(item.discipline);
-          const hasVariance = item.variancePercentage < 0;
+          const hasNegativeVariance = item.variancePercentage < 0;
 
           return (
             <div
               key={item.discipline}
               onClick={() => onSelectDiscipline && onSelectDiscipline(item.discipline)}
-              className="p-3 rounded-xl bg-slate-950/50 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-800/40 transition cursor-pointer space-y-2 group"
+              className="p-2.5 rounded-none border border-slate-900 hover:bg-stone-50 transition cursor-pointer space-y-1.5 text-xs font-mono shadow-[1px_1px_0px_#0f172a] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none"
             >
-              <div className="flex items-center justify-between text-xs">
+              <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <span className={`px-2 py-0.5 rounded text-[11px] font-bold font-mono uppercase ${colors.bg} ${colors.text} border ${colors.border}`}>
-                    {item.name}
+                  <span className="font-bold text-slate-950 uppercase font-mono tracking-wider text-[11px]">
+                    [{item.discipline}]
                   </span>
-                  <span className="text-slate-400 text-[11px]">
-                    {item.activityCount} Activities
+                  <span className="text-[10px] text-slate-600 font-bold">
+                    // {item.activityCount} TASKS
                   </span>
                 </div>
 
-                <div className="flex items-center gap-4 text-xs">
-                  <div>
-                    <span className="text-slate-400">Actual: </span>
-                    <strong className="text-slate-100 font-mono font-bold">{item.actualProgress}%</strong>
-                  </div>
-                  <div>
-                    <span className="text-slate-400">Plan: </span>
-                    <span className="text-slate-300 font-mono">{item.plannedProgress}%</span>
-                  </div>
-                  <div>
-                    <span className="text-slate-400">Variance: </span>
-                    <strong className={`font-mono font-bold ${hasVariance ? 'text-amber-400' : 'text-emerald-400'}`}>
-                      {item.variancePercentage > 0 ? '+' : ''}{item.variancePercentage}%
-                    </strong>
-                  </div>
-                  <ArrowRight className="w-3.5 h-3.5 text-slate-600 group-hover:text-cyan-400 transition" />
+                <div className="flex items-center gap-2.5 font-mono text-[11px]">
+                  <span className="text-slate-700">
+                    ACT: <strong className="text-slate-950">{item.actualProgress}%</strong>
+                  </span>
+                  <span className="text-slate-400">|</span>
+                  <span className="text-slate-600">PLAN: {item.plannedProgress}%</span>
+                  <span className="text-slate-400">|</span>
+                  <span className={`font-bold px-1 border ${hasNegativeVariance ? 'text-red-950 bg-red-100 border-red-300' : 'text-emerald-950 bg-emerald-100 border-emerald-300'}`}>
+                    {item.variancePercentage > 0 ? '+' : ''}{item.variancePercentage}%
+                  </span>
                 </div>
               </div>
 
-              {/* Progress Dual Bar */}
-              <div className="relative h-2 w-full bg-slate-900 rounded-full overflow-hidden">
-                {/* Planned marker (background track) */}
+              {/* Stepped Progress Bar */}
+              <div className="h-2 w-full rounded-none bg-stone-100 overflow-hidden relative border border-slate-900">
+                {/* Planned marker */}
                 <div
                   style={{ width: `${item.plannedProgress}%` }}
-                  className="absolute top-0 bottom-0 left-0 bg-slate-700/60"
+                  className="h-full bg-stone-300 absolute left-0 top-0"
                   title={`Planned: ${item.plannedProgress}%`}
                 />
-                {/* Actual bar */}
+                {/* Actual progress */}
                 <div
                   style={{ width: `${item.actualProgress}%` }}
-                  className={`absolute top-0 bottom-0 left-0 ${colors.bar} rounded-full transition-all duration-500`}
+                  className="h-full bg-slate-900 absolute left-0 top-0"
                   title={`Actual: ${item.actualProgress}%`}
                 />
               </div>
 
-              {/* Bottom Metadata Badges */}
-              <div className="flex items-center justify-between text-[11px] text-slate-400 pt-0.5">
-                <div className="flex items-center gap-3">
-                  {item.openReviews > 0 && (
-                    <span className="flex items-center gap-1 text-amber-400">
-                      <AlertTriangle className="w-3 h-3" />
-                      <span>{item.openReviews} reviews pending</span>
-                    </span>
-                  )}
-                  {item.staleActivitiesCount > 0 && (
-                    <span className="flex items-center gap-1 text-slate-400">
-                      <Clock className="w-3 h-3 text-slate-500" />
-                      <span>{item.staleActivitiesCount} stale (&gt;48h)</span>
-                    </span>
-                  )}
-                </div>
-                <span className="text-[10px] text-slate-500 group-hover:text-cyan-400 transition">
-                  Inspect Schedule Activities →
-                </span>
+              <div className="flex items-center justify-between text-[10px] text-slate-600 pt-0.5">
+                <span>OPEN_REVIEWS: <strong className="text-slate-950 font-mono">[{item.openReviews}]</strong></span>
+                {item.staleActivitiesCount > 0 ? (
+                  <span className="text-amber-950 font-bold bg-amber-100 px-1 border border-amber-300">[{item.staleActivitiesCount} STALE_TASKS]</span>
+                ) : (
+                  <span className="text-emerald-900 font-bold">[FLOAT_PROTECTED]</span>
+                )}
               </div>
             </div>
           );

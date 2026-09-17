@@ -58,123 +58,111 @@ export const RecentUpdatesFeed: React.FC<RecentUpdatesFeedProps> = ({
     },
     {
       id: 'UPD-03',
-      time: '12:41',
-      discipline: Discipline.ELECTRICAL,
-      activityCode: 'ELE-CBL-005',
-      activityName: 'Cable trench excavation',
-      progress: 40,
+      time: '12:15',
+      discipline: Discipline.MECHANICAL,
+      activityCode: 'MEC-EQP-012',
+      activityName: 'Compressor foundation anchor bolt verification',
+      progress: 60,
       status: 'REVIEW_REQUIRED',
       documentName: 'DPR-2026-09-16.pdf',
-      pageNumber: 2,
-      quotedText: 'Substation cable trench work initiated by electrical contractor.',
+      pageNumber: 5,
+      quotedText: 'Anchor bolts positioning checked against civil baseline. 60% torqued.',
     },
     {
       id: 'UPD-04',
-      time: '11:15',
-      discipline: Discipline.MECHANICAL,
-      activityCode: 'MEC-EQP-201',
-      activityName: 'Suction scrubber nozzle alignment',
-      progress: 50,
+      time: '11:00',
+      discipline: Discipline.ELECTRICAL,
+      activityCode: 'ELE-CAB-205',
+      activityName: 'Substation control cable trenching',
+      progress: 40,
       status: 'VERIFIED',
       verifiedBy: 'Er. R. Borah (Planner)',
       documentName: 'DPR-2026-09-16.pdf',
-      pageNumber: 5,
-      quotedText: 'Suction scrubber skid placed on foundation, nozzle alignment underway.',
+      pageNumber: 6,
+      quotedText: 'Cable trenching excavated 120m out of 300m total run.',
     },
   ];
 
-  const items = updates && updates.length > 0 ? updates : defaultUpdates;
+  const items = updates || defaultUpdates;
 
   return (
-    <div className="rounded-2xl bg-slate-900/90 border border-slate-800 p-5 space-y-4 shadow-xl">
-      <div className="flex items-center justify-between">
-        <div className="space-y-0.5">
-          <div className="flex items-center gap-2">
-            <span className="p-1.5 rounded-lg bg-teal-500/10 text-teal-400">
-              <Clock className="w-4 h-4" />
-            </span>
-            <h2 className="text-base font-bold text-white tracking-tight">
-              Recent Field Updates
-            </h2>
-          </div>
-          <p className="text-xs text-slate-400">
-            Live chronological stream of DPR extractions and planner verifications
+    <div className="rounded-none bg-white border-[1.5px] border-slate-900 p-4 space-y-3 shadow-[2px_2px_0px_#0f172a] font-mono">
+      <div className="flex items-center justify-between border-b-[1.5px] border-slate-900 pb-2.5">
+        <div>
+          <h2 className="text-xs font-black text-slate-950 uppercase tracking-wider font-mono">
+            // RECENT_VERIFIED_FIELD_INGESTIONS
+          </h2>
+          <p className="text-[10px] text-slate-600 font-mono">
+            Chronological audit feed of daily field reports parsed into schedule activities
           </p>
         </div>
-        <span className="flex items-center gap-1.5 text-[11px] font-mono text-emerald-400 bg-emerald-950/60 px-2.5 py-1 rounded-full border border-emerald-800/40">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-          Real-time Feed
-        </span>
       </div>
 
-      <div className="space-y-2.5 pt-1">
-        {items.map((item) => (
-          <div
-            key={item.id}
-            className="p-3 rounded-xl bg-slate-950/50 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-800/40 transition flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs"
-          >
-            <div className="space-y-1 flex-1 min-w-0">
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="font-mono text-slate-400 font-bold">{item.time}</span>
-                <span className="px-2 py-0.5 rounded text-[10px] font-bold font-mono uppercase bg-slate-800 text-slate-300">
-                  {item.discipline}
-                </span>
-                <span className="font-mono font-semibold text-cyan-400 cursor-pointer hover:underline" onClick={() => onSelectActivity && onSelectActivity(item.activityCode)}>
-                  {item.activityCode}
-                </span>
-                <span className="text-slate-600">•</span>
-                <span className="font-semibold text-white truncate max-w-sm">
-                  {item.activityName}
-                </span>
+      <div className="divide-y divide-slate-200">
+        {items.map((upd) => {
+          const isVerified = upd.status === 'VERIFIED';
+
+          return (
+            <div
+              key={upd.id}
+              className="py-2.5 first:pt-0 last:pb-0 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono"
+            >
+              <div className="space-y-1 min-w-0 flex-1">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="font-mono text-[10px] font-bold text-slate-500 bg-stone-100 px-1 border border-slate-300">[{upd.time}]</span>
+                  <span className="font-mono text-[10px] font-bold text-slate-900 uppercase">
+                    DISC: {upd.discipline}
+                  </span>
+                  <span className="text-slate-400">|</span>
+                  <button
+                    onClick={() => onSelectActivity && onSelectActivity(upd.activityCode)}
+                    className="font-mono font-bold text-slate-950 underline hover:bg-amber-100"
+                  >
+                    [{upd.activityCode}]
+                  </button>
+                  <span className="text-slate-900 font-bold truncate uppercase">{upd.activityName}</span>
+                </div>
+
+                {upd.quotedText && (
+                  <p className="text-[11px] text-slate-700 italic pl-2 border-l-2 border-slate-900 font-sans">
+                    "{upd.quotedText}"
+                  </p>
+                )}
+
+                <div className="flex items-center gap-2 text-[10px] text-slate-600 font-mono">
+                  <span>SRC: [{upd.documentName}]</span>
+                  {upd.pageNumber && <span>· PG_{upd.pageNumber}</span>}
+                  {upd.verifiedBy && <span>· AUTH: {upd.verifiedBy}</span>}
+                </div>
               </div>
 
-              {item.quotedText && (
-                <div className="text-[11px] text-slate-400 italic line-clamp-1 pl-1 border-l-2 border-slate-700">
-                  &quot;{item.quotedText}&quot;
+              <div className="flex items-center gap-3 shrink-0">
+                <div className="text-right">
+                  <div className="font-mono font-black text-slate-950">{upd.progress}%</div>
+                  <span
+                    className={`inline-block px-1.5 py-0.2 rounded-none text-[9px] font-mono font-bold uppercase tracking-wider border ${
+                      isVerified
+                        ? 'bg-emerald-100 text-emerald-950 border-emerald-800'
+                        : 'bg-amber-300 text-black border-slate-900'
+                    }`}
+                  >
+                    [{isVerified ? 'VERIFIED' : 'ACTION_REQ'}]
+                  </span>
                 </div>
-              )}
 
-              <div className="flex flex-wrap items-center gap-3 text-[11px] text-slate-500">
-                <span>Source: <strong className="text-slate-400">{item.documentName} {item.pageNumber ? `(P. ${item.pageNumber})` : ''}</strong></span>
-                {item.verifiedBy && (
-                  <>
-                    <span>•</span>
-                    <span className="text-emerald-400 flex items-center gap-1">
-                      <CheckCircle2 className="w-3 h-3" />
-                      {item.verifiedBy}
-                    </span>
-                  </>
+                {!isVerified && onOpenReview && (
+                  <button
+                    onClick={() => onOpenReview(upd.id)}
+                    className="p-1 rounded-none border border-slate-900 hover:bg-stone-200 text-slate-900 active:translate-x-[1px] active:translate-y-[1px]"
+                    title="Review item"
+                  >
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
                 )}
               </div>
             </div>
-
-            <div className="flex items-center gap-3 shrink-0 self-end sm:self-center">
-              <div className="text-right">
-                <div className="text-base font-black font-mono text-emerald-400">{item.progress}%</div>
-                <div className="text-[10px] text-slate-400">
-                  {item.status === 'VERIFIED' ? 'Verified' : 'Review Req.'}
-                </div>
-              </div>
-
-              {item.status === 'REVIEW_REQUIRED' ? (
-                <button
-                  onClick={() => onOpenReview && onOpenReview(item.id)}
-                  className="px-2.5 py-1.5 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/30 hover:bg-amber-500/30 font-bold text-[11px] transition"
-                >
-                  Verify
-                </button>
-              ) : (
-                <button
-                  onClick={() => onSelectActivity && onSelectActivity(item.activityCode)}
-                  className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-cyan-300 transition"
-                  title="Inspect Activity Details"
-                >
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-              )}
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

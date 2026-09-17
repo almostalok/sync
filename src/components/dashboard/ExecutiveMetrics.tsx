@@ -9,9 +9,7 @@ import {
   CheckCircle2, 
   AlertTriangle, 
   FileQuestion, 
-  Zap, 
   ShieldAlert,
-  Info
 } from 'lucide-react';
 
 interface ExecutiveMetricsProps {
@@ -30,13 +28,11 @@ export const ExecutiveMetrics: React.FC<ExecutiveMetricsProps> = ({
   const cards = [
     {
       id: 'overall-progress',
-      title: 'Overall Progress',
+      title: 'Verified Progress',
       value: `${metrics.overallProgress}%`,
       subtitle: `Plan: ${metrics.plannedProgress}% (${(metrics.overallProgress - metrics.plannedProgress).toFixed(1)}%)`,
-      icon: TrendingUp,
-      color: 'text-emerald-400',
-      bgColor: 'bg-emerald-500/10',
-      borderColor: 'border-emerald-500/20',
+      badge: 'HEALTHY',
+      badgeClass: 'bg-emerald-50 text-emerald-800 border-emerald-300',
       tooltip: metrics.calculationMethodology,
       onClick: onNavigateToGantt,
     },
@@ -45,10 +41,10 @@ export const ExecutiveMetrics: React.FC<ExecutiveMetricsProps> = ({
       title: 'Schedule Variance',
       value: `${metrics.scheduleVarianceDays > 0 ? '+' : ''}${metrics.scheduleVarianceDays} d`,
       subtitle: metrics.scheduleVarianceDays > 2 ? 'Variance exceeds 2-day buffer' : 'Within critical threshold',
-      icon: Clock,
-      color: metrics.scheduleVarianceDays > 2 ? 'text-amber-400' : 'text-cyan-400',
-      bgColor: metrics.scheduleVarianceDays > 2 ? 'bg-amber-500/10' : 'bg-cyan-500/10',
-      borderColor: metrics.scheduleVarianceDays > 2 ? 'border-amber-500/20' : 'border-cyan-500/20',
+      badge: metrics.scheduleVarianceDays > 2 ? 'ATTENTION' : 'ON TRACK',
+      badgeClass: metrics.scheduleVarianceDays > 2 
+        ? 'bg-amber-50 text-amber-900 border-amber-300' 
+        : 'bg-blue-50 text-blue-800 border-blue-300',
       tooltip: 'Calculated as actual finish vs planned baseline finish across critical path activities',
       onClick: onNavigateToGantt,
     },
@@ -57,35 +53,30 @@ export const ExecutiveMetrics: React.FC<ExecutiveMetricsProps> = ({
       title: 'Total Activities',
       value: metrics.totalActivities.toLocaleString(),
       subtitle: 'L5 / L6 Schedule Nodes',
-      icon: Layers,
-      color: 'text-blue-400',
-      bgColor: 'bg-blue-500/10',
-      borderColor: 'border-blue-500/20',
+      badge: 'BASELINE',
+      badgeClass: 'bg-slate-100 text-slate-700 border-slate-300',
       tooltip: 'Full WBS hierarchical activities ingested from master baseline schedule',
       onClick: onNavigateToGantt,
     },
     {
       id: 'verified-updates',
-      title: 'Verified Updates',
+      title: 'Verified Records',
       value: metrics.verifiedUpdates.toLocaleString(),
-      subtitle: 'Immutable audit records',
-      icon: CheckCircle2,
-      color: 'text-teal-400',
-      bgColor: 'bg-teal-500/10',
-      borderColor: 'border-teal-500/20',
+      subtitle: 'Immutable audit provenance',
+      badge: 'AUDITED',
+      badgeClass: 'bg-slate-100 text-slate-700 border-slate-300',
       tooltip: 'Verified field report progress records backed by first-class evidence chains',
     },
     {
       id: 'review-required',
       title: 'Review Required',
       value: metrics.reviewRequired.toString(),
-      subtitle: metrics.reviewRequired > 0 ? 'Requires human verification' : 'Review queue cleared',
-      icon: AlertTriangle,
-      color: 'text-amber-400',
-      bgColor: 'bg-amber-500/10',
-      borderColor: 'border-amber-500/30',
-      badge: metrics.reviewRequired > 0 ? 'ACTION' : undefined,
-      tooltip: 'AI match proposals with confidence < 0.90 or ambiguity requiring planner verification',
+      subtitle: metrics.reviewRequired > 0 ? 'Requires planner verification' : 'Review queue cleared',
+      badge: metrics.reviewRequired > 0 ? 'ACTION' : 'CLEAR',
+      badgeClass: metrics.reviewRequired > 0 
+        ? 'bg-amber-100 text-amber-900 border-amber-400 font-bold' 
+        : 'bg-emerald-50 text-emerald-800 border-emerald-300',
+      tooltip: 'Match proposals with confidence < 0.90 requiring human-in-the-loop verification',
       onClick: onNavigateToReview,
     },
     {
@@ -93,76 +84,74 @@ export const ExecutiveMetrics: React.FC<ExecutiveMetricsProps> = ({
       title: 'Unmatched Events',
       value: metrics.unmatchedEvents.toString(),
       subtitle: 'Out-of-scope or new tasks',
-      icon: FileQuestion,
-      color: 'text-purple-400',
-      bgColor: 'bg-purple-500/10',
-      borderColor: 'border-purple-500/20',
+      badge: 'UNLINKED',
+      badgeClass: 'bg-purple-50 text-purple-800 border-purple-200',
       tooltip: 'Field report events that could not be matched to existing schedule activities',
       onClick: onNavigateToReview,
+    },
+    {
+      id: 'critical-risks',
+      title: 'High Risk Activities',
+      value: metrics.criticalActivitiesAtRisk.toString(),
+      subtitle: metrics.criticalActivitiesAtRisk > 0 ? 'Downstream delay cascade' : 'No critical risks',
+      badge: metrics.criticalActivitiesAtRisk > 0 ? 'CRITICAL' : 'ZERO',
+      badgeClass: metrics.criticalActivitiesAtRisk > 0 
+        ? 'bg-red-100 text-red-900 border-red-400 font-bold' 
+        : 'bg-slate-100 text-slate-700 border-slate-300',
+      tooltip: 'Activities exceeding critical path float thresholds',
+      onClick: onNavigateToRisks,
     },
     {
       id: 'data-freshness',
       title: 'Data Freshness',
       value: `${metrics.dataFreshnessPercentage}%`,
-      subtitle: 'Updated within 48 hours',
-      icon: Zap,
-      color: metrics.dataFreshnessPercentage >= 90 ? 'text-emerald-400' : 'text-amber-400',
-      bgColor: metrics.dataFreshnessPercentage >= 90 ? 'bg-emerald-500/10' : 'bg-amber-500/10',
-      borderColor: metrics.dataFreshnessPercentage >= 90 ? 'border-emerald-500/20' : 'border-amber-500/20',
-      tooltip: 'Percentage of in-progress schedule activities updated within the last 48 hours',
-    },
-    {
-      id: 'critical-at-risk',
-      title: 'Critical At Risk',
-      value: metrics.criticalActivitiesAtRisk.toString(),
-      subtitle: 'Zero float path items',
-      icon: ShieldAlert,
-      color: metrics.criticalActivitiesAtRisk > 0 ? 'text-rose-400' : 'text-slate-400',
-      bgColor: metrics.criticalActivitiesAtRisk > 0 ? 'bg-rose-500/10' : 'bg-slate-800/40',
-      borderColor: metrics.criticalActivitiesAtRisk > 0 ? 'border-rose-500/30' : 'border-slate-800',
-      tooltip: 'Activities on the critical path exhibiting delay variance or negative progress velocity',
-      onClick: onNavigateToRisks,
+      subtitle: 'Verified field updates',
+      badge: 'SYNCHRONIZED',
+      badgeClass: 'bg-blue-50 text-blue-800 border-blue-200',
+      tooltip: 'Percentage of activities with recent verified updates',
     },
   ];
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
-      {cards.map((c) => {
-        const Icon = c.icon;
-        const isClickable = !!c.onClick;
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5 font-mono">
+      {cards.map((card) => {
+        const isClickable = !!card.onClick;
 
         return (
           <div
-            key={c.id}
-            onClick={c.onClick}
-            className={`rounded-xl bg-slate-900/80 border ${c.borderColor} p-3.5 flex flex-col justify-between transition-all duration-200 ${
-              isClickable ? 'cursor-pointer hover:bg-slate-800/80 hover:border-cyan-500/40 hover:shadow-lg' : ''
+            key={card.id}
+            onClick={card.onClick}
+            title={card.tooltip}
+            className={`bg-white rounded-none border-[1.5px] border-slate-900 p-3.5 shadow-[2px_2px_0px_#0f172a] transition flex flex-col justify-between ${
+              isClickable ? 'cursor-pointer hover:bg-stone-50 active:translate-x-[2px] active:translate-y-[2px] active:shadow-none' : ''
             }`}
           >
-            <div className="flex items-start justify-between gap-2">
-              <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider leading-tight">
-                {c.title}
+            <div className="flex items-center justify-between gap-2">
+              <span className="text-[10px] font-bold text-slate-700 uppercase tracking-wider truncate">
+                // {card.title}
               </span>
-              <div className={`p-1.5 rounded-lg ${c.bgColor} ${c.color} shrink-0`}>
-                <Icon className="w-3.5 h-3.5" />
-              </div>
+              <span className={`px-1.5 py-0.2 rounded-none text-[9px] font-mono font-bold uppercase tracking-wider border ${
+                card.badge === 'ACTION'
+                  ? 'bg-amber-300 text-black border-slate-900'
+                  : card.badge === 'CRITICAL'
+                  ? 'bg-red-600 text-white border-slate-900'
+                  : card.badge === 'HEALTHY' || card.badge === 'ON TRACK'
+                  ? 'bg-emerald-100 text-emerald-950 border-emerald-900'
+                  : 'bg-stone-100 text-slate-900 border-slate-400'
+              }`}>
+                [{card.badge}]
+              </span>
             </div>
 
-            <div className="my-2">
-              <div className={`text-xl md:text-2xl font-black tracking-tight ${c.color}`}>
-                {c.value}
-              </div>
-              <div className="text-[10px] text-slate-400 font-medium truncate mt-0.5" title={c.subtitle}>
-                {c.subtitle}
-              </div>
+            <div className="my-2.5 flex items-baseline gap-2">
+              <span className="text-2xl font-black tracking-tight text-slate-950 font-mono">
+                {card.value}
+              </span>
             </div>
 
-            {c.tooltip && (
-              <div className="pt-1.5 border-t border-slate-800/60 flex items-center justify-between text-[10px] text-slate-500">
-                <span className="truncate max-w-[85%]">{c.tooltip.split('=')[0]}</span>
-                <Info className="w-3 h-3 shrink-0 text-slate-500 hover:text-slate-300" />
-              </div>
-            )}
+            <div className="text-[10px] text-slate-600 truncate font-mono border-t border-slate-300 pt-1.5">
+              {card.subtitle}
+            </div>
           </div>
         );
       })}

@@ -16,7 +16,6 @@ import {
   CheckCircle2,
 } from 'lucide-react';
 
-
 interface RiskOverviewWidgetProps {
   riskOverview: RiskOverviewDTO;
   onSelectActivity?: (activityId: string) => void;
@@ -37,252 +36,207 @@ export const RiskOverviewWidget: React.FC<RiskOverviewWidgetProps> = ({
     switch (sev) {
       case RiskSeverity.CRITICAL:
         return (
-          <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-rose-500/20 text-rose-300 border border-rose-500/40 animate-pulse">
-            CRITICAL
+          <span className="px-1.5 py-0.2 rounded-none text-[9px] font-mono font-bold uppercase tracking-wider bg-red-100 text-red-950 border border-red-800">
+            [CRITICAL]
           </span>
         );
       case RiskSeverity.HIGH:
         return (
-          <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-orange-500/20 text-orange-300 border border-orange-500/40">
-            HIGH
+          <span className="px-1.5 py-0.2 rounded-none text-[9px] font-mono font-bold uppercase tracking-wider bg-amber-200 text-amber-950 border border-amber-800">
+            [HIGH]
           </span>
         );
       case RiskSeverity.MEDIUM:
         return (
-          <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-amber-500/20 text-amber-300 border border-amber-500/40">
-            MEDIUM
+          <span className="px-1.5 py-0.2 rounded-none text-[9px] font-mono font-bold uppercase tracking-wider bg-stone-100 text-slate-900 border border-slate-600">
+            [MEDIUM]
           </span>
         );
       case RiskSeverity.LOW:
         return (
-          <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-slate-700 text-slate-300 border border-slate-600">
-            LOW
+          <span className="px-1.5 py-0.2 rounded-none text-[9px] font-mono font-bold uppercase tracking-wider bg-stone-100 text-slate-700 border border-slate-400">
+            [LOW]
           </span>
         );
-    }
-  };
-
-  const getRiskTypeLabel = (type: RiskType) => {
-    switch (type) {
-      case RiskType.SCHEDULE_DELAY:
-        return 'Schedule Delay';
-      case RiskType.PROGRESS_LAG:
-        return 'Progress Deficit';
-      case RiskType.STALE_UPDATE:
-        return 'Stale Update (>48h)';
-      case RiskType.DEPENDENCY_BLOCK:
-        return 'Dependency Block';
-      case RiskType.LOW_CONFIDENCE_MATCH:
-        return 'Low Confidence Match';
-      case RiskType.MISSING_UPDATE:
-        return 'Missing Update';
+      default:
+        return null;
     }
   };
 
   return (
-    <div className="rounded-2xl bg-slate-900/90 border border-slate-800 p-5 space-y-4 shadow-xl">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <div className="space-y-0.5">
-          <div className="flex items-center gap-2">
-            <span className="p-1.5 rounded-lg bg-rose-500/10 text-rose-400">
-              <ShieldAlert className="w-4 h-4" />
-            </span>
-            <h2 className="text-base font-bold text-white tracking-tight">
-              Deterministic Risk Intelligence Radar
-            </h2>
-          </div>
-          <p className="text-xs text-slate-400">
-            Explainable schedule delays, dependency blocks, and progress deficits
+    <div className="rounded-none bg-white border-[1.5px] border-slate-900 p-4 space-y-3 shadow-[2px_2px_0px_#0f172a] font-mono">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b-[1.5px] border-slate-900 pb-2.5">
+        <div>
+          <h2 className="text-xs font-black text-slate-950 uppercase tracking-wider font-mono">
+            // FLOAT_&_DEPENDENCY_RISK_REGISTER
+          </h2>
+          <p className="text-[10px] text-slate-600 font-mono">
+            Automated float consumption and critical path slippage tracking
           </p>
         </div>
 
-        {/* Severity Filter Tabs */}
-        <div className="flex items-center gap-1.5 bg-slate-950 p-1 rounded-xl border border-slate-800 text-xs">
-          <button
-            onClick={() => setFilterSeverity('ALL')}
-            className={`px-2.5 py-1 rounded-lg font-semibold transition ${
-              filterSeverity === 'ALL' ? 'bg-slate-800 text-white' : 'text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            All ({riskOverview.summary.total})
-          </button>
-          <button
-            onClick={() => setFilterSeverity('CRITICAL')}
-            className={`px-2.5 py-1 rounded-lg font-semibold transition ${
-              filterSeverity === 'CRITICAL' ? 'bg-rose-500/20 text-rose-300 border border-rose-500/30' : 'text-slate-400 hover:text-rose-400'
-            }`}
-          >
-            Critical ({riskOverview.summary.critical})
-          </button>
-          <button
-            onClick={() => setFilterSeverity('HIGH')}
-            className={`px-2.5 py-1 rounded-lg font-semibold transition ${
-              filterSeverity === 'HIGH' ? 'bg-orange-500/20 text-orange-300 border border-orange-500/30' : 'text-slate-400 hover:text-orange-400'
-            }`}
-          >
-            High ({riskOverview.summary.high})
-          </button>
-          <button
-            onClick={() => setFilterSeverity('MEDIUM')}
-            className={`px-2.5 py-1 rounded-lg font-semibold transition ${
-              filterSeverity === 'MEDIUM' ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30' : 'text-slate-400 hover:text-amber-400'
-            }`}
-          >
-            Medium ({riskOverview.summary.medium})
-          </button>
+        {/* Severity Filters */}
+        <div className="flex items-center gap-1.5 text-xs">
+          {['ALL', RiskSeverity.CRITICAL, RiskSeverity.HIGH, RiskSeverity.MEDIUM].map((sev) => (
+            <button
+              key={sev}
+              onClick={() => setFilterSeverity(sev)}
+              className={`px-2 py-0.5 rounded-none text-[10px] font-mono font-bold uppercase transition border ${
+                filterSeverity === sev
+                  ? 'bg-black text-white border-black shadow-[1px_1px_0px_#000]'
+                  : 'bg-stone-100 text-slate-800 border-slate-300 hover:bg-stone-200'
+              }`}
+            >
+              [{sev}]
+            </button>
+          ))}
         </div>
       </div>
 
-      {/* Risk Items List */}
-      <div className="space-y-2.5">
-        {filteredRisks.slice(0, 6).map((risk) => (
-          <div
-            key={risk.id}
-            onClick={() => setSelectedRisk(risk)}
-            className="p-3.5 rounded-xl bg-slate-950/50 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-800/40 transition cursor-pointer flex flex-col md:flex-row md:items-center justify-between gap-3 group"
-          >
-            <div className="space-y-1.5 flex-1 min-w-0">
-              <div className="flex flex-wrap items-center gap-2">
-                {getSeverityBadge(risk.severity)}
-                <span className="text-[11px] font-mono font-bold text-cyan-400 bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-800/50">
-                  {risk.activityCode}
-                </span>
-                <span className="text-[11px] font-semibold text-slate-400">
-                  {getRiskTypeLabel(risk.riskType)}
-                </span>
-                <span className="text-slate-600">•</span>
-                <span className="text-xs font-bold text-white truncate max-w-md">
-                  {risk.activityName}
-                </span>
-              </div>
+      {/* Summary KPI row */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+        <div className="p-2 rounded-none border border-red-800 bg-red-50 text-center">
+          <div className="text-[9px] uppercase font-bold text-red-950 font-mono">CRITICAL_RISKS</div>
+          <div className="text-base font-black text-red-950 font-mono">[{riskOverview.summary?.critical ?? 0}]</div>
+        </div>
+        <div className="p-2 rounded-none border border-amber-800 bg-amber-50 text-center">
+          <div className="text-[9px] uppercase font-bold text-amber-950 font-mono">HIGH_RISKS</div>
+          <div className="text-base font-black text-amber-950 font-mono">[{riskOverview.summary?.high ?? 0}]</div>
+        </div>
+        <div className="p-2 rounded-none border border-slate-400 bg-stone-100 text-center">
+          <div className="text-[9px] uppercase font-bold text-slate-700 font-mono">MEDIUM_RISKS</div>
+          <div className="text-base font-black text-slate-900 font-mono">[{riskOverview.summary?.medium ?? 0}]</div>
+        </div>
+        <div className="p-2 rounded-none border border-slate-900 bg-white text-center">
+          <div className="text-[9px] uppercase font-bold text-slate-900 font-mono">TOTAL_FLAGGED</div>
+          <div className="text-base font-black text-slate-950 font-mono">[{riskOverview.summary?.total ?? riskOverview.risks.length}]</div>
+        </div>
+      </div>
 
-              <div className="text-xs text-slate-300/90 line-clamp-1">
-                {risk.trigger}
-              </div>
-
-              <div className="flex flex-wrap items-center gap-4 text-[11px] text-slate-400">
-                <span>Impact: <strong className="text-slate-200">{risk.explanation.affectedDownstreamCount} downstream activities</strong></span>
-                <span>•</span>
-                <span>Score: <strong className="text-cyan-300 font-mono">{risk.score}/100</strong></span>
-                <span>•</span>
-                <span>Evidence: <strong className="text-slate-300">{risk.evidenceSources[0]?.documentName || 'Schedule'}</strong></span>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3 shrink-0 self-end md:self-center">
-              <span className="text-xs font-semibold text-cyan-400 group-hover:translate-x-0.5 transition flex items-center gap-1">
-                Inspect Risk
-                <ChevronRight className="w-3.5 h-3.5" />
-              </span>
-            </div>
-          </div>
-        ))}
-
-        {filteredRisks.length === 0 && (
-          <div className="p-8 text-center rounded-xl bg-slate-950/40 border border-slate-800 text-slate-400 space-y-1">
-            <CheckCircle2 className="w-6 h-6 text-emerald-400 mx-auto mb-2" />
-            <div className="text-sm font-semibold text-slate-200">No active {filterSeverity.toLowerCase()} risks detected</div>
-            <div className="text-xs text-slate-500">All evaluated deterministic criteria are within acceptable thresholds.</div>
-          </div>
-        )}
+      {/* Risk Register Table */}
+      <div className="overflow-x-auto border-[1.5px] border-slate-900 rounded-none shadow-[1px_1px_0px_#0f172a]">
+        <table className="w-full text-left border-collapse text-xs font-mono">
+          <thead className="bg-stone-100 border-b-[1.5px] border-slate-900 text-slate-900 text-[10px] uppercase font-bold">
+            <tr>
+              <th className="py-2 px-3 border-r border-slate-300">SEVERITY</th>
+              <th className="py-2 px-3 border-r border-slate-300">TRIGGER_DESCRIPTION</th>
+              <th className="py-2 px-3 border-r border-slate-300">TARGET_NODE</th>
+              <th className="py-2 px-3 border-r border-slate-300">SCORE</th>
+              <th className="py-2 px-3 border-r border-slate-300">DOWNSTREAM_IMPACT</th>
+              <th className="py-2 px-3 text-right">ACTION</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-200">
+            {filteredRisks.map((risk) => (
+              <tr key={risk.id} className="hover:bg-amber-50/50 transition">
+                <td className="py-2 px-3 whitespace-nowrap border-r border-slate-200">
+                  {getSeverityBadge(risk.severity)}
+                </td>
+                <td className="py-2 px-3 border-r border-slate-200">
+                  <div className="font-bold text-slate-950 uppercase">{risk.trigger}</div>
+                  <div className="text-[10px] text-slate-600 font-mono">[{risk.id}] · TYPE: {risk.riskType}</div>
+                </td>
+                <td className="py-2 px-3 border-r border-slate-200">
+                  <button
+                    onClick={() => onSelectActivity && onSelectActivity(risk.activityId)}
+                    className="font-mono font-bold text-slate-950 underline hover:bg-amber-100"
+                  >
+                    [{risk.activityCode}]
+                  </button>
+                  <div className="text-[10px] text-slate-600 truncate max-w-[220px] uppercase font-sans">{risk.activityName}</div>
+                </td>
+                <td className="py-2 px-3 font-mono font-black text-red-700 border-r border-slate-200">
+                  [{risk.score}/100]
+                </td>
+                <td className="py-2 px-3 text-slate-700 border-r border-slate-200">
+                  <span className="font-bold text-slate-950 font-mono">[{risk.explanation.affectedDownstreamCount}]</span> NODES
+                </td>
+                <td className="py-2 px-3 text-right">
+                  <button
+                    onClick={() => setSelectedRisk(risk)}
+                    className="text-slate-950 hover:bg-stone-200 border border-slate-900 px-2 py-0.5 font-bold text-[10px] uppercase active:translate-x-[1px] active:translate-y-[1px]"
+                  >
+                    [INSPECT]
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
       {/* Risk Detail Modal / Drawer */}
       {selectedRisk && (
-        <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="w-full max-w-2xl bg-slate-900 border border-slate-700 rounded-2xl p-6 shadow-2xl space-y-5 max-h-[90vh] overflow-y-auto">
-            {/* Modal Header */}
-            <div className="flex items-start justify-between gap-4 border-b border-slate-800 pb-4">
-              <div className="space-y-1">
-                <div className="flex items-center gap-2">
-                  {getSeverityBadge(selectedRisk.severity)}
-                  <span className="text-xs font-mono font-bold text-cyan-400 bg-cyan-950 px-2 py-0.5 rounded border border-cyan-800">
-                    {selectedRisk.activityCode}
-                  </span>
-                  <span className="text-xs font-semibold text-slate-400">
-                    {getRiskTypeLabel(selectedRisk.riskType)}
-                  </span>
-                </div>
-                <h3 className="text-lg font-bold text-white">{selectedRisk.activityName}</h3>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 font-mono">
+          <div className="bg-white rounded-none border-[2px] border-slate-900 shadow-[4px_4px_0px_#000] max-w-xl w-full p-5 space-y-4 text-xs">
+            <div className="flex items-center justify-between border-b-[1.5px] border-slate-900 pb-2">
+              <div className="flex items-center gap-2">
+                {getSeverityBadge(selectedRisk.severity)}
+                <span className="font-black text-xs uppercase text-slate-950">[{selectedRisk.trigger}]</span>
               </div>
               <button
                 onClick={() => setSelectedRisk(null)}
-                className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white transition"
+                className="p-1 border border-slate-900 hover:bg-stone-100 text-slate-900"
               >
-                <X className="w-5 h-5" />
+                <X className="w-3.5 h-3.5" />
               </button>
             </div>
 
-            {/* Structured 5-Question Explainability */}
-            <div className="space-y-3.5 text-xs">
-              <div className="p-3 rounded-xl bg-slate-950/60 border border-slate-800 space-y-1">
-                <span className="font-bold text-cyan-300 uppercase tracking-wider text-[10px]">1. What Happened?</span>
-                <p className="text-slate-200 text-sm">{selectedRisk.explanation.whatHappened}</p>
-              </div>
-
-              <div className="p-3 rounded-xl bg-slate-950/60 border border-slate-800 space-y-1">
-                <span className="font-bold text-amber-300 uppercase tracking-wider text-[10px]">2. Why Does It Matter?</span>
-                <p className="text-slate-200 text-sm">{selectedRisk.explanation.whyItMatters}</p>
-              </div>
-
-              <div className="p-3 rounded-xl bg-slate-950/60 border border-slate-800 space-y-1">
-                <span className="font-bold text-emerald-300 uppercase tracking-wider text-[10px]">3. What Evidence Supports It?</span>
-                <p className="text-slate-200">{selectedRisk.explanation.evidence}</p>
-                {selectedRisk.evidenceSources.map((ev, idx) => (
-                  <div key={idx} className="mt-2 p-2 rounded bg-slate-900 border border-slate-800 text-[11px] font-mono text-slate-300">
-                    <strong className="text-cyan-400">{ev.documentName}</strong> ({ev.pageOrLocation}): &quot;{ev.excerpt}&quot;
-                  </div>
-                ))}
-              </div>
-
-              <div className="p-3 rounded-xl bg-slate-950/60 border border-slate-800 space-y-1">
-                <span className="font-bold text-purple-300 uppercase tracking-wider text-[10px]">4. What Is Affected?</span>
-                <p className="text-slate-200">
-                  <strong className="text-white">{selectedRisk.explanation.affectedDownstreamCount}</strong> downstream successor activities are potentially impacted by this delay.
+            <div className="space-y-3">
+              <div>
+                <span className="text-[9px] uppercase font-bold text-slate-600 block mb-1">
+                  // CAUSALITY_AND_IMPACT_ANALYSIS:
+                </span>
+                <p className="text-slate-900 leading-relaxed bg-stone-50 p-3 rounded-none border border-slate-400 font-sans">
+                  {selectedRisk.explanation.whatHappened}
+                </p>
+                <p className="text-slate-700 text-[11px] mt-1 pl-1 font-sans">
+                  {selectedRisk.explanation.whyItMatters}
                 </p>
               </div>
 
-              <div className="p-3 rounded-xl bg-slate-950/60 border border-cyan-500/20 space-y-1">
-                <span className="font-bold text-cyan-400 uppercase tracking-wider text-[10px]">5. Recommended Action for Planner</span>
-                <p className="text-slate-100 font-medium">{selectedRisk.explanation.recommendedAction}</p>
-              </div>
-            </div>
+              <div className="grid grid-cols-2 gap-2 text-xs">
+                <div className="p-2 border border-slate-400 bg-stone-50 space-y-0.5">
+                  <span className="text-[9px] text-slate-500 uppercase font-bold">TARGET_NODE</span>
+                  <div className="font-mono font-bold text-slate-950">[{selectedRisk.activityCode}]</div>
+                  <div className="text-[10px] text-slate-600 font-sans truncate">{selectedRisk.activityName}</div>
+                </div>
 
-            {/* Explainable Score Breakdown */}
-            <div className="border-t border-slate-800 pt-4 space-y-2">
-              <div className="flex items-center justify-between text-xs">
-                <span className="font-bold text-slate-300">Explainable Risk Factors Breakdown</span>
-                <span className="font-mono font-bold text-cyan-400">Total Score: {selectedRisk.score} / 100</span>
+                <div className="p-2 border border-slate-400 bg-stone-50 space-y-0.5">
+                  <span className="text-[9px] text-slate-500 uppercase font-bold">RISK_ASSESSMENT</span>
+                  <div className="font-mono font-bold text-red-700">[SCORE: {selectedRisk.score}/100]</div>
+                  <div className="text-[10px] text-slate-600 font-mono">[{selectedRisk.explanation.affectedDownstreamCount} Downstream Nodes]</div>
+                </div>
               </div>
-              <div className="space-y-1.5">
-                {selectedRisk.factors.map((f, i) => (
-                  <div key={i} className="flex items-center justify-between text-[11px] bg-slate-950 px-3 py-1.5 rounded-lg border border-slate-800">
-                    <span className="text-slate-400">{f.label} ({String(f.value)})</span>
-                    <span className="font-mono font-semibold text-slate-200">+{f.impactScore} pts</span>
-                  </div>
-                ))}
-              </div>
-            </div>
 
-            {/* Footer Buttons */}
-            <div className="flex items-center justify-end gap-3 pt-2">
-              {onSelectActivity && (
-                <button
-                  onClick={() => {
-                    const actId = selectedRisk.activityId;
-                    setSelectedRisk(null);
-                    onSelectActivity(actId);
-                  }}
-                  className="px-4 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs shadow-lg shadow-cyan-500/25 transition active:scale-95"
-                >
-                  Locate in Gantt View
-                </button>
+              {selectedRisk.explanation.recommendedAction && (
+                <div>
+                  <span className="text-[9px] uppercase font-bold text-slate-600 block mb-1">
+                    // OPERATIONAL_MITIGATION_STRATEGY:
+                  </span>
+                  <p className="text-slate-950 bg-amber-50 p-2.5 rounded-none border border-slate-900 text-xs font-sans">
+                    {selectedRisk.explanation.recommendedAction}
+                  </p>
+                </div>
               )}
+            </div>
+
+            <div className="flex justify-end gap-2 pt-2 border-t-[1.5px] border-slate-900">
               <button
                 onClick={() => setSelectedRisk(null)}
-                className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs transition"
+                className="px-3 py-1.5 rounded-none border border-slate-900 hover:bg-stone-100 text-slate-900 font-bold uppercase text-xs"
               >
-                Close
+                [CLOSE]
+              </button>
+              <button
+                onClick={() => {
+                  const actId = selectedRisk.activityId;
+                  setSelectedRisk(null);
+                  if (onSelectActivity) onSelectActivity(actId);
+                }}
+                className="px-3 py-1.5 rounded-none bg-black hover:bg-slate-800 text-white font-bold uppercase text-xs border border-black shadow-[2px_2px_0px_#0f172a] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
+              >
+                [INSPECT_IN_GANTT]
               </button>
             </div>
           </div>
