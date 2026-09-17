@@ -291,6 +291,26 @@ export function generateSyntheticHistoricalOutcomes(): HistoricalOutcomeDTO[] {
       evidenceDoc: 'DPR-Welding-Log.pdf',
     },
 
+    // 5B. Foundation Grouting (Golden Demo Benchmark: Master Prompt 13 Section 15)
+    {
+      type: 'FOUNDATION_GROUTING',
+      name: 'Compressor Foundation Grouting',
+      category: 'Mechanical Rotating Equipment',
+      discipline: Discipline.MECHANICAL,
+      basePlannedDuration: 3,
+      durationSpread: [2, 3, 3, 3, 4, 3, 4, 3, 3, 4, 3, 4, 3, 3, 4, 3, 4, 5, 3, 3, 4, 3, 3, 4], // Exactly 24 samples -> Median 3.0d, P25 3.0d, P75 4.0d
+      variances: [-1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 2, 0, 0, 1, 0, 0, 1],
+      unit: 'bags',
+      quantities: [45, 50, 48, 52, 46, 50, 55, 60, 48, 52, 50, 48, 52, 55, 46, 50, 54, 58, 48, 52, 50, 48, 52, 54],
+      delayCauses: [DelayCause.MATERIAL, DelayCause.WEATHER, DelayCause.CONTRACTOR],
+      delayTexts: [
+        'Non-shrink epoxy grout material batch test certificate pending vendor clearance.',
+        'High ambient humidity delayed final dry foundation surface curing by 12 hours.',
+      ],
+      lessons: 'Pre-qualify epoxy grout batches 14 days ahead and ensure foundation top surface is dry-cured before headbox pouring.',
+      evidenceDoc: 'DPR-Grout-Inspection.pdf',
+    },
+
     // 6. Compressor Skid Placement
     {
       type: 'COMPRESSOR_SKID_PLACEMENT',

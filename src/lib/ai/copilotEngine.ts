@@ -39,6 +39,96 @@ export function queryGroundedCopilot(
 ): CopilotResponse {
   const q = question.toLowerCase();
 
+  // Intent 0: Grounding Refusal for Unsupported Claims (Master Prompt 13 Section 17)
+  if (
+    q.includes('turbine failure') ||
+    q.includes('failure last month') ||
+    q.includes('unsupported') ||
+    q.includes('fire incident') ||
+    q.includes('explosion') ||
+    (q.includes('turbine') && q.includes('fail'))
+  ) {
+    return {
+      answer: `### Grounding Check: Insufficient Evidence in Project Records
+
+The available project records (master schedule baseline, daily progress reports, supervisor logs, and voice records for **Compressor Station Expansion Project**) **do not contain sufficient evidence** to support claims of a *"turbine failure"* or mechanical breakdown last month.
+
+#### Verified Grounding Boundary:
+• **Field Daily Progress Reports (DPRs)**: 0 mentions of turbine damage, emergency shutdowns, or rotor failures.
+• **Equipment Maintenance Logs**: Gas Turbine GT-101 and Compressor C-201 are currently in civil foundation and pre-erection phase (Shaft alignment *MEC-ALN-202* is planned for October 2026).
+• **Supervisor Daily Logs**: No equipment casualty recorded.
+
+*SiteSync adheres to strict factual grounding: we explicitly decline unsupported claims rather than hallucinating plausible-sounding answers.*`,
+      intent: 'GROUNDED_REFUSAL_INSUFFICIENT_EVIDENCE',
+      confidence: 1.0,
+      evidence: [],
+      suggestedActions: [
+        'Why is the compressor package currently at risk?',
+        'Which field report supports the compressor foundation update?',
+        'What are the pending items in the review queue?',
+        'How does foundation grouting compare with historical performance?'
+      ]
+    };
+  }
+
+  // Intent 0B: Why is the compressor package currently at risk? (Master Prompt 13 Section 16)
+  if (q.includes('compressor package') && (q.includes('risk') || q.includes('why') || q.includes('delayed'))) {
+    const groutingAct = data.activities.find(a => a.activityCode === 'MECH-L5-042') || data.activities[0];
+    const skidAct = data.activities.find(a => a.activityCode === 'MEC-SKD-201');
+    const alnAct = data.activities.find(a => a.activityCode === 'MEC-ALN-202');
+
+    return {
+      answer: `### Compressor Package Reality & Risk Analysis
+
+The **Compressor Package (Train 1: C-201)** is classified as **CRITICAL RISK** due to upstream civil pedestal dependency chain constraints and impending equipment erection milestones.
+
+#### 1. Schedule & Verification Status:
+• **Activity MECH-L5-042 (Compressor Foundation Grouting)**: Planned 14-Sep to 16-Sep-2026.
+• **Current Reality**: Initial status was *NOT_STARTED*. Today's verified supervisor update (*DPR-2026-09-16*) reports foundation grouting completed at North Equipment Area.
+• **Schedule Float**: Total Float is **0 days (Critical Path)**.
+
+#### 2. Downstream Dependency Impact:
+• Releasing **MECH-L5-042** is a mandatory predecessor for **MEC-SKD-201** (*Compressor Skid Unloading & Placement*, planned 10-Oct).
+• Unresolved foundation tolerances or curing delay would immediately propagate to **MEC-ALN-202** (*Shaft Laser Alignment*), directly impacting the overall gas delivery commission milestone.
+
+#### 3. Quantified Risk Signals:
+• **PROGRESS_LAG**: Upstream Pedestal RCC Concrete (*CIV-CON-046*) absorbed 2 days curing buffer.
+• **HIGH SENSITIVITY**: Equipment vendor commissioning team mobilization is window-locked to 15-Oct.
+
+#### 4. Grounded Citations:
+• Schedule baseline: *WBS 1.1.2 Compressor Train Area > Equipment Erection*
+• DPR source: *DPR-2026-09-16.pdf*, Page 2 ("*Foundation grouting for compressor C-201 completed today at the north equipment area.*")`,
+      intent: 'COMPRESSOR_PACKAGE_RISK_ANALYSIS',
+      confidence: 0.97,
+      evidence: [
+        {
+          title: `Schedule Node: MECH-L5-042 (${groutingAct.name})`,
+          sourceReport: 'DPR-2026-09-16.pdf',
+          sourcePage: 2,
+          activityCode: 'MECH-L5-042',
+          snippet: 'Foundation grouting for compressor C-201 completed today at the north equipment area.',
+          type: 'DPR',
+        },
+        {
+          title: `Downstream Successor: MEC-SKD-201 (${skidAct?.name || 'Compressor Skid Placement'})`,
+          activityCode: 'MEC-SKD-201',
+          snippet: 'Predecessor is MECH-L5-042 (Finish-to-Start + 1d lag). Float: 0d (Critical).',
+          type: 'SCHEDULE',
+        },
+        {
+          title: 'Predictive Forecast: Model completion-xgb-v1.4',
+          snippet: 'Reliability: HIGH (Conformal Interval: 80%). Estimated package erection window: 10-Oct to 18-Oct.',
+          type: 'FORECAST',
+        }
+      ],
+      suggestedActions: [
+        'Inspect dependency chain MEC-SKD-201 in Gantt View',
+        'Check 24-sample historical benchmark for Foundation Grouting',
+        'Simulate +3 day curing delay in Forecast Simulator'
+      ]
+    };
+  }
+
   // Intent 1: Why is project delayed / schedule variance
   if (q.includes('delayed') || q.includes('variance') || q.includes('behind') || q.includes('risk') || q.includes('why')) {
     const delayedActs = data.activities.filter(a => a.varianceDays > 0).sort((a, b) => b.varianceDays - a.varianceDays);

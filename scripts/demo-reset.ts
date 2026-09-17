@@ -11,8 +11,10 @@ import { ReviewService } from '../apps/api/src/modules/review/review.service';
 import { ScheduleSyncService } from '../apps/api/src/modules/schedule-sync/schedule-sync.service';
 import { SEEDED_REVIEW_CASES } from '../data/synthetic/review-cases';
 
+export const DEMO_SEED = 42;
+
 export async function runDemoReset(mode: 'reset' | 'seed' | 'clean' = 'reset') {
-  console.log(`\n🔄 [SiteSync Demo Lifecycle] Executing mode: '${mode.toUpperCase()}'...`);
+  console.log(`\n🔄 [SiteSync Demo Lifecycle] Executing mode: '${mode.toUpperCase()}' (DEMO_SEED=${DEMO_SEED})...`);
   const startTime = Date.now();
 
   const eventBus = EventBusService.getInstance();
@@ -29,10 +31,10 @@ export async function runDemoReset(mode: 'reset' | 'seed' | 'clean' = 'reset') {
   eventBus.clear();
   console.log('  ✓ Outbox & event history cleared');
 
-  // 2. Deterministically generate 1,000-activity Oil India Project
-  console.log('  ⏳ Generating canonical 1,000-activity Oil India dataset (fixed seed)...');
+  // 2. Deterministically generate 1,000-activity Project
+  console.log('  ⏳ Generating canonical Golden Demo Project: Compressor Station Expansion (DEMO_SEED=42)...');
   const synthetic = generateSyntheticProject();
-  console.log(`  ✓ Generated ${synthetic.activities.length} activities across L1-L6 WBS`);
+  console.log(`  ✓ Generated ${synthetic.activities.length} activities across L1-L6 WBS (Civil, Piping, Mechanical, Electrical, Instrumentation, HSE)`);
   console.log(`  ✓ Generated ${synthetic.dependencies.length} schedule dependencies`);
   console.log(`  ✓ Generated ${synthetic.fieldReports.length} DPR & inspection records`);
   console.log(`  ✓ Generated ${synthetic.historicalOutcomes.length} historical project outcomes`);
@@ -42,9 +44,9 @@ export async function runDemoReset(mode: 'reset' | 'seed' | 'clean' = 'reset') {
   SEEDED_REVIEW_CASES.forEach((c) => {
     ReviewService.registerReviewItem(JSON.parse(JSON.stringify(c)));
   });
-  console.log(`  ✓ Restored ${SEEDED_REVIEW_CASES.length} canonical review queue items`);
+  console.log(`  ✓ Restored ${SEEDED_REVIEW_CASES.length} canonical review queue items (including golden case MECH-L5-042)`);
 
-  // 4. Reset in-memory schedule sync states
+  // 4. Reset in-memory schedule sync states & ensure MECH-L5-042 baseline
   synthetic.activities.forEach((act) => {
     ScheduleSyncService.setInMemoryActivity(act.id, {
       ...act,
@@ -54,15 +56,33 @@ export async function runDemoReset(mode: 'reset' | 'seed' | 'clean' = 'reset') {
       actualFinish: act.actualFinish ? new Date(act.actualFinish) : null,
     });
   });
+
+  // Explicitly ensure golden demo baseline activity MECH-L5-042 is NOT_STARTED
+  ScheduleSyncService.setInMemoryActivity('MECH-L5-042', {
+    id: 'MECH-L5-042',
+    activityCode: 'MECH-L5-042',
+    name: 'Compressor Foundation Grouting',
+    discipline: 'MECHANICAL',
+    plannedStart: new Date('2026-09-14'),
+    plannedFinish: new Date('2026-09-16'),
+    actualStart: null,
+    actualFinish: null,
+    plannedProgress: 100,
+    actualProgress: 0,
+    status: 'NOT_STARTED',
+    varianceDays: 0,
+    criticalPath: true,
+  });
   console.log(`  ✓ Synchronized canonical schedule state for project ${synthetic.project.id}`);
+  console.log(`  ✓ Golden Demo Scenario baseline initialized: MECH-L5-042 [NOT_STARTED]`);
 
   const durationMs = Date.now() - startTime;
   console.log(`\n======================================================`);
   console.log(`🎉 Demo Reset Completed in ${durationMs}ms`);
   console.log(`   Canonical Project: '${synthetic.project.name}' (${synthetic.project.projectCode})`);
-  console.log(`   Operator: Oil India Limited (Duliajan Terminal)`);
-  console.log(`   WBS Levels: L1 to L6`);
-  console.log(`   Authoritative State: 100% Deterministic`);
+  console.log(`   Dataset Status: Synthetic demonstration dataset created for prototype evaluation`);
+  console.log(`   DEMO_SEED: ${DEMO_SEED} (100% Deterministic)`);
+  console.log(`   Golden Activity: MECH-L5-042 ready for live supervisor ingestion`);
   console.log(`======================================================\n`);
 }
 

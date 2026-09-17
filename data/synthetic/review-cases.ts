@@ -2,6 +2,96 @@ import { Discipline, MatchDecision, MatchStatus } from '@sitesync/types';
 import { ReviewItemModel } from '../../apps/api/src/modules/review/review.types';
 
 export const SEEDED_REVIEW_CASES: ReviewItemModel[] = [
+  // Golden Demo Scenario: MECH-L5-042 (Master Prompt 13 Section 5 & 6)
+  {
+    id: 'rev-case-golden-042',
+    matchId: 'match-case-golden-042',
+    projectId: 'PROJ-OIL-2026-01',
+    status: MatchStatus.REVIEW_REQUIRED,
+    decision: MatchDecision.REVIEW_REQUIRED,
+    event: {
+      id: 'evt-case-golden-042',
+      description: 'Foundation grouting for compressor C-201 completed today at the north equipment area.',
+      normalizedDescription: 'foundation grouting compressor c-201 completed today north equipment area',
+      eventDate: '2026-09-16T12:00:00.000Z',
+      discipline: Discipline.MECHANICAL,
+      location: 'North Equipment Area',
+      progress: 1.0,
+      status: 'COMPLETED',
+      sourceReportId: 'DPR-2026-09-16',
+    },
+    recommendedMatch: {
+      activityId: 'MECH-L5-042',
+      activityCode: 'MECH-L5-042',
+      activityName: 'Compressor Foundation Grouting',
+      discipline: Discipline.MECHANICAL,
+      location: 'North Equipment Area',
+      wbsPath: 'Compressor Station Expansion > Compressor Train Area > Equipment Erection',
+      finalScore: 0.94,
+      confidence: 0.94,
+      confidenceLevel: 'HIGH',
+      scores: {
+        semantic: 0.96,
+        discipline: 1.0,
+        location: 1.0,
+        wbs: 0.9,
+        temporal: 0.9,
+        dependency: 0.9,
+        entity: 0.92,
+      },
+      reasons: [
+        'Semantic similarity: 96%',
+        'Discipline verified: MECHANICAL',
+        'Location exact match: North Equipment Area',
+        'Entity overlap: Compressor C-201, foundation grouting',
+      ],
+      explanation: 'Unambiguous match to compressor C-201 foundation grouting with 94% confidence. Ready for planner verification.',
+    },
+    alternatives: [
+      {
+        activityId: 'CIV-L5-117',
+        activityCode: 'CIV-L5-117',
+        activityName: 'Foundation Concrete Repair',
+        discipline: Discipline.CIVIL,
+        finalScore: 0.68,
+        rank: 2,
+      },
+      {
+        activityId: 'MECH-L6-091',
+        activityCode: 'MECH-L6-091',
+        activityName: 'Compressor Base Plate Preparation',
+        discipline: Discipline.MECHANICAL,
+        finalScore: 0.53,
+        rank: 3,
+      },
+    ],
+    evidence: {
+      id: 'evi-case-golden-042',
+      sourceType: 'PDF',
+      sourceLocator: 'DPR-2026-09-16.pdf',
+      pageNumber: 2,
+      quotedText: 'Foundation grouting for compressor C-201 completed today at the north equipment area.',
+      reportDate: '2026-09-16',
+    },
+    reviewPriority: {
+      score: 92,
+      reasons: ['High AI confidence score (94%)', 'Milestone completion releases downstream Skid Placement (MEC-SKD-201)'],
+      components: {
+        uncertainty: 4,
+        ambiguity: 5,
+        scheduleCriticality: 40,
+        downstreamImpact: 35,
+        recency: 8,
+      },
+    },
+    downstreamImpact: {
+      downstreamCount: 2,
+      isCritical: true,
+      directSuccessors: ['MEC-SKD-201', 'MEC-ALN-202'],
+    },
+    createdAt: '2026-09-16T12:00:00.000Z',
+  },
+
   // Case 1: High Confidence (Auto-linked / routine verification)
   {
     id: 'rev-case-001',

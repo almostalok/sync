@@ -18,6 +18,8 @@
     "demo:reset": "tsx scripts/demo-reset.ts reset",
     "demo:seed": "tsx scripts/demo-reset.ts seed",
     "demo:clean": "tsx scripts/demo-reset.ts clean",
+    "demo:verify": "tsx scripts/demo-verify.ts",
+    "final:verify": "tsx scripts/final-verify.ts",
     "test:forecast": "tsx tests/forecasting.test.ts",
     "forecast:benchmark": "tsx scripts/generate-forecast-benchmark.ts",
     "test:voice": "tsx tests/voice-agent.test.ts",

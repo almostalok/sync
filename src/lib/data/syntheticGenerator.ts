@@ -218,6 +218,51 @@ export function generateSyntheticProject(): GeneratedProjectData {
 
     // Mechanical Package
     {
+      code: 'MECH-L5-042',
+      name: 'Compressor Foundation Grouting',
+      disc: 'MECHANICAL',
+      wbsId: 'WBS-L3-2',
+      wbsPath: 'Compressor Train Area > Equipment Erection',
+      location: 'North Equipment Area',
+      pStart: '2026-09-14',
+      pFinish: '2026-09-16',
+      plannedProg: 100,
+      actualProg: 0,
+      variance: 0,
+      crit: true,
+      aliases: ['Compressor foundation grouting', 'Foundation grouting for compressor C-201', 'C-201 base grouting', 'Foundation grouting compressor']
+    },
+    {
+      code: 'CIV-L5-117',
+      name: 'Foundation Concrete Repair',
+      disc: 'CIVIL',
+      wbsId: 'WBS-L3-1',
+      wbsPath: 'Compressor Train Area > Foundations & Civil',
+      location: 'North Equipment Area',
+      pStart: '2026-09-12',
+      pFinish: '2026-09-15',
+      plannedProg: 100,
+      actualProg: 100,
+      variance: 0,
+      crit: false,
+      aliases: ['Foundation concrete repair', 'Concrete surface repair', 'Pedestal plaster repair']
+    },
+    {
+      code: 'MECH-L6-091',
+      name: 'Compressor Base Plate Preparation',
+      disc: 'MECHANICAL',
+      wbsId: 'WBS-L3-2',
+      wbsPath: 'Compressor Train Area > Equipment Erection',
+      location: 'North Equipment Area',
+      pStart: '2026-09-13',
+      pFinish: '2026-09-15',
+      plannedProg: 100,
+      actualProg: 100,
+      variance: 0,
+      crit: false,
+      aliases: ['Compressor base plate preparation', 'Base plate levelling', 'Soleplate grinding']
+    },
+    {
       code: 'MEC-SKD-201',
       name: 'Centrifugal Gas Compressor Skid Unloading & Placement',
       disc: 'MECHANICAL',
@@ -422,7 +467,8 @@ export function generateSyntheticProject(): GeneratedProjectData {
     { id: 'DEP-02', projectId, predecessorId: 'CIV-PCC-043', successorId: 'CIV-REB-044', dependencyType: 'FS', lag: 1 },
     { id: 'DEP-03', projectId, predecessorId: 'CIV-REB-044', successorId: 'CIV-FRM-045', dependencyType: 'FS', lag: 0 },
     { id: 'DEP-04', projectId, predecessorId: 'CIV-FRM-045', successorId: 'CIV-CON-046', dependencyType: 'FS', lag: 1 },
-    { id: 'DEP-05', projectId, predecessorId: 'CIV-CON-046', successorId: 'MEC-SKD-201', dependencyType: 'FS', lag: 3 },
+    { id: 'DEP-05', projectId, predecessorId: 'CIV-CON-046', successorId: 'MECH-L5-042', dependencyType: 'FS', lag: 2 },
+    { id: 'DEP-05B', projectId, predecessorId: 'MECH-L5-042', successorId: 'MEC-SKD-201', dependencyType: 'FS', lag: 1 },
     { id: 'DEP-06', projectId, predecessorId: 'MEC-SKD-201', successorId: 'MEC-ALN-202', dependencyType: 'FS', lag: 1 },
     
     // Piping sequence
@@ -693,6 +739,19 @@ Tie-in joint welding at Header Spool 12 reached 90% completion. NDT radiography 
 
   // Historical outcomes
   const historicalOutcomes: HistoricalOutcome[] = [
+    {
+      id: 'HIST-00-GROUT',
+      projectId: 'OIL-BOG-2024',
+      projectName: 'Bhogpara Gas Compression Plant',
+      activityType: 'Foundation Grouting',
+      discipline: 'MECHANICAL',
+      plannedDuration: 3,
+      actualDuration: 3,
+      delayDays: 0,
+      delayCause: 'None - executed on schedule using high-flow non-shrink epoxy grout.',
+      productivityMetric: '12 bags/shift continuous headbox pour (24 completed activities benchmarked)',
+      lessonsLearned: 'Utilize pre-mixed epoxy grout kits stored under 25°C and ensure 48h dry foundation cure prior to machinery alignment.'
+    },
     {
       id: 'HIST-01',
       projectId: 'OIL-NHP-2024',
