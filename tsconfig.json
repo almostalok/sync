@@ -30,6 +30,8 @@
       "@sitesync/events/*": ["./packages/events/src/*"],
       "@sitesync/utils": ["./packages/utils/src/index.ts"],
       "@sitesync/utils/*": ["./packages/utils/src/*"],
+      "@sitesync/design-system": ["./packages/design-system/src/index.ts"],
+      "@sitesync/design-system/*": ["./packages/design-system/*"],
       "@sitesync/api/*": ["./apps/api/src/*"]
     }
   },
