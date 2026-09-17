@@ -4,9 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useProject } from '@/context/ProjectContext';
 import {
   Mic,
-  MicOff,
   Square,
-  Sparkles,
   Check,
   RotateCcw,
   CheckCircle2,
@@ -19,11 +17,7 @@ import {
   Globe,
   Wifi,
   ArrowRight,
-  Play,
-  Pause,
-  HelpCircle,
 } from 'lucide-react';
-import confetti from 'canvas-confetti';
 import { VoiceProcessingResult } from '@sitesync/types';
 import { ExtractedEvent } from '@/types/domain';
 
@@ -45,12 +39,11 @@ export const VoiceReporterView: React.FC = () => {
   const [activeSpeechSample, setActiveSpeechSample] = useState<string>('');
 
   const [processingResult, setProcessingResult] = useState<VoiceProcessingResult | null>(null);
-  const [isPlayingAudio, setIsPlayingAudio] = useState(false);
   const [selectedSegmentIdx, setSelectedSegmentIdx] = useState<number | null>(null);
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Field Speech Scenarios (Prompt Section 75 & 76)
+  // Field Speech Scenarios
   const DEMO_SAMPLES = [
     {
       label: 'Compressor Foundation (Hinglish)',
@@ -157,11 +150,6 @@ export const VoiceReporterView: React.FC = () => {
   };
 
   const handleConfirmSync = () => {
-    confetti({
-      particleCount: 80,
-      spread: 80,
-      origin: { y: 0.6 },
-    });
     setActiveView('review');
   };
 
@@ -174,139 +162,141 @@ export const VoiceReporterView: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6 pb-12">
+    <div className="space-y-5 pb-12">
       {/* Top Banner */}
-      <div className="glass-card rounded-2xl p-5 border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-[#0a0f1d]/90">
+      <div className="bg-white border border-slate-200 rounded-lg p-5 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-purple-500/20 text-purple-300 border border-purple-500/30 flex items-center gap-1">
-              <Mic className="w-3 h-3 text-purple-400" />
-              <span>Supervisor Voice Agent</span>
+            <span className="px-2 py-0.5 rounded text-[10px] font-bold tracking-wider uppercase bg-slate-100 text-slate-700 border border-slate-200 flex items-center gap-1">
+              <Mic className="w-3 h-3 text-slate-600" />
+              <span>Supervisor Voice Ingestion</span>
             </span>
-            <span className="text-xs text-slate-400 font-mono">Master Prompt 9 • Speech-to-Reality Pipeline</span>
+            <span className="text-xs text-slate-500 font-mono">Speech-to-Reality Pipeline</span>
           </div>
-          <h2 className="text-base md:text-lg font-bold text-slate-200">
-            Natural Field Speech Ingestion & Execution Event Synchronization
-          </h2>
+          <h1 className="text-xl font-bold text-slate-900 tracking-tight">
+            Field Speech Ingestion & Event Extraction
+          </h1>
+          <p className="text-xs text-slate-600">
+            Transcribe supervisor voice notes in Hinglish, English, or Hindi, resolve negations, and match to schedule activities.
+          </p>
         </div>
 
-        <div className="flex items-center gap-3">
-          <div className="text-[11px] text-slate-300 bg-slate-900/90 border border-slate-800 px-3 py-1.5 rounded-xl flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-emerald-400" />
+        <div className="flex items-center gap-2.5">
+          <div className="text-xs text-slate-700 bg-slate-50 border border-slate-200 px-3 py-1.5 rounded flex items-center gap-1.5">
+            <ShieldCheck className="w-4 h-4 text-emerald-600" />
             <span>
-              <strong className="text-emerald-400">Canonical Pipeline:</strong> Feeds identical ExtractedEvent & Review schema
+              <strong>Canonical Pipeline:</strong> Standard ExtractedEvent & Review schema
             </span>
           </div>
-          <div className="text-[11px] text-slate-400 bg-slate-900/90 border border-slate-800 px-3 py-1.5 rounded-xl flex items-center gap-1 font-mono">
-            <Wifi className="w-3.5 h-3.5 text-cyan-400" />
+          <div className="text-xs text-slate-500 bg-slate-50 border border-slate-200 px-2.5 py-1.5 rounded font-mono flex items-center gap-1">
+            <Wifi className="w-3.5 h-3.5 text-emerald-600" />
             <span>ONLINE</span>
           </div>
         </div>
       </div>
 
       {/* Main Grid: Left Controls & Recording, Right Results */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
         {/* Left Column: Voice Recording Console (5 cols) */}
         <div className="lg:col-span-5 space-y-4">
           {/* Central Recording Widget */}
-          <div className="glass-card rounded-2xl p-6 border border-slate-800 bg-[#070b16] text-center space-y-5 shadow-xl">
+          <div className="bg-white rounded-lg border border-slate-200 p-5 text-center space-y-4 shadow-sm">
             <div className="space-y-1">
-              <div className="font-mono text-4xl font-bold tracking-wider text-slate-100">
+              <div className="font-mono text-3xl font-bold tracking-wider text-slate-900">
                 {formatTime(timerSeconds)}
               </div>
               <div className="text-xs font-semibold">
-                {recordingState === 'IDLE' && <span className="text-slate-400">Press record and speak field update</span>}
+                {recordingState === 'IDLE' && <span className="text-slate-500">Ready to record field report</span>}
                 {recordingState === 'RECORDING' && (
-                  <span className="text-red-400 flex items-center justify-center gap-1.5 animate-pulse">
-                    <span className="w-2.5 h-2.5 rounded-full bg-red-500"></span>
+                  <span className="text-rose-700 flex items-center justify-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-rose-600 animate-pulse"></span>
                     <span>Recording in progress...</span>
                   </span>
                 )}
                 {recordingState === 'TRANSCRIBING' && (
-                  <span className="text-purple-400 flex items-center justify-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-purple-400 animate-ping"></span>
-                    <span>Speech-to-Text Transcription...</span>
+                  <span className="text-slate-700 flex items-center justify-center gap-1.5">
+                    <RotateCcw className="w-3 h-3 animate-spin text-slate-600" />
+                    <span>Transcribing audio stream...</span>
                   </span>
                 )}
                 {recordingState === 'EXTRACTING' && (
-                  <span className="text-cyan-400 flex items-center justify-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
-                    <span>Extracting events & resolving Hinglish...</span>
+                  <span className="text-slate-700 flex items-center justify-center gap-1.5">
+                    <RotateCcw className="w-3 h-3 animate-spin text-slate-600" />
+                    <span>Extracting execution events & negations...</span>
                   </span>
                 )}
                 {recordingState === 'MATCHING' && (
-                  <span className="text-emerald-400 flex items-center justify-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                    <span>Running 7-Signal Matcher against Schedule...</span>
+                  <span className="text-slate-700 flex items-center justify-center gap-1.5">
+                    <RotateCcw className="w-3 h-3 animate-spin text-slate-600" />
+                    <span>Evaluating candidate schedule activities...</span>
                   </span>
                 )}
                 {recordingState === 'READY' && (
-                  <span className="text-emerald-400 flex items-center justify-center gap-1">
-                    <CheckCircle2 className="w-4 h-4" />
+                  <span className="text-emerald-700 flex items-center justify-center gap-1">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                     <span>Processing complete • Ready for verification</span>
                   </span>
                 )}
                 {recordingState === 'FAILED' && (
-                  <span className="text-red-400 flex items-center justify-center gap-1">
-                    <AlertTriangle className="w-4 h-4" />
+                  <span className="text-rose-700 flex items-center justify-center gap-1">
+                    <AlertTriangle className="w-4 h-4 text-rose-600" />
                     <span>Processing failed. Please retry.</span>
                   </span>
                 )}
               </div>
             </div>
 
-            {/* Central Big Mic Button */}
+            {/* Central Mic Button */}
             <div className="flex justify-center items-center py-2">
               {recordingState !== 'RECORDING' ? (
                 <button
                   onClick={handleStartRecording}
                   disabled={recordingState !== 'IDLE' && recordingState !== 'READY'}
-                  className="w-28 h-28 rounded-full bg-gradient-to-tr from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white shadow-2xl shadow-purple-600/40 flex flex-col items-center justify-center gap-1.5 transition transform active:scale-95 disabled:opacity-50 group"
+                  className="w-24 h-24 rounded-full bg-slate-900 hover:bg-slate-800 text-white flex flex-col items-center justify-center gap-1.5 transition disabled:opacity-50 shadow-sm"
                 >
-                  <Mic className="w-9 h-9 group-hover:scale-110 transition" />
-                  <span className="text-[11px] font-bold uppercase tracking-wider">Record Update</span>
+                  <Mic className="w-7 h-7" />
+                  <span className="text-[10px] font-bold uppercase tracking-wider">Record Update</span>
                 </button>
               ) : (
                 <button
                   onClick={() => handleStopRecording()}
-                  className="w-28 h-28 rounded-full bg-gradient-to-tr from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white shadow-2xl shadow-red-600/50 flex flex-col items-center justify-center gap-1.5 transition transform active:scale-95 animate-pulse"
+                  className="w-24 h-24 rounded-full bg-rose-700 hover:bg-rose-800 text-white flex flex-col items-center justify-center gap-1.5 transition shadow-sm"
                 >
-                  <Square className="w-9 h-9" />
-                  <span className="text-[11px] font-bold uppercase tracking-wider">Stop Recording</span>
+                  <Square className="w-7 h-7" />
+                  <span className="text-[10px] font-bold uppercase tracking-wider">Stop Recording</span>
                 </button>
               )}
             </div>
 
             {/* Dialect Selector */}
             <div className="flex items-center justify-center gap-2 pt-1">
-              <Globe className="w-3.5 h-3.5 text-slate-400" />
-              <span className="text-slate-400 text-[11px]">Dialect:</span>
-              <div className="flex rounded-xl bg-slate-900 border border-slate-800 p-0.5">
+              <Globe className="w-3.5 h-3.5 text-slate-500" />
+              <span className="text-slate-600 text-[11px] font-medium">Language:</span>
+              <div className="flex rounded border border-slate-200 bg-slate-50 p-0.5 text-xs">
                 {(['hinglish', 'en', 'hi'] as const).map((lang) => (
                   <button
                     key={lang}
                     onClick={() => setSelectedLanguage(lang)}
-                    className={`px-3 py-1 rounded-lg text-[11px] font-semibold transition ${
+                    className={`px-2.5 py-1 rounded text-[11px] font-medium transition ${
                       selectedLanguage === lang
-                        ? 'bg-purple-600 text-white shadow-md'
-                        : 'text-slate-400 hover:text-slate-200'
+                        ? 'bg-slate-900 text-white'
+                        : 'text-slate-600 hover:text-slate-900'
                     }`}
                   >
-                    {lang === 'hinglish' ? 'Hinglish (Code-Switch)' : lang === 'en' ? 'English' : 'Hindi'}
+                    {lang === 'hinglish' ? 'Hinglish' : lang === 'en' ? 'English' : 'Hindi'}
                   </button>
                 ))}
               </div>
             </div>
           </div>
 
-          {/* Quick Demo Scenarios */}
-          <div className="glass-card rounded-2xl p-4 border border-slate-800 bg-[#080d18] space-y-2">
+          {/* Field Speech Scenarios */}
+          <div className="bg-white rounded-lg border border-slate-200 p-4 shadow-sm space-y-2.5">
             <div className="flex items-center justify-between">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-                <span>Instant Field Speech Samples</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-800">
+                Standard Field Audio Scenarios
               </span>
-              <span className="text-[10px] text-slate-500">1-Click Test</span>
+              <span className="text-[10px] text-slate-500 font-mono">Test Samples</span>
             </div>
 
             <div className="space-y-1.5">
@@ -314,15 +304,15 @@ export const VoiceReporterView: React.FC = () => {
                 <button
                   key={sIdx}
                   onClick={() => handleApplySample(sample)}
-                  className="w-full p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-cyan-500/40 text-left transition space-y-1 group"
+                  className="w-full p-2.5 rounded border border-slate-200 hover:border-slate-300 hover:bg-slate-50 text-left transition space-y-1"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="font-semibold text-slate-200 text-xs group-hover:text-cyan-300">
+                    <span className="font-semibold text-slate-900 text-xs">
                       {sample.label}
                     </span>
-                    <span className="text-[10px] text-slate-500 font-mono">00:{sample.duration}s</span>
+                    <span className="text-[10px] text-slate-500 font-mono">{sample.duration}s</span>
                   </div>
-                  <p className="text-[10px] text-slate-400 line-clamp-1 italic">"{sample.text}"</p>
+                  <p className="text-[11px] text-slate-600 line-clamp-1 italic">&ldquo;{sample.text}&rdquo;</p>
                 </button>
               ))}
             </div>
@@ -332,26 +322,26 @@ export const VoiceReporterView: React.FC = () => {
         {/* Right Column: Verbatim Transcript & Extracted Reality Events (7 cols) */}
         <div className="lg:col-span-7 space-y-4">
           {processingResult ? (
-            <div className="space-y-4 animate-in fade-in duration-300">
+            <div className="space-y-4">
               {/* Transcript & Word Alignment Card */}
-              <div className="glass-card rounded-2xl p-5 border border-slate-800 bg-[#080d18] space-y-3">
+              <div className="bg-white rounded-lg border border-slate-200 p-4 shadow-sm space-y-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <FileText className="w-4 h-4 text-purple-400" />
-                    <h3 className="font-bold text-slate-200 text-xs uppercase tracking-wider">
+                    <FileText className="w-4 h-4 text-slate-700" />
+                    <h3 className="font-bold text-slate-900 text-xs uppercase tracking-wider">
                       Verbatim Voice Transcript & Provenance
                     </h3>
                   </div>
-                  <div className="flex items-center gap-2 text-[10px] text-slate-400 font-mono">
-                    <span className="px-2 py-0.5 rounded bg-slate-800 text-slate-300">
+                  <div className="flex items-center gap-2 text-[10px] text-slate-500 font-mono">
+                    <span className="px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">
                       Whisper Large v3
                     </span>
                     <span>{(processingResult.transcript.confidence * 100).toFixed(0)}% Confidence</span>
                   </div>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-[#050811] border border-slate-800 text-xs text-slate-200 italic leading-relaxed">
-                  "{processingResult.transcript.text}"
+                <div className="p-3 rounded bg-slate-50 border border-slate-200 text-xs text-slate-800 italic leading-relaxed">
+                  &ldquo;{processingResult.transcript.text}&rdquo;
                 </div>
 
                 {/* Audio Segment Locators */}
@@ -365,15 +355,15 @@ export const VoiceReporterView: React.FC = () => {
                         <button
                           key={sIdx}
                           onClick={() => setSelectedSegmentIdx(sIdx)}
-                          className={`px-2.5 py-1 rounded-lg border font-mono text-[10px] transition flex items-center gap-1.5 ${
+                          className={`px-2 py-0.5 rounded border font-mono text-[10px] transition flex items-center gap-1.5 ${
                             selectedSegmentIdx === sIdx
-                              ? 'bg-purple-950 border-purple-500 text-purple-200'
-                              : 'bg-slate-900 border-slate-800 text-cyan-300 hover:bg-slate-800'
+                              ? 'bg-slate-900 border-slate-900 text-white'
+                              : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
                           }`}
                         >
-                          <Volume2 className="w-2.5 h-2.5 text-cyan-400" />
+                          <Volume2 className="w-2.5 h-2.5 text-slate-500" />
                           <span>
-                            {seg.startSeconds}s–{seg.endSeconds}s: "{seg.text.slice(0, 24)}..."
+                            {seg.startSeconds}s–{seg.endSeconds}s: &ldquo;{seg.text.slice(0, 24)}...&rdquo;
                           </span>
                         </button>
                       ))}
@@ -383,15 +373,15 @@ export const VoiceReporterView: React.FC = () => {
               </div>
 
               {/* Extracted Reality Events */}
-              <div className="glass-card rounded-2xl p-5 border border-slate-800 bg-[#080d18] space-y-3">
+              <div className="bg-white rounded-lg border border-slate-200 p-4 shadow-sm space-y-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <Layers className="w-4 h-4 text-emerald-400" />
-                    <h3 className="font-bold text-slate-200 text-xs uppercase tracking-wider">
+                    <Layers className="w-4 h-4 text-slate-700" />
+                    <h3 className="font-bold text-slate-900 text-xs uppercase tracking-wider">
                       Synchronized Execution Events ({processingResult.extractedEvents.length})
                     </h3>
                   </div>
-                  <div className="text-[10px] text-emerald-400 font-semibold">
+                  <div className="text-[10px] text-slate-600 font-semibold font-mono">
                     {processingResult.autoLinkedCount} Auto-Linked • {processingResult.reviewRequiredCount} Review Queued
                   </div>
                 </div>
@@ -400,57 +390,57 @@ export const VoiceReporterView: React.FC = () => {
                   {processingResult.extractedEvents.map((ev, eIdx) => (
                     <div
                       key={eIdx}
-                      className="p-3.5 rounded-xl bg-[#050811] border border-slate-800 hover:border-slate-700 transition space-y-2"
+                      className="p-3 rounded bg-slate-50 border border-slate-200 space-y-2"
                     >
                       <div className="flex items-start justify-between gap-3">
                         <div>
                           <div className="flex items-center gap-2">
-                            <h4 className="font-semibold text-xs text-slate-200">{ev.description}</h4>
+                            <h4 className="font-semibold text-xs text-slate-900">{ev.description}</h4>
                             {ev.description.includes('[NON-EVENT') && (
-                              <span className="px-1.5 py-0.2 rounded text-[9px] font-bold bg-rose-950 text-rose-300 border border-rose-800">
+                              <span className="px-1.5 py-0.2 rounded text-[9px] font-bold bg-rose-50 text-rose-700 border border-rose-200">
                                 NEGATION HELD
                               </span>
                             )}
                           </div>
-                          <p className="text-[10px] text-slate-400 italic mt-0.5">"{ev.sourceText}"</p>
+                          <p className="text-[11px] text-slate-600 italic mt-0.5">&ldquo;{ev.sourceText}&rdquo;</p>
                         </div>
 
                         <div className="text-right shrink-0">
                           {ev.match?.decision === 'AUTO_LINKED' && (
-                            <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-950 text-emerald-300 border border-emerald-800">
+                            <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
                               AUTO-LINKED ({(ev.match.confidence * 100).toFixed(0)}%)
                             </span>
                           )}
                           {ev.match?.decision === 'PENDING_REVIEW' && (
-                            <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-950 text-amber-300 border border-amber-800">
+                            <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-amber-50 text-amber-700 border border-amber-200">
                               REVIEW QUEUE ({(ev.match.confidence * 100).toFixed(0)}%)
                             </span>
                           )}
                           {ev.match?.decision === 'UNMATCHED' && (
-                            <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-800 text-slate-400 border border-slate-700">
+                            <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-100 text-slate-600 border border-slate-200">
                               UNMATCHED / HOLD
                             </span>
                           )}
                         </div>
                       </div>
 
-                      <div className="flex flex-wrap items-center gap-2 text-[10px] text-slate-400 pt-1.5 border-t border-slate-800/80">
+                      <div className="flex flex-wrap items-center gap-2 text-[10px] text-slate-600 pt-1.5 border-t border-slate-200">
                         {ev.match?.activityCode && ev.match.activityCode !== 'NONE' && (
-                          <span className="text-cyan-300 font-mono font-semibold">
+                          <span className="text-slate-900 font-mono font-semibold">
                             Target: {ev.match.activityCode} ({ev.match.activityName})
                           </span>
                         )}
                         {ev.progress !== undefined && (
-                          <span className="text-emerald-400 font-bold">Progress: {ev.progress}%</span>
+                          <span className="text-emerald-700 font-bold">Progress: {ev.progress}%</span>
                         )}
                         {ev.discipline && (
-                          <span className="px-1.5 py-0.5 rounded bg-slate-800 text-slate-300">{ev.discipline}</span>
+                          <span className="px-1.5 py-0.5 rounded bg-white text-slate-700 border border-slate-200">{ev.discipline}</span>
                         )}
                         {ev.location && (
-                          <span className="px-1.5 py-0.5 rounded bg-slate-800 text-slate-300">{ev.location}</span>
+                          <span className="px-1.5 py-0.5 rounded bg-white text-slate-700 border border-slate-200">{ev.location}</span>
                         )}
-                        <span className="text-purple-300 font-mono flex items-center gap-0.5">
-                          <Clock className="w-2.5 h-2.5 text-purple-400" />
+                        <span className="text-slate-500 font-mono flex items-center gap-0.5">
+                          <Clock className="w-2.5 h-2.5 text-slate-400" />
                           <span>
                             00:{String(ev.characterStart || 0).padStart(2, '0')}–00:
                             {String(ev.characterEnd || 10).padStart(2, '0')}
@@ -462,13 +452,13 @@ export const VoiceReporterView: React.FC = () => {
                 </div>
 
                 {/* Final Action Bar */}
-                <div className="pt-3 border-t border-slate-800 flex items-center justify-between">
-                  <span className="text-[11px] text-slate-400">
-                    Events synchronized with immutable cryptographic audit trail.
+                <div className="pt-3 border-t border-slate-200 flex items-center justify-between">
+                  <span className="text-[11px] text-slate-500">
+                    Events synchronized with immutable audit trail.
                   </span>
                   <button
                     onClick={handleConfirmSync}
-                    className="px-5 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs shadow-lg shadow-emerald-600/30 transition flex items-center gap-1.5"
+                    className="px-4 py-2 rounded bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs transition flex items-center gap-1.5 shadow-xs"
                   >
                     <span>View in Review Queue</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -477,14 +467,14 @@ export const VoiceReporterView: React.FC = () => {
               </div>
             </div>
           ) : (
-            <div className="glass-card rounded-2xl p-12 border border-slate-800 bg-[#080d18] text-center space-y-3 flex flex-col items-center justify-center min-h-[400px]">
-              <div className="w-16 h-16 rounded-2xl bg-purple-950/50 border border-purple-800/40 flex items-center justify-center text-purple-400">
-                <Mic className="w-8 h-8 opacity-60" />
+            <div className="bg-white rounded-lg border border-slate-200 p-10 text-center space-y-2.5 flex flex-col items-center justify-center min-h-[380px] shadow-sm">
+              <div className="w-12 h-12 rounded-lg bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-600">
+                <Mic className="w-6 h-6" />
               </div>
-              <h3 className="text-base font-bold text-slate-200">Awaiting Field Speech Input</h3>
-              <p className="text-xs text-slate-400 max-w-sm leading-relaxed">
-                Record a live field report or pick one of the instant speech samples to test real-time Hinglish
-                transcription, negation handling, and 7-signal L5/L6 schedule matching.
+              <h3 className="text-sm font-bold text-slate-900">Awaiting Field Speech Input</h3>
+              <p className="text-xs text-slate-500 max-w-sm leading-relaxed">
+                Record a live field report or pick one of the test scenarios to evaluate transcription,
+                negation handling, and L5/L6 schedule matching.
               </p>
             </div>
           )}

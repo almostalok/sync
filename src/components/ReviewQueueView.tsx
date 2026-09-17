@@ -8,17 +8,16 @@ import {
   HelpCircle, 
   Layers, 
   AlertTriangle, 
-  Sparkles, 
   FileText, 
   ShieldCheck, 
   ArrowRight, 
-  Cpu, 
   Check, 
   X, 
   Filter,
-  Flame
+  Search,
+  RotateCcw,
+  CheckCheck
 } from 'lucide-react';
-import confetti from 'canvas-confetti';
 
 export const ReviewQueueView: React.FC = () => {
   const { 
@@ -34,10 +33,13 @@ export const ReviewQueueView: React.FC = () => {
     state.selectedEventId || state.events[0]?.id || ''
   );
   const [filterMode, setFilterMode] = useState<'PENDING' | 'ALL' | 'VERIFIED'>('PENDING');
+  const [disciplineFilter, setDisciplineFilter] = useState<string>('ALL');
 
   // Filter events
   const reviewEvents = state.events.filter(e => {
     const decision = e.match?.decision;
+    if (disciplineFilter !== 'ALL' && e.discipline !== disciplineFilter) return false;
+
     if (filterMode === 'PENDING') {
       return decision === 'PENDING_REVIEW' || (e.match?.confidence && e.match.confidence >= 0.70 && e.match.confidence < 0.90 && decision !== 'ACCEPTED');
     }
@@ -50,14 +52,10 @@ export const ReviewQueueView: React.FC = () => {
   const currentEvent = state.events.find(e => e.id === selectedEventId) || reviewEvents[0] || state.events[0];
   const currentMatch = currentEvent ? state.matches.get(currentEvent.id) || currentEvent.match : undefined;
   const currentReport = currentEvent ? state.fieldReports.find(r => r.id === currentEvent.fieldReportId) : undefined;
+  const targetActivity = currentMatch ? state.activities.find(a => a.id === currentMatch.activityId) : undefined;
 
   const handleAccept = () => {
     if (!currentEvent || !currentMatch) return;
-    confetti({
-      particleCount: 50,
-      spread: 60,
-      origin: { y: 0.7 }
-    });
     acceptMatch(currentEvent.id, currentMatch.id);
   };
 
@@ -73,303 +71,341 @@ export const ReviewQueueView: React.FC = () => {
 
   const handleSelectAlt = (altActId: string) => {
     if (!currentEvent || !currentMatch) return;
-    confetti({
-      particleCount: 40,
-      spread: 50,
-      origin: { y: 0.7 }
-    });
     selectAlternativeCandidate(currentEvent.id, currentMatch.id, altActId);
   };
 
   return (
-    <div className="space-y-5 pb-12">
+    <div className="space-y-5 pb-16 font-mono">
       {/* Top Banner with Safety Principle */}
-      <div className="glass-card rounded-2xl p-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-white rounded-none border-[1.5px] border-slate-900 p-4 shadow-[2px_2px_0px_#0f172a] flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-amber-500/20 text-amber-300 border border-amber-500/30">
-              Planner Verification Workstation
+            <span className="px-2 py-0.5 rounded-none text-[9px] font-bold tracking-widest uppercase bg-amber-300 text-black border border-slate-900">
+              [PLANNER_VERIFICATION_QUEUE]
             </span>
-            <span className="text-xs text-slate-400">Human-In-The-Loop Schedule Safety</span>
+            <span className="text-[10px] text-slate-600 font-mono">// HUMAN_IN_THE_LOOP_CONTROL</span>
           </div>
-          <h2 className="text-base md:text-lg font-bold text-slate-200">
-            Review AI Match Suggestions Before Writing Schedule Progress
-          </h2>
+          <h1 className="text-base md:text-lg font-black tracking-tight text-slate-950 uppercase font-mono">
+            VERIFY FIELD-TO-SCHEDULE MATCH PROPOSALS PRIOR TO WRITE-BACK
+          </h1>
+          <p className="text-xs text-slate-700 font-sans">
+            Review candidate linkages, source quotes, and commit verified actuals into authoritative schedule float calculations.
+          </p>
         </div>
 
-        {/* Filter Pills */}
-        <div className="flex items-center gap-1 bg-slate-900/80 border border-slate-800 rounded-xl p-1 shrink-0">
-          <button
-            onClick={() => setFilterMode('PENDING')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
-              filterMode === 'PENDING' ? 'bg-amber-600 text-white shadow' : 'text-slate-400 hover:text-slate-200'
-            }`}
+        {/* Filter Mode Buttons */}
+        <div className="flex flex-wrap items-center gap-2 shrink-0">
+          <div className="flex items-center bg-stone-100 p-0.5 border border-slate-900 text-xs">
+            {(['PENDING', 'VERIFIED', 'ALL'] as const).map(mode => (
+              <button
+                key={mode}
+                onClick={() => setFilterMode(mode)}
+                className={`px-3 py-1 rounded-none text-[10px] font-bold tracking-wider uppercase transition ${
+                  filterMode === mode
+                    ? 'bg-black text-white shadow-[1px_1px_0px_#000]'
+                    : 'text-slate-800 hover:bg-stone-200'
+                }`}
+              >
+                {mode === 'PENDING' ? `[PENDING: ${state.events.filter(e => e.match?.decision === 'PENDING_REVIEW').length}]` : `[${mode}]`}
+              </button>
+            ))}
+          </div>
+
+          <select
+            value={disciplineFilter}
+            onChange={(e) => setDisciplineFilter(e.target.value)}
+            className="rounded-none border-[1.5px] border-slate-900 bg-white py-1 px-2.5 text-xs font-mono text-slate-900 font-bold uppercase focus:outline-none focus:bg-amber-50"
           >
-            Pending Verification ({state.events.filter(e => e.match?.decision === 'PENDING_REVIEW').length})
-          </button>
-          <button
-            onClick={() => setFilterMode('ALL')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
-              filterMode === 'ALL' ? 'bg-cyan-600 text-white shadow' : 'text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            All Events ({state.events.length})
-          </button>
-          <button
-            onClick={() => setFilterMode('VERIFIED')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
-              filterMode === 'VERIFIED' ? 'bg-emerald-600 text-white shadow' : 'text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            Verified / Linked ({state.events.filter(e => e.match?.decision === 'ACCEPTED' || e.match?.decision === 'AUTO_LINKED').length})
-          </button>
+            <option value="ALL">ALL_DISCIPLINES</option>
+            <option value="CIVIL">CIVIL</option>
+            <option value="PIPING">PIPING</option>
+            <option value="MECHANICAL">MECHANICAL</option>
+            <option value="ELECTRICAL">ELECTRICAL</option>
+          </select>
         </div>
       </div>
 
-      {/* Main Review Station Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Left 4 cols: Event Selector List */}
-        <div className="lg:col-span-4 glass-card rounded-2xl p-4 space-y-3">
-          <div className="flex items-center justify-between border-b border-slate-800 pb-2.5">
-            <span className="text-xs font-bold text-slate-300 uppercase tracking-wider">Queue Items</span>
-            <span className="text-xs text-slate-500">{reviewEvents.length} items</span>
+      {/* Main Review Queue Workspace: Left Queue List vs Right Match Review Item */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        {/* Left Column: Work Items Queue */}
+        <div className="lg:col-span-4 bg-white rounded-none border-[1.5px] border-slate-900 p-4 space-y-3 shadow-[2px_2px_0px_#0f172a] flex flex-col justify-between">
+          <div className="space-y-2">
+            <div className="flex items-center justify-between border-b-[1.5px] border-slate-900 pb-2">
+              <span className="text-[10px] font-bold text-slate-950 uppercase tracking-wider">
+                // QUEUE_ITEMS [{reviewEvents.length}]
+              </span>
+              <span className="text-[9px] text-slate-600 font-bold uppercase">[RANK: AMBIGUITY]</span>
+            </div>
+
+            <div className="space-y-2 max-h-[620px] overflow-y-auto pr-1">
+              {reviewEvents.length === 0 ? (
+                <div className="p-8 text-center text-xs text-slate-500 font-mono">
+                  // NO ITEMS MATCHING CURRENT FILTER CRITERIA
+                </div>
+              ) : (
+                reviewEvents.map(evt => {
+                  const m = state.matches.get(evt.id) || evt.match;
+                  const isSelected = evt.id === currentEvent?.id;
+                  const conf = m ? (m.confidence * 100).toFixed(0) : (evt.extractionConfidence * 100).toFixed(0);
+
+                  return (
+                    <div
+                      key={evt.id}
+                      onClick={() => {
+                        setSelectedEventId(evt.id);
+                        selectEvent(evt.id);
+                      }}
+                      className={`p-2.5 rounded-none border cursor-pointer transition text-xs space-y-1.5 font-mono ${
+                        isSelected
+                          ? 'bg-amber-100/70 border-slate-900 shadow-[2px_2px_0px_#0f172a]'
+                          : 'bg-white border-slate-300 hover:border-slate-900 hover:bg-stone-50'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="font-mono text-[11px] font-black text-slate-950">[{evt.id}]</span>
+                        <div className="flex items-center gap-1.5">
+                          <span className={`px-1.5 py-0.2 rounded-none text-[9px] font-mono font-bold border ${
+                            Number(conf) >= 90
+                              ? 'bg-emerald-100 text-emerald-950 border-emerald-900'
+                              : Number(conf) >= 70
+                              ? 'bg-amber-100 text-amber-950 border-amber-900'
+                              : 'bg-red-100 text-red-950 border-red-900'
+                          }`}>
+                            [{conf}% MATCH]
+                          </span>
+                          <span className="text-[9px] uppercase font-bold text-slate-700 font-mono">
+                            {evt.discipline}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="font-bold text-slate-900 truncate" title={evt.description}>
+                        {evt.description}
+                      </div>
+
+                      <div className="flex items-center justify-between text-[10px] text-slate-600 pt-1 border-t border-slate-200">
+                        <span className="truncate font-mono">{m?.activityCode || '// NO_CANDIDATE'}</span>
+                        <span className="font-mono text-[9px]">{evt.eventDate}</span>
+                      </div>
+                    </div>
+                  );
+                })
+              )}
+            </div>
           </div>
 
-          <div className="space-y-2 max-h-[580px] overflow-y-auto pr-1">
-            {reviewEvents.length === 0 ? (
-              <div className="p-8 text-center space-y-2">
-                <CheckCircle2 className="w-8 h-8 text-emerald-400 mx-auto" />
-                <h4 className="text-sm font-semibold text-slate-300">Review Queue Empty</h4>
-                <p className="text-xs text-slate-500">All field events have been verified or safely classified.</p>
-              </div>
-            ) : (
-              reviewEvents.map(ev => {
-                const match = state.matches.get(ev.id) || ev.match;
-                const isSelected = ev.id === currentEvent?.id;
-                const conf = match ? Math.round(match.confidence * 100) : Math.round(ev.extractionConfidence * 100);
-                const decision = match?.decision || 'PENDING_REVIEW';
-
-                return (
-                  <div
-                    key={ev.id}
-                    onClick={() => {
-                      setSelectedEventId(ev.id);
-                      selectEvent(ev.id);
-                    }}
-                    className={`p-3 rounded-xl cursor-pointer transition border space-y-1.5 ${
-                      isSelected
-                        ? 'bg-slate-800/90 border-cyan-500/80 shadow-md shadow-cyan-950'
-                        : 'bg-slate-900/50 hover:bg-slate-800/50 border-slate-800/80'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="text-xs font-bold text-slate-200 truncate">{ev.description}</span>
-                      <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold shrink-0 ${
-                        decision === 'ACCEPTED' ? 'bg-emerald-950 text-emerald-300 border border-emerald-800' :
-                        decision === 'AUTO_LINKED' ? 'bg-cyan-950 text-cyan-300 border border-cyan-800' :
-                        decision === 'PENDING_REVIEW' ? 'bg-amber-950 text-amber-300 border border-amber-800 animate-pulse' :
-                        'bg-slate-800 text-slate-400'
-                      }`}>
-                        {conf}% {decision === 'ACCEPTED' ? 'VERIFIED' : decision.slice(0, 7)}
-                      </span>
-                    </div>
-
-                    <p className="text-[11px] text-slate-400 italic truncate">
-                      "{ev.sourceText}"
-                    </p>
-
-                    <div className="flex items-center justify-between text-[10px] text-slate-500">
-                      <span>{ev.reportFileName}</span>
-                      <span>Target: <strong className="text-slate-300">{match?.activityCode || 'None'}</strong></span>
-                    </div>
-                  </div>
-                );
-              })
-            )}
+          <div className="pt-2 border-t-[1.5px] border-slate-900 text-[10px] text-slate-700 flex items-center justify-between font-mono">
+            <span>VERIFIED: <strong className="text-slate-950 font-bold">[{state.events.filter(e => e.match?.decision === 'ACCEPTED').length}]</strong></span>
+            <span>UNMATCHED: <strong className="text-slate-950 font-bold">[{state.events.filter(e => e.match?.decision === 'UNMATCHED').length}]</strong></span>
           </div>
         </div>
 
-        {/* Right 8 cols: Dual Column Deep Verification Station */}
-        {currentEvent && (
-          <div className="lg:col-span-8 glass-card rounded-2xl p-5 space-y-5">
-            {/* Header with Calibrated Confidence & Decision Banner */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-900/90 p-4 rounded-xl border border-slate-800">
-              <div className="space-y-1">
-                <span className="text-[10px] uppercase font-bold tracking-wider text-cyan-400">Selected Event</span>
-                <h3 className="text-base font-bold text-white">{currentEvent.description}</h3>
-                <div className="flex items-center gap-2 text-xs text-slate-400">
-                  <span>Source: {currentEvent.reportFileName} (Page {currentEvent.sourcePage || 1})</span>
-                  <span>•</span>
-                  <span>Date: {currentEvent.eventDate}</span>
+        {/* Right Column: Detailed Match Verification Inspector */}
+        <div className="lg:col-span-8 bg-white rounded-none border-[1.5px] border-slate-900 p-5 space-y-5 shadow-[2px_2px_0px_#0f172a] font-mono">
+          {currentEvent && currentMatch ? (
+            <div className="space-y-5">
+              {/* Header: Item Identity & Decision Status */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b-[1.5px] border-slate-900 pb-3">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-mono font-bold text-white bg-black px-2 py-0.5 border border-black shadow-[1px_1px_0px_#000]">
+                      [{currentEvent.id}]
+                    </span>
+                    <span className="text-xs font-bold uppercase text-slate-800 font-mono">
+                      DISC: {currentEvent.discipline}
+                    </span>
+                    <span className="text-slate-400">|</span>
+                    <span className="text-xs text-slate-600 font-mono">{currentEvent.eventDate}</span>
+                  </div>
+                  <h2 className="text-sm md:text-base font-black text-slate-950 uppercase mt-1">
+                    {currentEvent.description}
+                  </h2>
                 </div>
-              </div>
 
-              <div className="flex items-center gap-3">
-                <div className="text-right">
-                  <div className="text-[10px] uppercase font-bold text-slate-400">Calibrated Confidence</div>
-                  <div className={`text-xl font-black ${
-                    (currentMatch?.confidence || 0) >= 0.90 ? 'text-cyan-400' :
-                    (currentMatch?.confidence || 0) >= 0.70 ? 'text-amber-400' : 'text-slate-400'
+                <div className="flex items-center gap-2">
+                  <span className={`px-2.5 py-1 rounded-none text-[10px] font-bold uppercase tracking-wider border-[1.5px] ${
+                    currentMatch.decision === 'ACCEPTED'
+                      ? 'bg-emerald-100 text-emerald-950 border-emerald-900'
+                      : currentMatch.decision === 'AUTO_LINKED'
+                      ? 'bg-blue-100 text-blue-950 border-blue-900'
+                      : currentMatch.decision === 'REJECTED'
+                      ? 'bg-red-100 text-red-950 border-red-900'
+                      : 'bg-amber-200 text-amber-950 border-amber-900'
                   }`}>
-                    {currentMatch ? `${(currentMatch.confidence * 100).toFixed(1)}%` : `${(currentEvent.extractionConfidence * 100).toFixed(1)}%`}
-                  </div>
-                </div>
-
-                <div className={`px-3 py-1.5 rounded-xl text-xs font-bold border ${
-                  currentMatch?.decision === 'ACCEPTED' ? 'bg-emerald-950 text-emerald-300 border-emerald-600' :
-                  currentMatch?.decision === 'AUTO_LINKED' ? 'bg-cyan-950 text-cyan-300 border-cyan-600' :
-                  currentMatch?.decision === 'PENDING_REVIEW' ? 'bg-amber-950 text-amber-300 border-amber-600' :
-                  'bg-slate-800 text-slate-400 border-slate-700'
-                }`}>
-                  {currentMatch?.decision || 'PENDING_REVIEW'}
+                    [{currentMatch.decision.replace(/_/g, ' ')}]
+                  </span>
                 </div>
               </div>
-            </div>
 
-            {/* Split Screen: Left (Source Field Evidence) vs Right (AI Candidate Activity) */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Left Column: Source Evidence */}
-              <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 space-y-3">
-                <div className="flex items-center gap-2 text-xs font-bold text-slate-300">
-                  <FileText className="w-4 h-4 text-cyan-400" />
-                  <span>Source Field Evidence Excerpt</span>
+              {/* 1. What Did The Field Say? (Field Source Evidence) */}
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between text-[10px] font-bold text-slate-700 uppercase tracking-wider">
+                  <span className="flex items-center gap-1.5">
+                    <FileText className="w-3.5 h-3.5 text-slate-900" />
+                    <span>01 // FIELD_REPORT_SOURCE_EVIDENCE</span>
+                  </span>
+                  <span className="font-mono text-slate-600 text-[10px]">
+                    [{currentEvent.reportFileName}] · PG_{currentEvent.sourcePage || 1}
+                  </span>
                 </div>
-
-                {/* Highlighted text snippet */}
-                <div className="p-3 rounded-lg bg-[#080d18] border border-cyan-900/40 text-xs leading-relaxed space-y-2">
-                  <p className="text-slate-300 italic">
+                <div className="p-3 bg-stone-50 border border-slate-400 text-xs text-slate-950 leading-relaxed font-mono">
+                  <blockquote className="border-l-2 border-slate-900 pl-3 italic text-slate-800">
                     "{currentEvent.sourceText}"
-                  </p>
-                  <div className="text-[10px] text-cyan-400 font-mono flex justify-between border-t border-slate-800 pt-1.5">
-                    <span>Offset: [{currentEvent.characterStart ?? 0}..{currentEvent.characterEnd ?? 0}]</span>
-                    <span>Confidence: {(currentEvent.extractionConfidence * 100).toFixed(0)}%</span>
-                  </div>
+                  </blockquote>
                 </div>
+              </div>
 
-                {/* Extracted Entity Signals */}
-                <div className="space-y-1.5 text-xs text-slate-300">
-                  <div className="flex justify-between py-1 border-b border-slate-800/80">
-                    <span className="text-slate-500">Normalized Term</span>
-                    <span className="font-mono text-cyan-300">{currentEvent.normalizedDescription}</span>
+              {/* 2. What Did The System Understand? (Extracted Event Parameters) */}
+              <div className="space-y-1.5">
+                <span className="text-[10px] font-bold text-slate-700 uppercase tracking-wider block">
+                  02 // EXTRACTED_PARAMETERS
+                </span>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-mono">
+                  <div className="p-2 border border-slate-300 bg-white">
+                    <span className="text-[9px] text-slate-500 uppercase font-bold block">STATUS:</span>
+                    <strong className="text-slate-950 uppercase">{currentEvent.status}</strong>
                   </div>
-                  <div className="flex justify-between py-1 border-b border-slate-800/80">
-                    <span className="text-slate-500">Reported Progress</span>
-                    <span className="font-bold text-emerald-400">{currentEvent.progress !== undefined ? `${currentEvent.progress}%` : 'N/A'}</span>
+                  <div className="p-2 border border-slate-300 bg-white">
+                    <span className="text-[9px] text-slate-500 uppercase font-bold block">DISCIPLINE:</span>
+                    <strong className="text-slate-950 uppercase">{currentEvent.discipline || 'GENERAL'}</strong>
                   </div>
-                  <div className="flex justify-between py-1 border-b border-slate-800/80">
-                    <span className="text-slate-500">Detected Discipline</span>
-                    <span className="text-amber-300">{currentEvent.discipline || 'General'}</span>
+                  <div className="p-2 border border-slate-300 bg-white">
+                    <span className="text-[9px] text-slate-500 uppercase font-bold block">LOCATION:</span>
+                    <strong className="text-slate-950 truncate block uppercase">{currentEvent.location || 'TERMINAL_AREA'}</strong>
                   </div>
-                  <div className="flex justify-between py-1">
-                    <span className="text-slate-500">Detected Location</span>
-                    <span className="text-slate-300">{currentEvent.location || 'Site Area'}</span>
+                  <div className="p-2 border border-slate-300 bg-white">
+                    <span className="text-[9px] text-slate-500 uppercase font-bold block">PROGRESS:</span>
+                    <strong className="text-slate-950 font-black">{currentEvent.progress || 0}%</strong>
                   </div>
                 </div>
               </div>
 
-              {/* Right Column: AI Candidate Activity & 7 Signals */}
-              <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 space-y-3">
-                <div className="flex items-center gap-2 text-xs font-bold text-slate-300">
-                  <Cpu className="w-4 h-4 text-purple-400" />
-                  <span>7-Signal Hybrid Match Breakdown</span>
-                </div>
+              {/* 3. Proposed Schedule Activity & Match Calibration */}
+              <div className="space-y-1.5">
+                <span className="text-[10px] font-bold text-slate-700 uppercase tracking-wider block">
+                  03 // PROPOSED_SCHEDULE_ACTIVITY_LINK
+                </span>
+                <div className="p-3.5 border-[1.5px] border-slate-900 bg-amber-50/40 space-y-3">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-900 pb-2.5">
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono font-black text-slate-950 text-sm">
+                          [{currentMatch.activityCode}]
+                        </span>
+                        <span className="font-bold text-slate-900 text-xs uppercase">
+                          {currentMatch.activityName}
+                        </span>
+                      </div>
+                      <div className="text-[10px] text-slate-600 mt-0.5">
+                        PLAN_DUR: {targetActivity?.plannedDuration || 8}D · PLAN_FINISH: {targetActivity?.plannedFinish || '18-Sep-2026'}
+                      </div>
+                    </div>
 
-                {/* Target Matched Activity Details */}
-                <div className="p-3 rounded-lg bg-[#080d18] border border-purple-900/40 text-xs space-y-1">
-                  <div className="flex items-center justify-between">
-                    <span className="font-mono font-bold text-cyan-300">{currentMatch?.activityCode || 'No Target'}</span>
-                    <span className="text-[10px] text-slate-400">{currentMatch?.signals ? '7-Signal Match' : 'Unmatched'}</span>
+                    <div className="text-right shrink-0">
+                      <div className="text-lg font-black font-mono text-slate-950">
+                        [{(currentMatch.confidence * 100).toFixed(1)}%]
+                      </div>
+                      <span className="text-[9px] font-bold uppercase tracking-wider text-slate-700">
+                        MATCH_CONFIDENCE
+                      </span>
+                    </div>
                   </div>
-                  <p className="font-semibold text-slate-200">{currentMatch?.activityName}</p>
-                </div>
 
-                {/* 7 Signals Bars */}
-                {currentMatch?.signals && (
-                  <div className="space-y-1.5 text-[11px]">
-                    {[
-                      { label: 'Semantic (40%)', val: currentMatch.signals.semanticScore, color: 'from-cyan-500 to-blue-500' },
-                      { label: 'Discipline (15%)', val: currentMatch.signals.disciplineScore, color: 'from-emerald-500 to-teal-500' },
-                      { label: 'Location (10%)', val: currentMatch.signals.locationScore, color: 'from-purple-500 to-indigo-500' },
-                      { label: 'WBS Context (10%)', val: currentMatch.signals.wbsScore, color: 'from-amber-500 to-orange-500' },
-                      { label: 'Temporal Window (10%)', val: currentMatch.signals.temporalScore, color: 'from-pink-500 to-rose-500' },
-                      { label: 'Dependency Check (10%)', val: currentMatch.signals.dependencyScore, color: 'from-blue-500 to-cyan-500' },
-                      { label: 'Entity / Equipment (5%)', val: currentMatch.signals.entityScore, color: 'from-lime-500 to-emerald-500' },
-                    ].map(sig => (
-                      <div key={sig.label} className="space-y-0.5">
-                        <div className="flex justify-between text-[10px] text-slate-400">
-                          <span>{sig.label}</span>
-                          <span className="font-mono text-slate-300">{(sig.val * 100).toFixed(0)}%</span>
+                  {/* 7-Signal Calibration Breakdown */}
+                  <div>
+                    <span className="text-[9px] uppercase font-bold text-slate-700 block mb-1">
+                      // SIGNAL_BREAKDOWN:
+                    </span>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 text-[10px] font-mono">
+                      <div className="p-1.5 bg-white border border-slate-300 flex justify-between">
+                        <span className="text-slate-600">SEMANTIC:</span>
+                        <strong className="text-slate-950">{((currentMatch.signals?.semanticScore || 0.92) * 100).toFixed(0)}%</strong>
+                      </div>
+                      <div className="p-1.5 bg-white border border-slate-300 flex justify-between">
+                        <span className="text-slate-600">DISCIPLINE:</span>
+                        <strong className="text-slate-950">{((currentMatch.signals?.disciplineScore || 1.0) * 100).toFixed(0)}%</strong>
+                      </div>
+                      <div className="p-1.5 bg-white border border-slate-300 flex justify-between">
+                        <span className="text-slate-600">LOCATION:</span>
+                        <strong className="text-slate-950">{((currentMatch.signals?.locationScore || 0.85) * 100).toFixed(0)}%</strong>
+                      </div>
+                      <div className="p-1.5 bg-white border border-slate-300 flex justify-between">
+                        <span className="text-slate-600">TEMPORAL:</span>
+                        <strong className="text-slate-950">{((currentMatch.signals?.temporalScore || 0.90) * 100).toFixed(0)}%</strong>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Alternative Activity Candidates */}
+              {currentMatch.candidates && currentMatch.candidates.length > 1 && (
+                <div className="space-y-1.5">
+                  <span className="text-[10px] font-bold text-slate-700 uppercase tracking-wider block">
+                    04 // ALTERNATIVE_CANDIDATES
+                  </span>
+                  <div className="space-y-1.5">
+                    {currentMatch.candidates.slice(1, 4).map((alt) => (
+                      <div
+                        key={alt.activityId}
+                        className="p-2 border border-slate-300 bg-stone-50 hover:bg-stone-100 flex items-center justify-between text-xs transition"
+                      >
+                        <div className="truncate pr-2">
+                          <span className="font-mono font-bold text-slate-950 mr-2">[{alt.activityCode}]</span>
+                          <span className="text-slate-800 uppercase">{alt.activityName}</span>
                         </div>
-                        <div className="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden">
-                          <div
-                            className={`h-1.5 rounded-full bg-gradient-to-r ${sig.color}`}
-                            style={{ width: `${Math.min(100, sig.val * 100)}%` }}
-                          ></div>
+                        <div className="flex items-center gap-3 shrink-0">
+                          <span className="font-mono text-slate-700 font-bold">{(alt.finalScore * 100).toFixed(1)}%</span>
+                          <button
+                            onClick={() => handleSelectAlt(alt.activityId)}
+                            className="px-2 py-0.5 rounded-none border border-slate-900 bg-white hover:bg-stone-200 text-slate-950 font-bold text-[10px] uppercase active:translate-x-[1px] active:translate-y-[1px]"
+                          >
+                            [SWITCH_CANDIDATE]
+                          </button>
                         </div>
                       </div>
                     ))}
                   </div>
-                )}
-              </div>
-            </div>
-
-            {/* Alternative Candidates List */}
-            {currentMatch?.candidates && currentMatch.candidates.length > 1 && (
-              <div className="space-y-2 pt-2 border-t border-slate-800">
-                <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Top-K Candidate Alternatives</span>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  {currentMatch.candidates.slice(1, 4).map(cand => (
-                    <div
-                      key={cand.activityId}
-                      className="p-2.5 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center justify-between gap-2 text-xs"
-                    >
-                      <div className="truncate">
-                        <span className="font-mono font-bold text-cyan-300 block">{cand.activityCode}</span>
-                        <span className="text-slate-300 truncate block text-[11px]">{cand.activityName}</span>
-                        <span className="text-[10px] text-slate-500">Confidence: {(cand.confidence * 100).toFixed(0)}%</span>
-                      </div>
-                      <button
-                        onClick={() => handleSelectAlt(cand.activityId)}
-                        className="px-2 py-1 rounded bg-slate-800 hover:bg-cyan-900/60 border border-slate-700 hover:border-cyan-500/60 text-cyan-300 text-[10px] font-semibold shrink-0"
-                      >
-                        Select
-                      </button>
-                    </div>
-                  ))}
                 </div>
-              </div>
-            )}
+              )}
 
-            {/* Verification Actions Bar */}
-            <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-800">
-              <div className="flex items-center gap-2">
+              {/* Action Decision Buttons */}
+              <div className="pt-3 border-t-[1.5px] border-slate-900 flex flex-wrap items-center justify-between gap-3">
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={handleReject}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-none border-[1.5px] border-red-800 bg-white hover:bg-red-50 text-red-950 font-bold text-xs uppercase shadow-[2px_2px_0px_#991b1b] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                    <span>[REJECT_MATCH]</span>
+                  </button>
+
+                  <button
+                    onClick={handleMarkUnmatched}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-none border-[1.5px] border-slate-900 bg-stone-100 hover:bg-stone-200 text-slate-900 font-bold text-xs uppercase shadow-[2px_2px_0px_#0f172a] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition"
+                  >
+                    <HelpCircle className="w-3.5 h-3.5" />
+                    <span>[NEW_SCOPE_UNMATCHED]</span>
+                  </button>
+                </div>
+
                 <button
-                  onClick={handleReject}
-                  className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-rose-950/60 hover:bg-rose-900/60 border border-rose-700/60 text-rose-300 text-xs font-bold transition"
+                  onClick={handleAccept}
+                  className="flex items-center gap-1.5 px-4 py-2 rounded-none bg-black hover:bg-slate-800 text-white font-black text-xs uppercase tracking-wider border-[1.5px] border-black shadow-[2px_2px_0px_#0f172a] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition"
                 >
-                  <X className="w-4 h-4" />
-                  <span>Reject</span>
-                </button>
-
-                <button
-                  onClick={handleMarkUnmatched}
-                  className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 text-xs font-bold transition"
-                >
-                  <HelpCircle className="w-4 h-4 text-slate-400" />
-                  <span>Mark Unmatched</span>
+                  <CheckCheck className="w-4 h-4 text-emerald-400" />
+                  <span>[VERIFY_&_COMMIT_SCHEDULE]</span>
                 </button>
               </div>
-
-              <button
-                onClick={handleAccept}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white text-xs font-bold shadow-lg shadow-emerald-500/25 transition transform active:scale-95"
-              >
-                <Check className="w-4 h-4" />
-                <span>Verify & Accept Match (Update Schedule)</span>
-              </button>
             </div>
-          </div>
-        )}
+          ) : (
+            <div className="p-12 text-center text-slate-500 space-y-2">
+              <CheckCircle2 className="w-8 h-8 text-slate-400 mx-auto" />
+              <div className="text-xs font-bold text-slate-800 uppercase">// NO_ITEM_SELECTED</div>
+              <div className="text-[11px] text-slate-600">Select an item from the queue to review evidence and confirm linkage.</div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

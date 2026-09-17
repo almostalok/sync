@@ -23,7 +23,7 @@ export default function Home() {
   const [showDemoModal, setShowDemoModal] = useState(false);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#070b13] text-slate-100">
+    <div className="min-h-screen flex flex-col bg-[#f8fafc] text-slate-900 font-sans">
       {/* Top Application Header */}
       <Header onOpenDemoModal={() => setShowDemoModal(true)} />
 
@@ -47,7 +47,7 @@ export default function Home() {
         </main>
       </div>
 
-      {/* Interactive SIH Demo Script Walkthrough Modal */}
+      {/* Presentation Demo Script Walkthrough Modal */}
       <DemoScriptModal
         isOpen={showDemoModal}
         onClose={() => setShowDemoModal(false)}

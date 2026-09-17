@@ -6,17 +6,17 @@ import { ProjectState } from '@/lib/store/projectStore';
 import { 
   LayoutDashboard, 
   CalendarRange, 
-  GitFork, 
   FileText, 
   CheckSquare, 
   SearchCheck, 
   AlertOctagon, 
-  Sparkles, 
+  TrendingUp, 
+  BookOpen, 
+  Compass, 
   Mic, 
   BarChart2, 
-  BookOpen, 
   History,
-  TrendingUp 
+  ShieldCheck
 } from 'lucide-react';
 
 interface NavItem {
@@ -24,7 +24,7 @@ interface NavItem {
   label: string;
   icon: React.ElementType;
   badge?: number | string;
-  badgeColor?: string;
+  badgeVariant?: 'neutral' | 'warning' | 'critical' | 'info';
 }
 
 export const Sidebar: React.FC = () => {
@@ -36,83 +36,99 @@ export const Sidebar: React.FC = () => {
 
   const highRiskCount = state.risks.filter(r => r.severity === 'HIGH').length;
 
-  const navGroups: { group: string; items: NavItem[] }[] = [
+  const navGroups: { group: string; prefix: string; items: NavItem[] }[] = [
     {
-      group: 'OVERVIEW & SCHEDULE',
+      group: 'PROJECT_OPERATIONS',
+      prefix: '01',
       items: [
-        { id: 'dashboard', label: 'Command Center', icon: LayoutDashboard },
-        { id: 'gantt', label: 'Schedule & Gantt', icon: CalendarRange },
-        { id: 'history', label: 'Historical Memory', icon: BookOpen },
-      ]
-    },
-    {
-      group: 'FIELD INTELLIGENCE',
-      items: [
-        { id: 'reports', label: 'DPR & Field Reports', icon: FileText, badge: state.fieldReports.length, badgeColor: 'bg-slate-700 text-slate-300' },
+        { id: 'dashboard', label: 'COMMAND_CENTER', icon: LayoutDashboard },
+        { id: 'gantt', label: 'SCHEDULE_GANTT', icon: CalendarRange },
+        { id: 'reports', label: 'FIELD_REPORTS_DPR', icon: FileText, badge: state.fieldReports.length, badgeVariant: 'neutral' },
         { 
           id: 'review', 
-          label: 'Review Queue', 
+          label: 'REVIEW_QUEUE', 
           icon: CheckSquare, 
           badge: pendingReviewCount > 0 ? pendingReviewCount : undefined, 
-          badgeColor: 'bg-amber-500/20 text-amber-300 border border-amber-500/40' 
+          badgeVariant: 'warning' 
         },
-        { id: 'evidence', label: 'Evidence Provenance', icon: SearchCheck },
+        { id: 'evidence', label: 'EVIDENCE_PROVENANCE', icon: SearchCheck },
       ]
     },
     {
-      group: 'INTELLIGENCE & AI',
+      group: 'INTELLIGENCE_CONTROLS',
+      prefix: '02',
       items: [
         { 
           id: 'risks', 
-          label: 'Risk & Dependencies', 
+          label: 'FLOAT_RADAR_RISKS', 
           icon: AlertOctagon, 
-          badge: highRiskCount > 0 ? `${highRiskCount} High` : undefined,
-          badgeColor: 'bg-rose-500/20 text-rose-300 border border-rose-500/40'
+          badge: highRiskCount > 0 ? `${highRiskCount} HIGH` : undefined,
+          badgeVariant: 'critical'
         },
-        { id: 'forecast', label: 'Forecast & Scenarios', icon: TrendingUp, badge: 'New', badgeColor: 'bg-indigo-900/60 text-indigo-300' },
-        { id: 'copilot', label: 'Grounded Copilot', icon: Sparkles, badge: 'AI', badgeColor: 'bg-purple-900/60 text-purple-300' },
-        { id: 'voice', label: 'Voice Field Memo', icon: Mic, badge: 'Live', badgeColor: 'bg-emerald-900/60 text-emerald-300' },
-        { id: 'benchmark', label: 'Benchmark & Baselines', icon: BarChart2 },
+        { id: 'forecast', label: 'SCENARIO_SIMULATOR', icon: TrendingUp },
+        { id: 'history', label: 'HISTORICAL_BENCH', icon: BookOpen },
       ]
     },
     {
-      group: 'GOVERNANCE',
+      group: 'ANALYTICAL_TOOLS',
+      prefix: '03',
       items: [
-        { id: 'audit', label: 'Audit Trail', icon: History },
+        { id: 'copilot', label: 'SCHEDULE_DOSSIER', icon: Compass },
+        { id: 'voice', label: 'VOICE_INGESTION', icon: Mic },
+        { id: 'benchmark', label: 'MODEL_EVALUATION', icon: BarChart2 },
+      ]
+    },
+    {
+      group: 'COMPLIANCE_AUDIT',
+      prefix: '04',
+      items: [
+        { id: 'audit', label: 'AUDIT_TRAIL', icon: History },
       ]
     }
   ];
 
   return (
-    <aside className="w-64 shrink-0 hidden md:flex flex-col border-r border-slate-800/80 bg-[#0a0f1d]/70 backdrop-blur-lg min-h-[calc(100vh-61px)] p-3">
-      <div className="space-y-5 flex-1">
+    <aside className="w-64 shrink-0 hidden md:flex flex-col border-r-[2px] border-slate-900 bg-stone-50 min-h-[calc(100vh-53px)] p-3 font-mono">
+      <div className="space-y-4 flex-1">
         {navGroups.map((grp, gIdx) => (
           <div key={gIdx} className="space-y-1">
-            <h2 className="px-3 text-[10px] font-bold uppercase tracking-wider text-slate-300/80">
-              {grp.group}
+            <h2 className="px-2 text-[9px] font-bold uppercase tracking-widest text-slate-500 flex items-center gap-1.5 border-b border-slate-300 pb-0.5">
+              <span>{grp.prefix} //</span>
+              <span>{grp.group}</span>
             </h2>
-            <div className="space-y-0.5">
+            <div className="space-y-1 pt-1">
               {grp.items.map(item => {
                 const Icon = item.icon;
                 const isActive = state.activeView === item.id;
+
                 return (
                   <button
                     key={item.id}
                     onClick={() => setActiveView(item.id)}
-                    className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium transition-all duration-150 ${
+                    className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-none text-xs font-mono font-bold transition uppercase tracking-wider ${
                       isActive
-                        ? 'bg-gradient-to-r from-cyan-950/80 to-blue-950/50 text-cyan-300 border border-cyan-500/30 shadow-sm shadow-cyan-950/50'
-                        : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40'
+                        ? 'bg-black text-white border-[1.5px] border-black shadow-[2px_2px_0px_#0f172a]'
+                        : 'text-slate-800 hover:bg-stone-200 border border-transparent hover:border-slate-400'
                     }`}
                   >
-                    <div className="flex items-center gap-2.5 truncate">
-                      <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-cyan-400' : 'text-slate-400'}`} />
-                      <span className="truncate">{item.label}</span>
+                    <div className="flex items-center gap-2 truncate">
+                      <Icon className={`w-3.5 h-3.5 shrink-0 ${isActive ? 'text-white' : 'text-slate-700'}`} />
+                      <span className="truncate text-[11px]">{item.label}</span>
                     </div>
 
-                    {item.badge && (
-                      <span className={`px-1.5 py-0.5 text-[10px] font-semibold rounded-md ${item.badgeColor || 'bg-slate-800 text-slate-300'}`}>
-                        {item.badge}
+                    {item.badge !== undefined && (
+                      <span
+                        className={`px-1.5 py-0.2 rounded-none text-[9px] font-bold font-mono border ${
+                          isActive
+                            ? 'bg-white text-black border-white'
+                            : item.badgeVariant === 'warning'
+                            ? 'bg-amber-300 text-black border-slate-900'
+                            : item.badgeVariant === 'critical'
+                            ? 'bg-red-600 text-white border-slate-900'
+                            : 'bg-stone-200 text-slate-800 border-slate-400'
+                        }`}
+                      >
+                        [{item.badge}]
                       </span>
                     )}
                   </button>
@@ -123,20 +139,15 @@ export const Sidebar: React.FC = () => {
         ))}
       </div>
 
-      {/* Safety Principle Sticky Note in Sidebar */}
-      <div className="mt-4 p-3 rounded-xl bg-slate-900/90 border border-slate-800 text-[11px] space-y-1.5">
-        <div className="flex items-center gap-1.5 font-semibold text-cyan-300">
-          <span className="w-2 h-2 rounded-full bg-cyan-400"></span>
-          <span>Core Safety Policy</span>
+      {/* Safety Compliance Footer Note */}
+      <div className="mt-4 p-2.5 rounded-none border-[1.5px] border-slate-900 bg-white text-[10px] space-y-1 shadow-[2px_2px_0px_#0f172a]">
+        <div className="flex items-center gap-1.5 font-bold text-slate-950 uppercase tracking-wider">
+          <ShieldCheck className="w-3.5 h-3.5 text-slate-900" />
+          <span>[SAFETY_RULE::CIV-09]</span>
         </div>
-        <p className="text-slate-400 text-[10px] leading-relaxed">
-          SiteSync never silently forces schedule updates. Matches below 90% confidence require planner verification.
+        <p className="text-[10px] text-slate-700 leading-tight">
+          MATCH &lt; 90% MANDATES MANUAL VERIFICATION PRIOR TO P6 WRITE-BACK.
         </p>
-        <div className="flex items-center justify-between text-[9px] pt-1 text-slate-400 border-t border-slate-800">
-          <span>Auto: ≥90%</span>
-          <span>Review: 70-89%</span>
-          <span>Unmatch: &lt;70%</span>
-        </div>
       </div>
     </aside>
   );
