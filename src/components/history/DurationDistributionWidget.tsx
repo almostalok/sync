@@ -5,7 +5,6 @@ import { HistoricalBenchmarkDTO, HistoricalOutcomeDTO, SampleQuality } from '@si
 import { 
   BarChart2, 
   AlertCircle, 
-  ShieldAlert, 
   ShieldCheck, 
   Clock, 
   FileText, 
@@ -38,19 +37,19 @@ export const DurationDistributionWidget: React.FC<Props> = ({
   const maxPct = (durationDays.max / maxChartVal) * 100;
 
   return (
-    <div className="glass-card rounded-2xl border border-slate-800 p-5 space-y-5">
+    <div className="bg-white rounded-lg border border-slate-200 p-4 shadow-sm space-y-4">
       {/* Header */}
       <div className="flex items-start justify-between">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-cyan-950/60 text-cyan-300 border border-cyan-800/40">
+            <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-700 border border-slate-200">
               {discipline}
             </span>
-            <span className="text-xs font-mono text-slate-400">{benchmark.activityType}</span>
+            <span className="text-xs font-mono text-slate-500">{benchmark.activityType}</span>
           </div>
-          <h3 className="text-base font-bold text-slate-100 flex items-center gap-2">
+          <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
             <span>{activityName}</span>
-            <span className="text-xs font-normal text-slate-400">
+            <span className="text-xs font-normal text-slate-500">
               — Historical Duration Distribution
             </span>
           </h3>
@@ -59,7 +58,7 @@ export const DurationDistributionWidget: React.FC<Props> = ({
         {onClose && (
           <button
             onClick={onClose}
-            className="p-1 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-slate-200 transition"
+            className="p-1 rounded hover:bg-slate-100 text-slate-400 hover:text-slate-700 transition"
           >
             <X className="w-4 h-4" />
           </button>
@@ -68,11 +67,11 @@ export const DurationDistributionWidget: React.FC<Props> = ({
 
       {/* Small Sample Warning Banner (if applicable) */}
       {quality === SampleQuality.LOW_SAMPLE && (
-        <div className="p-3 rounded-xl bg-amber-950/40 border border-amber-800/50 flex items-center gap-3 text-amber-200 text-xs">
-          <AlertCircle className="w-5 h-5 text-amber-400 flex-shrink-0" />
+        <div className="p-3 rounded bg-amber-50 border border-amber-200 flex items-center gap-3 text-amber-900 text-xs">
+          <AlertCircle className="w-5 h-5 text-amber-700 shrink-0" />
           <div>
             <div className="font-bold">Low Historical Sample Size ({sampleCount} tasks)</div>
-            <div className="text-[11px] text-amber-300/80 mt-0.5">
+            <div className="text-[11px] text-amber-800 mt-0.5">
               {warningNotice || 'Only a limited number of historical activities exist in this category. Use estimate cautiously.'}
             </div>
           </div>
@@ -80,8 +79,8 @@ export const DurationDistributionWidget: React.FC<Props> = ({
       )}
 
       {quality === SampleQuality.STRONGER_HISTORICAL_BASE && (
-        <div className="p-2.5 rounded-xl bg-emerald-950/30 border border-emerald-800/40 flex items-center gap-2.5 text-emerald-300 text-xs">
-          <ShieldCheck className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+        <div className="p-2.5 rounded bg-emerald-50 border border-emerald-200 flex items-center gap-2 text-emerald-800 text-xs">
+          <ShieldCheck className="w-4 h-4 text-emerald-700 shrink-0" />
           <span className="text-[11px]">
             Strong statistical baseline ({sampleCount} verified activities across completed Oil India capital assets).
           </span>
@@ -89,9 +88,9 @@ export const DurationDistributionWidget: React.FC<Props> = ({
       )}
 
       {/* Box Plot / Percentile Distribution Visualizer */}
-      <div className="p-4 rounded-xl bg-slate-900/90 border border-slate-800 space-y-4">
+      <div className="p-4 rounded-lg bg-slate-50 border border-slate-200 space-y-4">
         <div className="flex items-center justify-between text-xs">
-          <span className="font-semibold text-slate-300">Duration Range (Days)</span>
+          <span className="font-semibold text-slate-700">Duration Range (Days)</span>
           <span className="text-[11px] text-slate-500 font-mono">
             Sample N = {sampleCount} completed activities
           </span>
@@ -100,10 +99,10 @@ export const DurationDistributionWidget: React.FC<Props> = ({
         {/* Visual Box-Plot Bar */}
         <div className="relative pt-6 pb-8">
           {/* Axis Line */}
-          <div className="h-2 w-full bg-slate-800 rounded-full relative">
+          <div className="h-2 w-full bg-slate-200 rounded-full relative">
             {/* Whiskers: Min to Max Range */}
             <div
-              className="absolute top-1/2 -translate-y-1/2 h-0.5 bg-slate-600"
+              className="absolute top-1/2 -translate-y-1/2 h-0.5 bg-slate-400"
               style={{
                 left: `${minPct}%`,
                 width: `${Math.max(1, maxPct - minPct)}%`,
@@ -112,23 +111,23 @@ export const DurationDistributionWidget: React.FC<Props> = ({
 
             {/* Middle 50% Box: P25 to P75 */}
             <div
-              className="absolute top-1/2 -translate-y-1/2 h-5 bg-cyan-900/80 border border-cyan-400/80 rounded"
+              className="absolute top-1/2 -translate-y-1/2 h-5 bg-slate-300 border border-slate-400 rounded"
               style={{
                 left: `${p25Pct}%`,
                 width: `${Math.max(2, p75Pct - p25Pct)}%`,
               }}
             >
-              <span className="absolute -top-5 left-1/2 -translate-x-1/2 text-[9px] font-mono text-cyan-300 uppercase tracking-tight">
+              <span className="absolute -top-5 left-1/2 -translate-x-1/2 text-[9px] font-mono text-slate-600 uppercase tracking-tight">
                 Middle 50%
               </span>
             </div>
 
             {/* Median Marker */}
             <div
-              className="absolute top-1/2 -translate-y-1/2 w-3 h-7 bg-amber-400 border border-amber-200 rounded-sm shadow-lg shadow-amber-500/20"
+              className="absolute top-1/2 -translate-y-1/2 w-3 h-7 bg-slate-900 border border-slate-700 rounded-xs shadow-xs"
               style={{ left: `calc(${medianPct}% - 6px)` }}
             >
-              <span className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[10px] font-bold font-mono text-amber-300">
+              <span className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[10px] font-bold font-mono text-slate-900">
                 {durationDays.median}d
               </span>
             </div>
@@ -152,29 +151,29 @@ export const DurationDistributionWidget: React.FC<Props> = ({
         </div>
 
         {/* Statistical Interpretation Legend */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 border-t border-slate-800 text-center text-xs">
-          <div className="p-2 rounded bg-slate-900 border border-slate-800/80">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 border-t border-slate-200 text-center text-xs">
+          <div className="p-2 rounded bg-white border border-slate-200">
             <div className="text-[10px] text-slate-500">Median Duration</div>
-            <div className="text-sm font-bold font-mono text-amber-400">{durationDays.median} days</div>
+            <div className="text-sm font-bold font-mono text-slate-900">{durationDays.median} days</div>
           </div>
-          <div className="p-2 rounded bg-slate-900 border border-slate-800/80">
+          <div className="p-2 rounded bg-white border border-slate-200">
             <div className="text-[10px] text-slate-500">Typical (P25–P75)</div>
-            <div className="text-sm font-bold font-mono text-cyan-300">{durationDays.p25}d – {durationDays.p75}d</div>
+            <div className="text-sm font-bold font-mono text-slate-800">{durationDays.p25}d – {durationDays.p75}d</div>
           </div>
-          <div className="p-2 rounded bg-slate-900 border border-slate-800/80">
+          <div className="p-2 rounded bg-white border border-slate-200">
             <div className="text-[10px] text-slate-500">Mean Duration</div>
-            <div className="text-sm font-bold font-mono text-slate-300">{durationDays.mean} days</div>
+            <div className="text-sm font-bold font-mono text-slate-700">{durationDays.mean} days</div>
           </div>
-          <div className="p-2 rounded bg-slate-900 border border-slate-800/80">
+          <div className="p-2 rounded bg-white border border-slate-200">
             <div className="text-[10px] text-slate-500">Median Variance</div>
-            <div className={`text-sm font-bold font-mono ${benchmark.scheduleVarianceDays.median > 0 ? 'text-rose-400' : 'text-emerald-400'}`}>
+            <div className={`text-sm font-bold font-mono ${benchmark.scheduleVarianceDays.median > 0 ? 'text-rose-700' : 'text-emerald-700'}`}>
               {benchmark.scheduleVarianceDays.median > 0 ? `+${benchmark.scheduleVarianceDays.median}` : benchmark.scheduleVarianceDays.median}d
             </div>
           </div>
         </div>
 
-        <div className="text-[11px] text-slate-400 italic flex items-center gap-1.5 pt-1">
-          <Info className="w-3.5 h-3.5 text-slate-500 flex-shrink-0" />
+        <div className="text-[11px] text-slate-500 italic flex items-center gap-1.5 pt-1">
+          <Info className="w-3.5 h-3.5 text-slate-400 shrink-0" />
           <span>
             Institutional note: Historical metrics represent verified empirical reality. No guarantee or certainty of future execution duration is implied.
           </span>
@@ -185,16 +184,16 @@ export const DurationDistributionWidget: React.FC<Props> = ({
       {sampleRecords && sampleRecords.length > 0 && (
         <div className="space-y-2">
           <div className="flex items-center justify-between text-xs">
-            <span className="font-semibold text-slate-300 uppercase tracking-wider text-[11px]">
+            <span className="font-semibold text-slate-700 uppercase tracking-wider text-[11px]">
               Supporting Verified Records ({sampleRecords.length} inspected)
             </span>
             <span className="text-[10px] text-slate-500">Click row for evidence citation</span>
           </div>
 
-          <div className="overflow-x-auto rounded-xl border border-slate-800/80">
+          <div className="overflow-x-auto rounded border border-slate-200">
             <table className="w-full text-left border-collapse text-xs">
               <thead>
-                <tr className="bg-slate-900 text-slate-400 text-[10px] uppercase font-semibold">
+                <tr className="bg-slate-50 text-slate-600 text-[10px] uppercase font-semibold border-b border-slate-200">
                   <th className="py-2 px-3">Project</th>
                   <th className="py-2 px-3">Activity</th>
                   <th className="py-2 px-3 text-center">Plan</th>
@@ -204,33 +203,33 @@ export const DurationDistributionWidget: React.FC<Props> = ({
                   <th className="py-2 px-3">Evidence Reference</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/40">
+              <tbody className="divide-y divide-slate-200">
                 {sampleRecords.map((rec) => (
                   <tr
                     key={rec.id}
-                    className="hover:bg-slate-900/60 cursor-pointer transition"
+                    className="hover:bg-slate-50 cursor-pointer transition-colors"
                     onClick={() => onSelectRecord && onSelectRecord(rec)}
                   >
-                    <td className="py-2 px-3 font-mono font-bold text-cyan-400 text-[11px]">
+                    <td className="py-2 px-3 font-mono font-bold text-slate-800 text-[11px]">
                       {rec.projectId}
                     </td>
-                    <td className="py-2 px-3 text-slate-200">
+                    <td className="py-2 px-3 text-slate-800">
                       <div>{rec.activityName}</div>
                       <div className="text-[10px] text-slate-500 font-mono">{rec.activityCode}</div>
                     </td>
-                    <td className="py-2 px-3 text-center font-mono text-slate-400">{rec.plannedDuration}d</td>
-                    <td className="py-2 px-3 text-center font-mono font-bold text-slate-200">{rec.actualDuration}d</td>
+                    <td className="py-2 px-3 text-center font-mono text-slate-600">{rec.plannedDuration}d</td>
+                    <td className="py-2 px-3 text-center font-mono font-bold text-slate-900">{rec.actualDuration}d</td>
                     <td className="py-2 px-3 text-center font-mono">
-                      <span className={rec.scheduleVariance > 0 ? 'text-rose-400' : 'text-emerald-400'}>
+                      <span className={rec.scheduleVariance > 0 ? 'text-rose-700 font-semibold' : 'text-emerald-700'}>
                         {rec.scheduleVariance > 0 ? `+${rec.scheduleVariance}` : rec.scheduleVariance}d
                       </span>
                     </td>
-                    <td className="py-2 px-3 text-slate-300">
-                      <span className="px-1.5 py-0.5 rounded bg-slate-800 text-[10px]">
+                    <td className="py-2 px-3 text-slate-700">
+                      <span className="px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200 text-[10px]">
                         {rec.delayCause}
                       </span>
                     </td>
-                    <td className="py-2 px-3 text-slate-400 font-mono text-[10px]">
+                    <td className="py-2 px-3 text-slate-500 font-mono text-[10px]">
                       {rec.evidenceReference}
                     </td>
                   </tr>

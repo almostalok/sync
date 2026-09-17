@@ -26,207 +26,140 @@ export const DependencyImpactView: React.FC<DependencyImpactViewProps> = ({
   onSelectActivity,
 }) => {
   return (
-    <div className="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4">
-      <div className="w-full max-w-4xl bg-slate-900 border border-slate-700 rounded-2xl p-6 shadow-2xl space-y-6 max-h-[92vh] overflow-y-auto">
+    <div className="fixed inset-0 z-50 bg-slate-900/50 flex items-center justify-center p-4">
+      <div className="w-full max-w-4xl bg-white border border-slate-300 rounded-lg p-6 shadow-2xl space-y-6 max-h-[92vh] overflow-y-auto">
         {/* Modal Header */}
-        <div className="flex items-start justify-between gap-4 border-b border-slate-800 pb-4">
+        <div className="flex items-start justify-between gap-4 border-b border-slate-200 pb-4">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <span className="p-1.5 rounded-lg bg-purple-500/10 text-purple-400">
+              <span className="p-1 rounded bg-slate-100 text-slate-700">
                 <GitBranch className="w-4 h-4" />
               </span>
-              <span className="text-xs font-mono font-bold text-cyan-400 bg-cyan-950 px-2 py-0.5 rounded border border-cyan-800">
+              <span className="text-xs font-mono font-bold text-white bg-[#0f2744] px-2 py-0.5 rounded">
                 {graph.activityCode}
               </span>
-              <span className="text-xs uppercase font-mono font-bold text-slate-400 bg-slate-800 px-2 py-0.5 rounded">
+              <span className="text-xs uppercase font-mono font-bold text-slate-700 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
                 {graph.discipline}
               </span>
               {graph.isCritical && (
-                <span className="text-[10px] font-bold uppercase bg-rose-500/20 text-rose-300 border border-rose-500/30 px-2 py-0.5 rounded">
+                <span className="text-[10px] font-bold uppercase bg-red-100 text-red-900 border border-red-300 px-2 py-0.5 rounded">
                   Critical Path
                 </span>
               )}
             </div>
-            <h3 className="text-xl font-extrabold text-white">{graph.activityName}</h3>
-            <p className="text-xs text-slate-400">
-              Interactive Dependency Graph &amp; Multi-level Delay Propagation Intelligence
+            <h3 className="text-lg font-bold text-slate-900">{graph.activityName}</h3>
+            <p className="text-xs text-slate-500">
+              Dependency Network &amp; Multi-level Delay Propagation Intelligence
             </p>
           </div>
 
           <button
             onClick={onClose}
-            className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white transition"
+            className="p-1.5 rounded hover:bg-slate-100 text-slate-500 hover:text-slate-800 transition"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        {/* Legend / Methodology Warning Notice */}
-        <div className="p-3 rounded-xl bg-purple-950/40 border border-purple-800/50 text-xs text-purple-200 flex items-start gap-2.5">
-          <Info className="w-4 h-4 text-purple-400 shrink-0 mt-0.5" />
-          <div>
-            <strong className="text-white">Deterministic Impact Rule: </strong>
-            <span>
-              Confirmed delay on this node (<strong className="text-rose-400">+{graph.confirmedDelayDays} days</strong>) propagates through Finish-to-Start (FS) links minus float/lag. Potential impacts indicate schedule exposure risks, not authoritative baseline alterations until field confirmation.
-            </span>
-          </div>
-        </div>
-
-        {/* 3-Tier Visual Flow: Predecessors -> Target Activity -> Successors */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
-          {/* Tier 1: Upstream Predecessors */}
-          <div className="space-y-2.5">
-            <div className="flex items-center justify-between text-xs">
-              <span className="font-bold text-slate-300 uppercase tracking-wider text-[11px]">
-                1. Upstream Predecessors ({graph.predecessors.length})
-              </span>
+        {/* 3-Tier Dependency Propagation Chain */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {/* Column 1: Predecessors */}
+          <div className="p-4 rounded border border-slate-200 bg-slate-50 space-y-3">
+            <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+              <span className="text-xs font-bold text-slate-700 uppercase">Predecessors</span>
+              <span className="text-xs font-mono font-bold text-slate-500">{graph.predecessors.length}</span>
             </div>
 
-            <div className="space-y-2">
-              {graph.predecessors.map((p) => (
-                <div
-                  key={p.activityId}
-                  onClick={() => onSelectActivity && onSelectActivity(p.activityCode)}
-                  className="p-3 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-slate-700 cursor-pointer transition space-y-1"
-                >
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="font-mono font-bold text-cyan-400">{p.activityCode}</span>
-                    <span className="font-mono text-[10px] text-slate-400">{p.dependencyType}</span>
+            {graph.predecessors.length > 0 ? (
+              <div className="space-y-2">
+                {graph.predecessors.map((p) => (
+                  <div
+                    key={p.activityId}
+                    onClick={() => onSelectActivity && onSelectActivity(p.activityCode)}
+                    className="p-2.5 rounded bg-white border border-slate-200 hover:border-slate-400 cursor-pointer space-y-1 text-xs transition"
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="font-mono font-bold text-blue-700">{p.activityCode}</span>
+                      <span className="text-[10px] font-mono text-slate-500">{p.dependencyType}</span>
+                    </div>
+                    <div className="text-slate-800 font-medium truncate">{p.name}</div>
+                    <div className="text-[10px] text-slate-500 font-mono">Variance: {p.varianceDays > 0 ? `+${p.varianceDays}d` : `${p.varianceDays}d`}</div>
                   </div>
-                  <div className="text-xs text-slate-200 font-medium truncate">{p.name}</div>
-                  <div className="text-[10px] text-slate-500">Status: {p.status}</div>
-                </div>
-              ))}
-
-              {graph.predecessors.length === 0 && (
-                <div className="p-4 text-center rounded-xl bg-slate-950/40 border border-slate-800 text-slate-500 text-xs italic">
-                  No upstream schedule predecessors (Start Node)
-                </div>
-              )}
-            </div>
+                ))}
+              </div>
+            ) : (
+              <div className="p-6 text-center text-xs text-slate-400">Root Node (No Predecessors)</div>
+            )}
           </div>
 
-          {/* Tier 2: Selected Focus Node */}
-          <div className="space-y-2.5">
-            <div className="flex items-center justify-between text-xs">
-              <span className="font-bold text-cyan-400 uppercase tracking-wider text-[11px]">
-                2. Target Activity Focus
-              </span>
-            </div>
-
-            <div className="p-4 rounded-xl bg-gradient-to-b from-cyan-950/80 to-slate-950 border-2 border-cyan-500 shadow-xl space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="font-mono font-black text-cyan-300 text-sm">{graph.activityCode}</span>
-                <span className={`px-2 py-0.5 rounded text-[10px] font-bold font-mono ${
-                  graph.confirmedDelayDays > 0 ? 'bg-rose-500/20 text-rose-300 border border-rose-500/40' : 'bg-emerald-500/20 text-emerald-300'
-                }`}>
-                  {graph.confirmedDelayDays > 0 ? `+${graph.confirmedDelayDays}d Delay` : 'On Schedule'}
-                </span>
+          {/* Column 2: Current Focus Node */}
+          <div className="p-4 rounded border-2 border-blue-600 bg-blue-50/40 space-y-3 flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between border-b border-blue-200 pb-2">
+                <span className="text-xs font-bold text-blue-900 uppercase">Active Focus Node</span>
+                <span className="text-xs font-mono font-bold text-blue-800">In Scope</span>
               </div>
 
-              <div className="text-sm font-bold text-white leading-snug">{graph.activityName}</div>
-
-              <div className="space-y-1 text-xs text-slate-300 border-t border-slate-800 pt-2 font-mono">
-                <div className="flex justify-between">
-                  <span className="text-slate-500">Discipline:</span>
-                  <span>{graph.discipline}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-500">Critical Path:</span>
-                  <span className={graph.isCritical ? 'text-rose-400 font-bold' : 'text-slate-300'}>
-                    {graph.isCritical ? 'YES' : 'NO'}
-                  </span>
+              <div className="mt-3 space-y-2 text-xs">
+                <div className="font-mono font-bold text-slate-900 text-sm">{graph.activityCode}</div>
+                <div className="text-slate-800 font-medium">{graph.activityName}</div>
+                <div className="grid grid-cols-2 gap-2 pt-2 text-[11px] font-mono">
+                  <div className="p-2 rounded bg-white border border-blue-200">
+                    <span className="text-slate-500 block text-[9px] uppercase font-sans">Variance</span>
+                    <strong className="text-slate-900">{graph.varianceDays > 0 ? `+${graph.varianceDays}d` : `${graph.varianceDays}d`}</strong>
+                  </div>
+                  <div className="p-2 rounded bg-white border border-blue-200">
+                    <span className="text-slate-500 block text-[9px] uppercase font-sans">Confirmed Delay</span>
+                    <strong className="text-red-700">+{graph.confirmedDelayDays} Days</strong>
+                  </div>
                 </div>
               </div>
             </div>
+
+            <div className="p-2.5 rounded bg-white border border-blue-200 text-[11px] text-blue-950 font-medium">
+              Delay Status: {graph.confirmedDelayDays > 0 ? `${graph.confirmedDelayDays}d delay propagating` : 'Float intact'}
+            </div>
           </div>
 
-          {/* Tier 3: Direct Downstream Successors */}
-          <div className="space-y-2.5">
-            <div className="flex items-center justify-between text-xs">
-              <span className="font-bold text-purple-300 uppercase tracking-wider text-[11px]">
-                3. Direct Successors ({graph.directSuccessors.length})
-              </span>
+          {/* Column 3: Direct Successors & Cascade Impact */}
+          <div className="p-4 rounded border border-slate-200 bg-slate-50 space-y-3">
+            <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+              <span className="text-xs font-bold text-slate-700 uppercase">Direct Successors</span>
+              <span className="text-xs font-mono font-bold text-slate-500">{graph.directSuccessors.length}</span>
             </div>
 
-            <div className="space-y-2">
-              {graph.directSuccessors.map((s) => (
-                <div
-                  key={s.activityId}
-                  onClick={() => onSelectActivity && onSelectActivity(s.activityCode)}
-                  className="p-3 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-purple-500/50 cursor-pointer transition space-y-1"
-                >
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="font-mono font-bold text-purple-400">{s.activityCode}</span>
-                    <span className="text-[10px] font-mono text-slate-400">{s.dependencyType} (lag: {s.lag}d)</span>
+            {graph.directSuccessors.length > 0 ? (
+              <div className="space-y-2">
+                {graph.directSuccessors.map((s) => (
+                  <div
+                    key={s.activityId}
+                    onClick={() => onSelectActivity && onSelectActivity(s.activityCode)}
+                    className="p-2.5 rounded bg-white border border-slate-200 hover:border-slate-400 cursor-pointer space-y-1 text-xs transition"
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="font-mono font-bold text-blue-700">{s.activityCode}</span>
+                      <span className="text-[10px] font-mono text-slate-500">{s.dependencyType}</span>
+                    </div>
+                    <div className="text-slate-800 font-medium truncate">{s.name}</div>
+                    <div className="text-[10px] text-slate-500 font-mono">
+                      {s.isCritical ? <span className="text-red-700 font-bold">Critical Path</span> : 'Non-critical'}
+                    </div>
                   </div>
-                  <div className="text-xs text-slate-200 font-medium truncate">{s.name}</div>
-                  <div className="flex items-center justify-between text-[11px] pt-1">
-                    <span className={s.isCritical ? 'text-rose-400 font-semibold' : 'text-slate-500'}>
-                      {s.isCritical ? 'Critical Path' : 'Non-critical'}
-                    </span>
-                    <span className="font-mono font-bold text-amber-400">
-                      +{s.potentialStartDelayDays}d Risk Exposure
-                    </span>
-                  </div>
-                </div>
-              ))}
-
-              {graph.directSuccessors.length === 0 && (
-                <div className="p-4 text-center rounded-xl bg-slate-950/40 border border-slate-800 text-slate-500 text-xs italic">
-                  No downstream schedule successors (End Milestone)
-                </div>
-              )}
-            </div>
+                ))}
+              </div>
+            ) : (
+              <div className="p-6 text-center text-xs text-slate-400">Terminal Node (No Successors)</div>
+            )}
           </div>
         </div>
 
-        {/* Multi-tier Downstream Cascade Tree */}
-        {graph.downstreamCascade.length > 0 && (
-          <div className="space-y-3 border-t border-slate-800 pt-4">
-            <div className="flex items-center justify-between text-xs">
-              <span className="font-bold text-slate-200">
-                Multi-Tier Downstream Cascade Path ({graph.downstreamCascade.length} affected activities)
-              </span>
-              <span className="text-[11px] text-slate-400">Breadth-First Propagation Analysis</span>
-            </div>
-
-            <div className="space-y-1.5 max-h-48 overflow-y-auto pr-1">
-              {graph.downstreamCascade.map((c, i) => (
-                <div
-                  key={i}
-                  className="p-2.5 rounded-lg bg-slate-950/40 border border-slate-800 flex items-center justify-between text-xs"
-                >
-                  <div className="flex items-center gap-2">
-                    <span className="px-1.5 py-0.5 rounded text-[10px] font-mono font-bold bg-slate-800 text-slate-300">
-                      Tier {c.depth}
-                    </span>
-                    <span className="font-mono text-purple-300 font-bold">{c.activityCode}</span>
-                    <span className="text-slate-300 truncate max-w-sm">{c.name}</span>
-                    {c.isCritical && (
-                      <span className="px-1.5 py-0.2 rounded text-[9px] font-bold uppercase bg-rose-500/20 text-rose-300 border border-rose-500/30">
-                        Critical
-                      </span>
-                    )}
-                  </div>
-
-                  <div className="flex items-center gap-3 text-xs font-mono">
-                    <span className="text-slate-500 text-[11px]">{c.path.join(' → ')}</span>
-                    <span className="text-amber-400 font-bold">+{c.potentialStartDelayDays}d potential delay</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Footer */}
-        <div className="flex items-center justify-end gap-3 border-t border-slate-800 pt-4">
+        {/* Modal Footer */}
+        <div className="flex justify-end gap-2 pt-2 border-t border-slate-200">
           <button
             onClick={onClose}
-            className="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs transition"
+            className="px-4 py-2 rounded border border-slate-300 hover:bg-slate-50 text-slate-700 font-semibold text-xs transition"
           >
-            Close Graph View
+            Close Diagram
           </button>
         </div>
       </div>

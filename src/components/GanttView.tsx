@@ -13,7 +13,7 @@ import {
 import { GanttScheduleView } from './gantt/GanttScheduleView';
 import { ActivityDetailDrawer } from './gantt/ActivityDetailDrawer';
 import { DependencyImpactView } from './gantt/DependencyImpactView';
-import { RefreshCw, Sparkles, Layers, Info } from 'lucide-react';
+import { RefreshCw, CalendarRange, Filter } from 'lucide-react';
 
 export const GanttView: React.FC = () => {
   const { state, setActiveView } = useProject();
@@ -93,45 +93,45 @@ export const GanttView: React.FC = () => {
 
   if (loading && !scheduleView) {
     return (
-      <div className="p-12 text-center space-y-4">
-        <RefreshCw className="w-8 h-8 text-cyan-400 animate-spin mx-auto" />
-        <div className="text-base font-bold text-white">Loading Master Baseline Schedule &amp; WBS Hierarchy...</div>
-        <div className="text-xs text-slate-400">Reconciling activity progress, critical path floats, and predecessor links...</div>
+      <div className="p-12 text-center space-y-3 bg-white rounded-lg border border-slate-200">
+        <RefreshCw className="w-6 h-6 text-slate-600 animate-spin mx-auto" />
+        <div className="text-sm font-bold text-slate-800">Loading Master Baseline Schedule &amp; WBS Hierarchy...</div>
+        <div className="text-xs text-slate-500">Reconciling activity progress, critical path floats, and predecessor links...</div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6 pb-16">
+    <div className="space-y-5 pb-16">
       {/* Top Header Information Banner */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-lg bg-white border border-slate-200 shadow-sm">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <span className="px-2.5 py-0.5 rounded text-xs font-mono font-bold bg-cyan-950 text-cyan-400 border border-cyan-800">
-              Gantt / Schedule Intelligence
+            <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase tracking-wider bg-slate-100 text-slate-800 border border-slate-200">
+              Gantt / Schedule Controls
             </span>
-            <span className="text-xs text-slate-400">Oil India Limited • Compressor Station Expansion</span>
+            <span className="text-xs text-slate-500 font-medium">Oil India Limited • Compressor Station Expansion</span>
           </div>
-          <h1 className="text-xl font-extrabold text-white">
+          <h1 className="text-lg md:text-xl font-bold tracking-tight text-slate-900">
             Schedule Execution Control &amp; Critical Path Visualizer
           </h1>
-          <p className="text-xs text-slate-300">
+          <p className="text-xs text-slate-600">
             Expand and collapse WBS packages to inspect L5/L6 activities, start/finish variance, verified progress, and downstream dependency cascades.
           </p>
         </div>
 
-        <div className="flex items-center gap-2.5 shrink-0">
+        <div className="flex items-center gap-2 shrink-0">
           <button
             onClick={() => fetchScheduleView(activeFilters)}
             disabled={isRefreshing}
-            className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold shadow-sm transition"
           >
-            <RefreshCw className={`w-3.5 h-3.5 ${isRefreshing ? 'animate-spin text-cyan-400' : ''}`} />
+            <RefreshCw className={`w-3.5 h-3.5 ${isRefreshing ? 'animate-spin text-blue-600' : ''}`} />
             <span>Refresh</span>
           </button>
           <button
             onClick={() => setActiveView('review')}
-            className="px-3.5 py-2 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs font-semibold hover:bg-amber-500/30 transition"
+            className="px-3 py-1.5 rounded bg-amber-50 hover:bg-amber-100 border border-amber-300 text-amber-900 text-xs font-semibold transition"
           >
             Review Queue
           </button>

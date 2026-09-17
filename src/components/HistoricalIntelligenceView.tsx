@@ -27,9 +27,10 @@ import {
   Building2, 
   Search, 
   Database, 
-  Sparkles, 
   Compass,
-  ArrowRight
+  ArrowRight,
+  Archive,
+  BookOpen
 } from 'lucide-react';
 
 export const HistoricalIntelligenceView: React.FC = () => {
@@ -100,41 +101,41 @@ export const HistoricalIntelligenceView: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6 pb-16">
-      {/* Top Banner & Header */}
-      <div className="glass-card rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border border-purple-500/20 bg-gradient-to-r from-purple-950/30 via-slate-900/60 to-cyan-950/30">
+    <div className="space-y-5 pb-16">
+      {/* Enterprise Operational Header */}
+      <div className="bg-white border border-slate-200 rounded-lg p-5 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-purple-500/20 text-purple-300 border border-purple-500/30 flex items-center gap-1">
-              <Database className="w-3 h-3" />
+            <span className="px-2 py-0.5 rounded text-[10px] font-bold tracking-wider uppercase bg-slate-100 text-slate-700 border border-slate-200 flex items-center gap-1">
+              <Database className="w-3 h-3 text-slate-500" />
               <span>Historical Intelligence & Institutional Memory</span>
             </span>
-            <span className="text-xs text-slate-400">Oil India Limited Asset Repository</span>
+            <span className="text-xs text-slate-500 font-mono">Oil India Project Records</span>
           </div>
-          <h2 className="text-lg md:text-xl font-bold text-slate-100">
-            Past Project Reality, Duration Benchmarks & Delay Root-Causes
-          </h2>
-          <p className="text-xs text-slate-400">
+          <h1 className="text-xl font-bold text-slate-900 tracking-tight">
+            Duration Benchmarks & Delay Root Causes
+          </h1>
+          <p className="text-xs text-slate-600">
             Query empirical execution data across completed capital projects to eliminate optimism bias in scheduling.
           </p>
         </div>
 
-        {/* Action Buttons */}
+        {/* Action Controls */}
         <div className="flex items-center gap-2.5">
           <button
             onClick={() => setShowClosureModal(true)}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 text-xs font-semibold transition"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold shadow-sm transition"
           >
-            <Database className="w-3.5 h-3.5 text-purple-400" />
+            <Archive className="w-3.5 h-3.5 text-slate-500" />
             <span>Project Closure Gate</span>
           </button>
 
           <button
             onClick={() => setActiveView('copilot')}
-            className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold shadow-lg shadow-purple-900/30 transition"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold shadow-xs transition"
           >
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Ask Historical Copilot</span>
+            <BookOpen className="w-3.5 h-3.5 text-slate-300" />
+            <span>Project Intelligence Panel</span>
           </button>
         </div>
       </div>
@@ -143,72 +144,72 @@ export const HistoricalIntelligenceView: React.FC = () => {
       <HistoricalOverviewWidget overview={overview} loading={loading} />
 
       {/* Sub-Navigation Tabs */}
-      <div className="flex border-b border-slate-800 gap-1 overflow-x-auto text-xs font-semibold">
+      <div className="flex border-b border-slate-200 gap-1 overflow-x-auto text-xs font-semibold">
         <button
           onClick={() => setActiveTab('benchmarks')}
-          className={`px-4 py-2.5 rounded-t-xl transition flex items-center gap-2 border-b-2 ${
+          className={`px-3.5 py-2.5 transition flex items-center gap-2 border-b-2 ${
             activeTab === 'benchmarks'
-              ? 'border-cyan-400 text-cyan-300 bg-slate-900/80 font-bold'
-              : 'border-transparent text-slate-400 hover:text-slate-200 hover:bg-slate-900/40'
+              ? 'border-slate-900 text-slate-900 bg-white font-bold'
+              : 'border-transparent text-slate-500 hover:text-slate-900 hover:bg-slate-50'
           }`}
         >
-          <BarChart2 className="w-4 h-4" />
+          <BarChart2 className="w-4 h-4 text-slate-600" />
           <span>Activity Benchmarks & Distributions</span>
         </button>
 
         <button
           onClick={() => setActiveTab('delays')}
-          className={`px-4 py-2.5 rounded-t-xl transition flex items-center gap-2 border-b-2 ${
+          className={`px-3.5 py-2.5 transition flex items-center gap-2 border-b-2 ${
             activeTab === 'delays'
-              ? 'border-cyan-400 text-cyan-300 bg-slate-900/80 font-bold'
-              : 'border-transparent text-slate-400 hover:text-slate-200 hover:bg-slate-900/40'
+              ? 'border-slate-900 text-slate-900 bg-white font-bold'
+              : 'border-transparent text-slate-500 hover:text-slate-900 hover:bg-slate-50'
           }`}
         >
-          <AlertTriangle className="w-4 h-4 text-amber-400" />
+          <AlertTriangle className="w-4 h-4 text-amber-600" />
           <span>Delay Intelligence & Causes</span>
         </button>
 
         <button
           onClick={() => setActiveTab('productivity')}
-          className={`px-4 py-2.5 rounded-t-xl transition flex items-center gap-2 border-b-2 ${
+          className={`px-3.5 py-2.5 transition flex items-center gap-2 border-b-2 ${
             activeTab === 'productivity'
-              ? 'border-cyan-400 text-cyan-300 bg-slate-900/80 font-bold'
-              : 'border-transparent text-slate-400 hover:text-slate-200 hover:bg-slate-900/40'
+              ? 'border-slate-900 text-slate-900 bg-white font-bold'
+              : 'border-transparent text-slate-500 hover:text-slate-900 hover:bg-slate-50'
           }`}
         >
-          <Zap className="w-4 h-4 text-cyan-400" />
+          <Zap className="w-4 h-4 text-slate-600" />
           <span>Productivity Rates</span>
         </button>
 
         <button
           onClick={() => setActiveTab('projects')}
-          className={`px-4 py-2.5 rounded-t-xl transition flex items-center gap-2 border-b-2 ${
+          className={`px-3.5 py-2.5 transition flex items-center gap-2 border-b-2 ${
             activeTab === 'projects'
-              ? 'border-cyan-400 text-cyan-300 bg-slate-900/80 font-bold'
-              : 'border-transparent text-slate-400 hover:text-slate-200 hover:bg-slate-900/40'
+              ? 'border-slate-900 text-slate-900 bg-white font-bold'
+              : 'border-transparent text-slate-500 hover:text-slate-900 hover:bg-slate-50'
           }`}
         >
-          <Building2 className="w-4 h-4 text-slate-400" />
+          <Building2 className="w-4 h-4 text-slate-600" />
           <span>Cross-Project Comparisons</span>
         </button>
 
         <button
           onClick={() => setActiveTab('search')}
-          className={`px-4 py-2.5 rounded-t-xl transition flex items-center gap-2 border-b-2 ${
+          className={`px-3.5 py-2.5 transition flex items-center gap-2 border-b-2 ${
             activeTab === 'search'
-              ? 'border-cyan-400 text-cyan-300 bg-slate-900/80 font-bold'
-              : 'border-transparent text-slate-400 hover:text-slate-200 hover:bg-slate-900/40'
+              ? 'border-slate-900 text-slate-900 bg-white font-bold'
+              : 'border-transparent text-slate-500 hover:text-slate-900 hover:bg-slate-50'
           }`}
         >
-          <Search className="w-4 h-4 text-purple-400" />
+          <Search className="w-4 h-4 text-slate-600" />
           <span>Search & Lineage Records</span>
         </button>
       </div>
 
       {/* Tab Content Views */}
-      <div className="space-y-6">
+      <div className="space-y-5">
         {activeTab === 'benchmarks' && (
-          <div className="space-y-6">
+          <div className="space-y-5">
             {/* If benchmark is selected, show distribution visualizer on top */}
             {selectedBenchmark && (
               <DurationDistributionWidget

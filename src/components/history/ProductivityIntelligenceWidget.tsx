@@ -3,13 +3,9 @@
 import React, { useState } from 'react';
 import { Discipline, ProductivityIntelligenceDTO } from '@sitesync/types';
 import { 
-  TrendingUp, 
-  Layers, 
   Zap, 
   Building2, 
-  ShieldCheck, 
-  Info,
-  ChevronRight
+  Info
 } from 'lucide-react';
 
 interface Props {
@@ -25,17 +21,17 @@ export const ProductivityIntelligenceWidget: React.FC<Props> = ({ data, loading 
   );
 
   return (
-    <div className="glass-card rounded-2xl border border-slate-800 p-5 space-y-5">
+    <div className="bg-white rounded-lg border border-slate-200 p-4 shadow-sm space-y-4">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <div className="flex items-center gap-2">
-            <Zap className="w-4 h-4 text-cyan-400" />
-            <h3 className="text-sm font-bold text-slate-100 uppercase tracking-wider">
+            <Zap className="w-4 h-4 text-slate-700" />
+            <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">
               Verifiable Productivity Rates & Benchmarks
             </h3>
           </div>
-          <p className="text-xs text-slate-400 mt-0.5">
+          <p className="text-xs text-slate-500 mt-0.5">
             Daily execution velocity derived strictly from actual installed quantities divided by verified work duration.
           </p>
         </div>
@@ -44,7 +40,7 @@ export const ProductivityIntelligenceWidget: React.FC<Props> = ({ data, loading 
         <select
           value={selectedDiscipline}
           onChange={(e) => setSelectedDiscipline(e.target.value)}
-          className="px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-slate-200 focus:outline-none focus:border-cyan-500"
+          className="px-2.5 py-1.5 rounded border border-slate-300 text-xs text-slate-800 bg-white focus:outline-none focus:border-slate-500"
         >
           <option value="ALL">All Disciplines</option>
           <option value="CIVIL">Civil</option>
@@ -56,10 +52,10 @@ export const ProductivityIntelligenceWidget: React.FC<Props> = ({ data, loading 
       </div>
 
       {/* Grid of Productivity Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
         {loading ? (
           [1, 2, 3].map((i) => (
-            <div key={i} className="h-40 bg-slate-900/40 rounded-xl animate-pulse border border-slate-800" />
+            <div key={i} className="h-36 bg-slate-50 rounded animate-pulse border border-slate-200" />
           ))
         ) : filtered.length === 0 ? (
           <div className="col-span-3 text-center py-8 text-slate-500 text-xs">
@@ -69,44 +65,44 @@ export const ProductivityIntelligenceWidget: React.FC<Props> = ({ data, loading 
           filtered.map((item) => (
             <div
               key={`${item.activityType}_${item.unit}`}
-              className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-cyan-800/50 transition space-y-3 flex flex-col justify-between"
+              className="p-3.5 rounded-lg bg-slate-50 border border-slate-200 hover:border-slate-300 transition-colors space-y-2.5 flex flex-col justify-between"
             >
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-800 text-slate-300 border border-slate-700">
+                  <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-white text-slate-700 border border-slate-200">
                     {item.discipline}
                   </span>
-                  <span className="text-[10px] font-mono text-cyan-400 font-semibold">
+                  <span className="text-[10px] font-mono text-slate-500 font-medium">
                     {item.sampleCount} verified samples
                   </span>
                 </div>
 
                 <div>
-                  <h4 className="text-sm font-bold text-slate-100">
+                  <h4 className="text-sm font-bold text-slate-900">
                     {item.activityType.replace(/_/g, ' ')}
                   </h4>
-                  <div className="text-[11px] text-slate-400">
-                    Standard Unit: <strong className="text-slate-300 font-mono">{item.unit}</strong>
+                  <div className="text-[11px] text-slate-500">
+                    Standard Unit: <strong className="text-slate-800 font-mono">{item.unit}</strong>
                   </div>
                 </div>
 
                 {/* Percentile Stats */}
-                <div className="grid grid-cols-3 gap-1.5 p-2.5 rounded-lg bg-slate-950/80 border border-slate-800/80 text-center text-xs">
+                <div className="grid grid-cols-3 gap-1.5 p-2 rounded bg-white border border-slate-200 text-center text-xs">
                   <div>
                     <div className="text-[9px] text-slate-500">P25</div>
-                    <div className="font-mono font-semibold text-slate-300">
+                    <div className="font-mono font-semibold text-slate-700">
                       {item.p25}
                     </div>
                   </div>
                   <div>
-                    <div className="text-[9px] text-cyan-400 font-bold">Median</div>
-                    <div className="font-mono font-bold text-cyan-300 text-sm">
+                    <div className="text-[9px] text-slate-900 font-bold">Median</div>
+                    <div className="font-mono font-bold text-slate-900 text-sm">
                       {item.median}
                     </div>
                   </div>
                   <div>
                     <div className="text-[9px] text-slate-500">P75</div>
-                    <div className="font-mono font-semibold text-slate-300">
+                    <div className="font-mono font-semibold text-slate-700">
                       {item.p75}
                     </div>
                   </div>
@@ -114,12 +110,12 @@ export const ProductivityIntelligenceWidget: React.FC<Props> = ({ data, loading 
               </div>
 
               {/* Benchmark Reference */}
-              <div className="pt-2 border-t border-slate-800/80 flex items-center justify-between text-[10px] text-slate-500">
+              <div className="pt-2 border-t border-slate-200 flex items-center justify-between text-[10px] text-slate-500">
                 <span className="flex items-center gap-1">
                   <Building2 className="w-3 h-3 text-slate-400" />
                   <span className="truncate max-w-[140px]">{item.topProject}</span>
                 </span>
-                <span className="text-cyan-400 font-mono font-semibold">
+                <span className="text-slate-800 font-mono font-semibold">
                   Med: {item.median} {item.unit}
                 </span>
               </div>
@@ -128,8 +124,8 @@ export const ProductivityIntelligenceWidget: React.FC<Props> = ({ data, loading 
         )}
       </div>
 
-      <div className="p-3 rounded-xl bg-slate-900/60 border border-slate-800 flex items-center gap-2 text-slate-400 text-xs italic">
-        <Info className="w-4 h-4 text-slate-500 flex-shrink-0" />
+      <div className="p-3 rounded bg-slate-50 border border-slate-200 flex items-center gap-2 text-slate-500 text-xs italic">
+        <Info className="w-4 h-4 text-slate-400 shrink-0" />
         <span>
           Institutional Rule: Productivity metrics are calculated only for activities with verified volumetric or linear progress (m³, MT, joints, meters) and verified duration &gt; 0.
         </span>

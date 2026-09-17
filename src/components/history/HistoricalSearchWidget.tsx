@@ -8,15 +8,8 @@ import {
 } from '@sitesync/types';
 import { 
   Search, 
-  Filter, 
-  Layers, 
-  Building2, 
-  Clock, 
   AlertTriangle, 
-  FileText, 
-  MapPin,
   ChevronRight,
-  ExternalLink,
   RotateCcw
 } from 'lucide-react';
 
@@ -70,26 +63,26 @@ export const HistoricalSearchWidget: React.FC<Props> = ({ onSelectRecord }) => {
   };
 
   return (
-    <div className="glass-card rounded-2xl border border-slate-800 p-5 space-y-5">
+    <div className="bg-white rounded-lg border border-slate-200 p-4 shadow-sm space-y-4">
       {/* Search Bar & Filter Controls */}
       <form onSubmit={handleSearchSubmit} className="space-y-3">
         <div className="flex items-center gap-2">
-          <Search className="w-4 h-4 text-cyan-400" />
-          <h3 className="text-sm font-bold text-slate-100 uppercase tracking-wider">
-            Semantic & Structured Historical Search
+          <Search className="w-4 h-4 text-slate-700" />
+          <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">
+            Structured Historical Activity Search
           </h3>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-12 gap-2.5">
+        <div className="grid grid-cols-1 sm:grid-cols-12 gap-2">
           {/* Text Input */}
           <div className="sm:col-span-6 relative">
-            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+            <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               placeholder="Search past activities (e.g. 'compressor foundation', 'welding', 'hydrotest')..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+              className="w-full pl-8 pr-3 py-1.5 rounded border border-slate-300 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-slate-500"
             />
           </div>
 
@@ -98,7 +91,7 @@ export const HistoricalSearchWidget: React.FC<Props> = ({ onSelectRecord }) => {
             <select
               value={discipline}
               onChange={(e) => setDiscipline(e.target.value)}
-              className="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs text-slate-200 focus:outline-none focus:border-cyan-500"
+              className="w-full px-2.5 py-1.5 rounded border border-slate-300 text-xs text-slate-800 bg-white focus:outline-none focus:border-slate-500"
             >
               <option value="ALL">All Disciplines</option>
               <option value="CIVIL">Civil</option>
@@ -114,7 +107,7 @@ export const HistoricalSearchWidget: React.FC<Props> = ({ onSelectRecord }) => {
             <select
               value={delayCause}
               onChange={(e) => setDelayCause(e.target.value)}
-              className="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs text-slate-200 focus:outline-none focus:border-cyan-500"
+              className="w-full px-2.5 py-1.5 rounded border border-slate-300 text-xs text-slate-800 bg-white focus:outline-none focus:border-slate-500"
             >
               <option value="ALL">All Delay Causes</option>
               {Object.values(DelayCause).map((c) => (
@@ -129,14 +122,14 @@ export const HistoricalSearchWidget: React.FC<Props> = ({ onSelectRecord }) => {
           <div className="sm:col-span-1 flex gap-1">
             <button
               type="submit"
-              className="flex-1 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-semibold text-xs flex items-center justify-center transition"
+              className="flex-1 py-1.5 rounded bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs transition"
             >
               Go
             </button>
             <button
               type="button"
               onClick={handleReset}
-              className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-slate-200 transition"
+              className="p-1.5 rounded border border-slate-300 bg-white hover:bg-slate-50 text-slate-600 transition"
               title="Reset Filters"
             >
               <RotateCcw className="w-3.5 h-3.5" />
@@ -146,20 +139,20 @@ export const HistoricalSearchWidget: React.FC<Props> = ({ onSelectRecord }) => {
       </form>
 
       {/* Results Header */}
-      <div className="flex items-center justify-between text-xs text-slate-400 border-b border-slate-800 pb-2">
+      <div className="flex items-center justify-between text-xs text-slate-500 border-b border-slate-200 pb-2">
         <span>
           Showing <strong>{results.length}</strong> of <strong>{total}</strong> historical records
         </span>
-        <span className="text-[11px] text-slate-500">
+        <span className="text-[11px] text-slate-400">
           Click any card to inspect full evidence lineage
         </span>
       </div>
 
       {/* Results Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 max-h-[560px] overflow-y-auto pr-1">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 max-h-[560px] overflow-y-auto pr-1">
         {loading ? (
           [1, 2, 3, 4, 5, 6].map((i) => (
-            <div key={i} className="h-44 bg-slate-900/40 rounded-xl animate-pulse border border-slate-800" />
+            <div key={i} className="h-40 bg-slate-50 rounded animate-pulse border border-slate-200" />
           ))
         ) : results.length === 0 ? (
           <div className="col-span-3 text-center py-10 text-slate-500 text-xs">
@@ -170,20 +163,20 @@ export const HistoricalSearchWidget: React.FC<Props> = ({ onSelectRecord }) => {
             <div
               key={rec.id}
               onClick={() => onSelectRecord(rec)}
-              className="p-3.5 rounded-xl bg-slate-900/70 border border-slate-800 hover:border-cyan-800/60 transition cursor-pointer flex flex-col justify-between space-y-3 group"
+              className="p-3.5 rounded-lg bg-white border border-slate-200 hover:border-slate-300 transition-colors cursor-pointer flex flex-col justify-between space-y-2.5 shadow-xs group"
             >
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-mono font-bold text-cyan-400 bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-800/40">
+                  <span className="text-[10px] font-mono font-bold text-slate-700 bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200">
                     {rec.projectId}
                   </span>
-                  <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-800 text-slate-300 border border-slate-700">
+                  <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-slate-100 text-slate-700 border border-slate-200">
                     {rec.discipline}
                   </span>
                 </div>
 
                 <div>
-                  <h4 className="text-xs font-bold text-slate-100 group-hover:text-cyan-300 transition">
+                  <h4 className="text-xs font-bold text-slate-900 group-hover:text-slate-800 transition">
                     {rec.activityName}
                   </h4>
                   <div className="text-[10px] text-slate-500 font-mono">
@@ -192,24 +185,24 @@ export const HistoricalSearchWidget: React.FC<Props> = ({ onSelectRecord }) => {
                 </div>
 
                 {/* Duration & Variance Matrix */}
-                <div className="grid grid-cols-3 gap-1 p-2 rounded-lg bg-slate-950/80 border border-slate-800 text-center text-xs">
+                <div className="grid grid-cols-3 gap-1 p-2 rounded bg-slate-50 border border-slate-200 text-center text-xs">
                   <div>
                     <div className="text-[9px] text-slate-500">Plan</div>
-                    <div className="font-mono text-slate-300">{rec.plannedDuration}d</div>
+                    <div className="font-mono text-slate-700">{rec.plannedDuration}d</div>
                   </div>
                   <div>
                     <div className="text-[9px] text-slate-500">Actual</div>
-                    <div className="font-mono font-bold text-cyan-300">{rec.actualDuration}d</div>
+                    <div className="font-mono font-bold text-slate-900">{rec.actualDuration}d</div>
                   </div>
                   <div>
                     <div className="text-[9px] text-slate-500">Variance</div>
                     <div
                       className={`font-mono font-bold ${
                         rec.scheduleVariance > 0
-                          ? 'text-rose-400'
+                          ? 'text-rose-700'
                           : rec.scheduleVariance < 0
-                          ? 'text-emerald-400'
-                          : 'text-slate-400'
+                          ? 'text-emerald-700'
+                          : 'text-slate-600'
                       }`}
                     >
                       {rec.scheduleVariance > 0 ? `+${rec.scheduleVariance}` : rec.scheduleVariance}d
@@ -218,27 +211,27 @@ export const HistoricalSearchWidget: React.FC<Props> = ({ onSelectRecord }) => {
                 </div>
 
                 {/* Delay & Productivity */}
-                <div className="space-y-1 text-[11px]">
+                <div className="space-y-0.5 text-[11px]">
                   {rec.delayCause !== DelayCause.UNKNOWN && (
-                    <div className="flex items-center gap-1.5 text-amber-300">
-                      <AlertTriangle className="w-3 h-3 text-amber-400 flex-shrink-0" />
+                    <div className="flex items-center gap-1.5 text-amber-800">
+                      <AlertTriangle className="w-3 h-3 text-amber-700 shrink-0" />
                       <span className="truncate">Cause: {rec.delayCause}</span>
                     </div>
                   )}
                   {rec.productivityMetric && (
-                    <div className="text-[10px] font-mono text-slate-400">
-                      Productivity: <strong className="text-slate-300">{rec.productivityMetric} {rec.productivityUnit}</strong>
+                    <div className="text-[10px] font-mono text-slate-600">
+                      Productivity: <strong className="text-slate-800">{rec.productivityMetric} {rec.productivityUnit}</strong>
                     </div>
                   )}
                 </div>
               </div>
 
               {/* Evidence footer */}
-              <div className="pt-2 border-t border-slate-800 flex items-center justify-between text-[10px] text-slate-500">
+              <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-500">
                 <span className="truncate max-w-[170px] font-mono">
                   {rec.evidenceReference}
                 </span>
-                <span className="text-cyan-400 flex items-center gap-0.5 group-hover:translate-x-0.5 transition font-semibold">
+                <span className="text-slate-700 flex items-center gap-0.5 font-semibold">
                   <span>Inspect</span>
                   <ChevronRight className="w-3 h-3" />
                 </span>
