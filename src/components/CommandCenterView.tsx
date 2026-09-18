@@ -140,7 +140,7 @@ export const CommandCenterView: React.FC<{ onOpenDemoModal: () => void }> = ({ o
                 [PROJECT_CONTROL_ROOM]
               </span>
               <span className="text-[10px] text-slate-600 font-mono">
-                // OIL_INDIA_LTD :: PROBLEM_STMT_SIH26122
+                {'// OIL_INDIA_LTD :: PROBLEM_STMT_SIH26122'}
               </span>
             </div>
             <h2 className="text-base md:text-lg font-black tracking-tight text-slate-950 uppercase font-mono">

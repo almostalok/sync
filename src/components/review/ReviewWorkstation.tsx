@@ -169,7 +169,7 @@ export const ReviewWorkstation: React.FC<ReviewWorkstationProps> = ({
               </div>
 
               <div className="p-3 bg-slate-950 border border-slate-800 rounded-md text-xs text-slate-200 leading-relaxed font-sans border-l-2 border-l-indigo-500 italic">
-                "{item.evidence.quotedText}"
+                &quot;{item.evidence.quotedText}&quot;
               </div>
 
               <div className="flex items-center justify-between text-[11px] text-slate-500 pt-1 border-t border-slate-800/60">

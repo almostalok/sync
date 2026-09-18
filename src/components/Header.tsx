@@ -50,7 +50,7 @@ export const Header: React.FC<{ onOpenDemoModal: () => void }> = ({ onOpenDemoMo
                 </span>
               </div>
               <span className="text-[10px] text-slate-600 font-mono tracking-normal block mt-0.5 uppercase">
-                // INDUSTRIAL_SCHEDULE_INTEL
+                {'// INDUSTRIAL_SCHEDULE_INTEL'}
               </span>
             </div>
           </div>
@@ -79,7 +79,7 @@ export const Header: React.FC<{ onOpenDemoModal: () => void }> = ({ onOpenDemoMo
             {projectDropdownOpen && (
               <div className="absolute left-0 mt-1.5 w-80 bg-white border-[1.5px] border-slate-900 rounded-none shadow-[3px_3px_0px_#0f172a] z-50 py-1 text-xs font-mono">
                 <div className="px-3 py-1 text-[9px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-900 bg-stone-100">
-                  // SELECT_ACTIVE_PROJECT
+                  {'// SELECT_ACTIVE_PROJECT'}
                 </div>
                 <div className="px-3 py-2 bg-amber-50/70 border-l-[3px] border-slate-900 cursor-pointer">
                   <div className="font-bold text-slate-950 uppercase">{state.project.name}</div>

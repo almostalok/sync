@@ -15,7 +15,7 @@ export const DataFreshnessWidget: React.FC<DataFreshnessWidgetProps> = ({ freshn
         <div className="flex items-center justify-between border-b-[1.5px] border-slate-900 pb-2">
           <div>
             <h2 className="text-xs font-black text-slate-950 uppercase tracking-wider font-mono">
-              // DATA_FRESHNESS_TELEMETRY
+              {'// DATA_FRESHNESS_TELEMETRY'}
             </h2>
             <p className="text-[10px] text-slate-600 font-mono">
               DPR ingestion cadence and verification throughput

@@ -41,7 +41,7 @@ export const ProgressScurveChart: React.FC<ProgressScurveChartProps> = ({ timeSe
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b-[1.5px] border-slate-900 pb-2.5">
         <div>
           <h2 className="text-xs font-black text-slate-950 uppercase tracking-wider font-mono">
-            // PROGRESS_S_CURVE: PLANNED_BASELINE VS VERIFIED_ACTUAL
+            {'// PROGRESS_S_CURVE: PLANNED_BASELINE VS VERIFIED_ACTUAL'}
           </h2>
           <p className="text-[10px] text-slate-600 font-mono">
             Duration-weighted cumulative progression baseline across project lifecycle

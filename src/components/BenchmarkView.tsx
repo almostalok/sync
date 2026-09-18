@@ -92,7 +92,7 @@ export const BenchmarkView: React.FC = () => {
             <div className="flex items-center justify-between">
               <div>
                 <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">4-Baseline Comparative Analysis</h3>
-                <p className="text-xs text-slate-500">Testing why SiteSync's 7-Signal architecture outperforms naive algorithms</p>
+                <p className="text-xs text-slate-500">Testing why SiteSync&apos;s 7-Signal architecture outperforms naive algorithms</p>
               </div>
               <span className="text-[11px] font-semibold text-slate-700 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded font-mono">
                 Held-out Split

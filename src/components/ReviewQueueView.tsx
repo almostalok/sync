@@ -83,7 +83,7 @@ export const ReviewQueueView: React.FC = () => {
             <span className="px-2 py-0.5 rounded-none text-[9px] font-bold tracking-widest uppercase bg-amber-300 text-black border border-slate-900">
               [PLANNER_VERIFICATION_QUEUE]
             </span>
-            <span className="text-[10px] text-slate-600 font-mono">// HUMAN_IN_THE_LOOP_CONTROL</span>
+            <span className="text-[10px] text-slate-600 font-mono">{'// HUMAN_IN_THE_LOOP_CONTROL'}</span>
           </div>
           <h1 className="text-base md:text-lg font-black tracking-tight text-slate-950 uppercase font-mono">
             VERIFY FIELD-TO-SCHEDULE MATCH PROPOSALS PRIOR TO WRITE-BACK
@@ -132,7 +132,7 @@ export const ReviewQueueView: React.FC = () => {
           <div className="space-y-2">
             <div className="flex items-center justify-between border-b-[1.5px] border-slate-900 pb-2">
               <span className="text-[10px] font-bold text-slate-950 uppercase tracking-wider">
-                // QUEUE_ITEMS [{reviewEvents.length}]
+                {`// QUEUE_ITEMS [${reviewEvents.length}]`}
               </span>
               <span className="text-[9px] text-slate-600 font-bold uppercase">[RANK: AMBIGUITY]</span>
             </div>
@@ -140,7 +140,7 @@ export const ReviewQueueView: React.FC = () => {
             <div className="space-y-2 max-h-[620px] overflow-y-auto pr-1">
               {reviewEvents.length === 0 ? (
                 <div className="p-8 text-center text-xs text-slate-500 font-mono">
-                  // NO ITEMS MATCHING CURRENT FILTER CRITERIA
+                  {'// NO ITEMS MATCHING CURRENT FILTER CRITERIA'}
                 </div>
               ) : (
                 reviewEvents.map(evt => {
@@ -250,7 +250,7 @@ export const ReviewQueueView: React.FC = () => {
                 </div>
                 <div className="p-3 bg-stone-50 border border-slate-400 text-xs text-slate-950 leading-relaxed font-mono">
                   <blockquote className="border-l-2 border-slate-900 pl-3 italic text-slate-800">
-                    "{currentEvent.sourceText}"
+                    &quot;{currentEvent.sourceText}&quot;
                   </blockquote>
                 </div>
               </div>
@@ -314,7 +314,7 @@ export const ReviewQueueView: React.FC = () => {
                   {/* 7-Signal Calibration Breakdown */}
                   <div>
                     <span className="text-[9px] uppercase font-bold text-slate-700 block mb-1">
-                      // SIGNAL_BREAKDOWN:
+                      {'// SIGNAL_BREAKDOWN:'}
                     </span>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 text-[10px] font-mono">
                       <div className="p-1.5 bg-white border border-slate-300 flex justify-between">
@@ -401,7 +401,7 @@ export const ReviewQueueView: React.FC = () => {
           ) : (
             <div className="p-12 text-center text-slate-500 space-y-2">
               <CheckCircle2 className="w-8 h-8 text-slate-400 mx-auto" />
-              <div className="text-xs font-bold text-slate-800 uppercase">// NO_ITEM_SELECTED</div>
+              <div className="text-xs font-bold text-slate-800 uppercase">{'// NO_ITEM_SELECTED'}</div>
               <div className="text-[11px] text-slate-600">Select an item from the queue to review evidence and confirm linkage.</div>
             </div>
           )}

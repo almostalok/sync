@@ -18,7 +18,7 @@ export const DisciplinePerformance: React.FC<DisciplinePerformanceProps> = ({
       <div className="flex items-center justify-between border-b-[1.5px] border-slate-900 pb-2.5">
         <div>
           <h2 className="text-xs font-black text-slate-950 uppercase tracking-wider font-mono">
-            // DISCIPLINE_PERFORMANCE_&_FLOAT_VARIANCE
+            {'// DISCIPLINE_PERFORMANCE_&_FLOAT_VARIANCE'}
           </h2>
           <p className="text-[10px] text-slate-600 font-mono">
             Verified actuals vs planned baseline progress by engineering work package
@@ -42,7 +42,7 @@ export const DisciplinePerformance: React.FC<DisciplinePerformanceProps> = ({
                     [{item.discipline}]
                   </span>
                   <span className="text-[10px] text-slate-600 font-bold">
-                    // {item.activityCount} TASKS
+                    {`// ${item.activityCount} TASKS`}
                   </span>
                 </div>
 

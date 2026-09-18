@@ -93,7 +93,7 @@ export const Sidebar: React.FC = () => {
         {navGroups.map((grp, gIdx) => (
           <div key={gIdx} className="space-y-1">
             <h2 className="px-2 text-[9px] font-bold uppercase tracking-widest text-slate-500 flex items-center gap-1.5 border-b border-slate-300 pb-0.5">
-              <span>{grp.prefix} //</span>
+              <span>{`${grp.prefix} //`}</span>
               <span>{grp.group}</span>
             </h2>
             <div className="space-y-1 pt-1">

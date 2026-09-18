@@ -60,6 +60,7 @@ export const GanttView: React.FC = () => {
 
   useEffect(() => {
     fetchScheduleView(activeFilters);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projectId]);
 
   const handleInspectActivity = async (activityIdOrCode: string) => {

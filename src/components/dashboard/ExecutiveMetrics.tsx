@@ -128,7 +128,7 @@ export const ExecutiveMetrics: React.FC<ExecutiveMetricsProps> = ({
           >
             <div className="flex items-center justify-between gap-2">
               <span className="text-[10px] font-bold text-slate-700 uppercase tracking-wider truncate">
-                // {card.title}
+                {`// ${card.title}`}
               </span>
               <span className={`px-1.5 py-0.2 rounded-none text-[9px] font-mono font-bold uppercase tracking-wider border ${
                 card.badge === 'ACTION'

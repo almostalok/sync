@@ -68,7 +68,7 @@ export const RiskOverviewWidget: React.FC<RiskOverviewWidgetProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b-[1.5px] border-slate-900 pb-2.5">
         <div>
           <h2 className="text-xs font-black text-slate-950 uppercase tracking-wider font-mono">
-            // FLOAT_&_DEPENDENCY_RISK_REGISTER
+            {'// FLOAT_&_DEPENDENCY_RISK_REGISTER'}
           </h2>
           <p className="text-[10px] text-slate-600 font-mono">
             Automated float consumption and critical path slippage tracking
@@ -185,7 +185,7 @@ export const RiskOverviewWidget: React.FC<RiskOverviewWidgetProps> = ({
             <div className="space-y-3">
               <div>
                 <span className="text-[9px] uppercase font-bold text-slate-600 block mb-1">
-                  // CAUSALITY_AND_IMPACT_ANALYSIS:
+                  {'// CAUSALITY_AND_IMPACT_ANALYSIS:'}
                 </span>
                 <p className="text-slate-900 leading-relaxed bg-stone-50 p-3 rounded-none border border-slate-400 font-sans">
                   {selectedRisk.explanation.whatHappened}
@@ -212,7 +212,7 @@ export const RiskOverviewWidget: React.FC<RiskOverviewWidgetProps> = ({
               {selectedRisk.explanation.recommendedAction && (
                 <div>
                   <span className="text-[9px] uppercase font-bold text-slate-600 block mb-1">
-                    // OPERATIONAL_MITIGATION_STRATEGY:
+                    {'// OPERATIONAL_MITIGATION_STRATEGY:'}
                   </span>
                   <p className="text-slate-950 bg-amber-50 p-2.5 rounded-none border border-slate-900 text-xs font-sans">
                     {selectedRisk.explanation.recommendedAction}

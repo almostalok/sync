@@ -201,7 +201,7 @@ export const CopilotView: React.FC = () => {
           {/* Query Input Box */}
           <div className="bg-white border-[1.5px] border-slate-900 rounded-none p-4 shadow-[2px_2px_0px_#0f172a] space-y-3">
             <label className="text-[10px] font-bold text-slate-950 uppercase tracking-wider block">
-              // TERMINAL_QUERY_INPUT:
+              {'// TERMINAL_QUERY_INPUT:'}
             </label>
             <div className="relative">
               <input
@@ -248,7 +248,7 @@ export const CopilotView: React.FC = () => {
           <div className="bg-white border-[1.5px] border-slate-900 rounded-none p-4 shadow-[2px_2px_0px_#0f172a] space-y-3">
             <div className="flex items-center justify-between border-b border-slate-300 pb-1.5">
               <span className="text-[10px] font-bold text-slate-950 uppercase tracking-wider">
-                // STANDARD_OPERATIONAL_INQUIRIES
+                {'// STANDARD_OPERATIONAL_INQUIRIES'}
               </span>
               <span className="text-[9px] text-slate-600 font-mono font-bold">[GROUNDED]</span>
             </div>
@@ -272,7 +272,7 @@ export const CopilotView: React.FC = () => {
           <div className="bg-white border-[1.5px] border-slate-900 rounded-none p-4 shadow-[2px_2px_0px_#0f172a] space-y-3 font-mono">
             <div className="flex items-center justify-between border-b border-slate-300 pb-1.5">
               <span className="text-[10px] font-bold text-slate-950 uppercase tracking-wider">
-                // ASSESSMENT_HISTORY
+                {'// ASSESSMENT_HISTORY'}
               </span>
               <span className="text-[9px] text-slate-600 font-mono font-bold">[{history.length} RECORDS]</span>
             </div>
@@ -303,7 +303,7 @@ export const CopilotView: React.FC = () => {
             <div className="border-b-[1.5px] border-slate-900 pb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
                 <span className="text-[9px] font-bold text-slate-600 uppercase tracking-wider block">
-                  // CURRENT_ANALYTICAL_DOSSIER
+                  {'// CURRENT_ANALYTICAL_DOSSIER'}
                 </span>
                 <h2 className="text-sm md:text-base font-black text-slate-950 uppercase mt-0.5">
                   {activeRecord.query}
@@ -349,7 +349,7 @@ export const CopilotView: React.FC = () => {
                 if (para.startsWith('### ')) {
                   return (
                     <h3 key={pIdx} className="font-bold text-xs uppercase tracking-wider text-slate-950 pt-2 border-b border-slate-900 pb-1">
-                      // {para.replace('### ', '')}
+                      {`// ${para.replace('### ', '')}`}
                     </h3>
                   );
                 }
@@ -384,7 +384,7 @@ export const CopilotView: React.FC = () => {
               <div className="pt-3 border-t-[1.5px] border-slate-900 space-y-2">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-slate-950 flex items-center gap-1.5">
                   <Calculator className="w-3.5 h-3.5 text-slate-900" />
-                  <span>// DETERMINISTIC_CALCULATIONS</span>
+                  <span>{'// DETERMINISTIC_CALCULATIONS'}</span>
                 </span>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {activeRecord.calculations.map((calc, cIdx) => (
@@ -413,7 +413,7 @@ export const CopilotView: React.FC = () => {
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] font-bold uppercase tracking-wider text-slate-950 flex items-center gap-1.5">
                     <FileText className="w-3.5 h-3.5 text-slate-900" />
-                    <span>// SOURCE_EVIDENCE_LINEAGE [{activeRecord.citations.length}]</span>
+                    <span>{`// SOURCE_EVIDENCE_LINEAGE [${activeRecord.citations.length}]`}</span>
                   </span>
                   <span className="text-[9px] text-slate-600 uppercase font-bold">[SELECT_DRAWER]</span>
                 </div>
@@ -435,7 +435,7 @@ export const CopilotView: React.FC = () => {
                       </div>
                       {cit.excerpt && (
                         <p className="text-[10px] text-slate-700 line-clamp-2 italic leading-relaxed font-sans">
-                          "{cit.excerpt}"
+                          &quot;{cit.excerpt}&quot;
                         </p>
                       )}
                       <div className="flex items-center justify-between text-[9px] text-slate-600 font-mono pt-1 border-t border-slate-300">
@@ -454,7 +454,7 @@ export const CopilotView: React.FC = () => {
             {activeRecord.suggestedActions && activeRecord.suggestedActions.length > 0 && (
               <div className="pt-3 border-t-[1.5px] border-slate-900 space-y-2">
                 <span className="text-[10px] font-bold text-slate-600 uppercase tracking-wider block">
-                  // FOLLOW_UP_OPERATIONAL_INQUIRIES:
+                  {'// FOLLOW_UP_OPERATIONAL_INQUIRIES:'}
                 </span>
                 <div className="flex flex-wrap gap-1.5">
                   {activeRecord.suggestedActions.map((act, aIdx) => (
@@ -490,7 +490,7 @@ export const CopilotView: React.FC = () => {
               <div className="flex items-center justify-between pb-3 border-b-[1.5px] border-slate-900">
                 <div className="flex items-center gap-2">
                   <FileText className="w-4 h-4 text-slate-900" />
-                  <h3 className="font-black text-slate-950 text-xs uppercase">// SOURCE_EVIDENCE_DOSSIER</h3>
+                  <h3 className="font-black text-slate-950 text-xs uppercase">{'// SOURCE_EVIDENCE_DOSSIER'}</h3>
                 </div>
                 <button
                   onClick={() => setSelectedCitation(null)}
@@ -540,7 +540,7 @@ export const CopilotView: React.FC = () => {
                   <div>
                     <span className="text-[9px] uppercase font-bold text-slate-600 tracking-wider">PRIMARY_EVIDENCE_EXCERPT:</span>
                     <div className="mt-1 p-3 rounded-none bg-stone-50 border border-slate-900 text-slate-950 italic text-[11px] leading-relaxed font-sans">
-                      "{selectedCitation.excerpt}"
+                      &quot;{selectedCitation.excerpt}&quot;
                     </div>
                   </div>
                 )}

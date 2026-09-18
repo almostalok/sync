@@ -90,7 +90,7 @@ export const RecentUpdatesFeed: React.FC<RecentUpdatesFeedProps> = ({
       <div className="flex items-center justify-between border-b-[1.5px] border-slate-900 pb-2.5">
         <div>
           <h2 className="text-xs font-black text-slate-950 uppercase tracking-wider font-mono">
-            // RECENT_VERIFIED_FIELD_INGESTIONS
+            {'// RECENT_VERIFIED_FIELD_INGESTIONS'}
           </h2>
           <p className="text-[10px] text-slate-600 font-mono">
             Chronological audit feed of daily field reports parsed into schedule activities
@@ -125,7 +125,7 @@ export const RecentUpdatesFeed: React.FC<RecentUpdatesFeedProps> = ({
 
                 {upd.quotedText && (
                   <p className="text-[11px] text-slate-700 italic pl-2 border-l-2 border-slate-900 font-sans">
-                    "{upd.quotedText}"
+                    &quot;{upd.quotedText}&quot;
                   </p>
                 )}
 

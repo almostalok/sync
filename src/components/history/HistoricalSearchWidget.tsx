@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { 
   DelayCause, 
   Discipline, 
@@ -25,7 +25,7 @@ export const HistoricalSearchWidget: React.FC<Props> = ({ onSelectRecord }) => {
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
 
-  const fetchResults = async () => {
+  const fetchResults = useCallback(async () => {
     setLoading(true);
     try {
       const params = new URLSearchParams();
@@ -45,11 +45,11 @@ export const HistoricalSearchWidget: React.FC<Props> = ({ onSelectRecord }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [query, discipline, delayCause]);
 
   useEffect(() => {
     fetchResults();
-  }, [discipline, delayCause]);
+  }, [fetchResults]);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();

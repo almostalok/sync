@@ -26,7 +26,7 @@ export const AttentionWidget: React.FC<AttentionWidgetProps> = ({
                 <AlertTriangle className="w-4 h-4" />
               </div>
               <h2 className="text-xs font-black text-slate-950 uppercase tracking-wider font-mono">
-                // REVIEW_REQUIRED_QUEUE
+                {'// REVIEW_REQUIRED_QUEUE'}
               </h2>
             </div>
             <span className="px-1.5 py-0.5 rounded-none text-[10px] font-mono font-bold bg-amber-300 text-black border border-slate-900">
@@ -77,7 +77,7 @@ export const AttentionWidget: React.FC<AttentionWidgetProps> = ({
                 <FileQuestion className="w-4 h-4" />
               </div>
               <h2 className="text-xs font-black text-slate-950 uppercase tracking-wider font-mono">
-                // UNMATCHED_FIELD_EVENTS
+                {'// UNMATCHED_FIELD_EVENTS'}
               </h2>
             </div>
             <span className="px-1.5 py-0.5 rounded-none text-[10px] font-mono font-bold bg-stone-200 text-slate-950 border border-slate-900">
