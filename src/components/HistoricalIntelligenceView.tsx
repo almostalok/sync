@@ -101,41 +101,42 @@ export const HistoricalIntelligenceView: React.FC = () => {
   };
 
   return (
-    <div className="space-y-5 pb-16">
+    <div className="space-y-5 pb-16 font-mono">
       {/* Enterprise Operational Header */}
-      <div className="bg-white border border-slate-200 rounded-lg p-5 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="bg-white border-[1.5px] border-slate-900 border-t-4 border-t-amber-500 rounded-none p-4 shadow-[2px_2px_0px_#0f172a] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <span className="px-2 py-0.5 rounded text-[10px] font-bold tracking-wider uppercase bg-slate-100 text-slate-700 border border-slate-200 flex items-center gap-1">
-              <Database className="w-3 h-3 text-slate-500" />
-              <span>Historical Intelligence & Institutional Memory</span>
+            <span className="px-1.5 py-0.5 rounded-none text-[9px] font-bold tracking-wider uppercase bg-amber-100 text-amber-950 border border-amber-900 flex items-center gap-1">
+              <Database className="w-3 h-3 text-amber-950" />
+              <span>[04 // HISTORICAL_INTELLIGENCE]</span>
             </span>
-            <span className="text-xs text-slate-500 font-mono">Oil India Project Records</span>
+            <span className="text-slate-400">|</span>
+            <span className="text-xs text-slate-600 font-mono">OIL INDIA INSTITUTIONAL MEMORY</span>
           </div>
-          <h1 className="text-xl font-bold text-slate-900 tracking-tight">
-            Duration Benchmarks & Delay Root Causes
+          <h1 className="text-base md:text-lg font-black text-slate-950 tracking-tight uppercase">
+            DURATION BENCHMARKS & DELAY ROOT CAUSES
           </h1>
-          <p className="text-xs text-slate-600">
+          <p className="text-xs text-slate-700 font-sans">
             Query empirical execution data across completed capital projects to eliminate optimism bias in scheduling.
           </p>
         </div>
 
         {/* Action Controls */}
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-2">
           <button
             onClick={() => setShowClosureModal(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold shadow-sm transition"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-none border border-slate-900 bg-stone-100 hover:bg-stone-200 text-slate-950 text-xs font-bold uppercase shadow-[2px_2px_0px_#0f172a] active:translate-x-[1px] active:translate-y-[1px] transition"
           >
-            <Archive className="w-3.5 h-3.5 text-slate-500" />
-            <span>Project Closure Gate</span>
+            <Archive className="w-3.5 h-3.5 text-slate-700" />
+            <span>[CLOSURE_GATE]</span>
           </button>
 
           <button
             onClick={() => setActiveView('copilot')}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold shadow-xs transition"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-none bg-black hover:bg-slate-800 text-white text-xs font-black uppercase shadow-[2px_2px_0px_#0f172a] active:translate-x-[1px] active:translate-y-[1px] transition border border-black"
           >
-            <BookOpen className="w-3.5 h-3.5 text-slate-300" />
-            <span>Project Intelligence Panel</span>
+            <BookOpen className="w-3.5 h-3.5 text-amber-300" />
+            <span>[COPILOT_DOSSIER]</span>
           </button>
         </div>
       </div>
@@ -144,65 +145,65 @@ export const HistoricalIntelligenceView: React.FC = () => {
       <HistoricalOverviewWidget overview={overview} loading={loading} />
 
       {/* Sub-Navigation Tabs */}
-      <div className="flex border-b border-slate-200 gap-1 overflow-x-auto text-xs font-semibold">
+      <div className="flex border-b-[1.5px] border-slate-900 gap-1 overflow-x-auto text-xs font-mono font-bold">
         <button
           onClick={() => setActiveTab('benchmarks')}
-          className={`px-3.5 py-2.5 transition flex items-center gap-2 border-b-2 ${
+          className={`px-3 py-2 transition flex items-center gap-1.5 rounded-none border-t border-l border-r ${
             activeTab === 'benchmarks'
-              ? 'border-slate-900 text-slate-900 bg-white font-bold'
-              : 'border-transparent text-slate-500 hover:text-slate-900 hover:bg-slate-50'
+              ? 'border-slate-900 text-slate-950 bg-white font-black border-t-2 border-t-amber-500 shadow-[1px_-1px_0px_#000]'
+              : 'border-transparent text-slate-600 hover:text-slate-950 hover:bg-stone-100'
           }`}
         >
-          <BarChart2 className="w-4 h-4 text-slate-600" />
-          <span>Activity Benchmarks & Distributions</span>
+          <BarChart2 className="w-3.5 h-3.5 text-slate-700" />
+          <span>[BENCHMARKS]</span>
         </button>
 
         <button
           onClick={() => setActiveTab('delays')}
-          className={`px-3.5 py-2.5 transition flex items-center gap-2 border-b-2 ${
+          className={`px-3 py-2 transition flex items-center gap-1.5 rounded-none border-t border-l border-r ${
             activeTab === 'delays'
-              ? 'border-slate-900 text-slate-900 bg-white font-bold'
-              : 'border-transparent text-slate-500 hover:text-slate-900 hover:bg-slate-50'
+              ? 'border-slate-900 text-slate-950 bg-white font-black border-t-2 border-t-rose-500 shadow-[1px_-1px_0px_#000]'
+              : 'border-transparent text-slate-600 hover:text-slate-950 hover:bg-stone-100'
           }`}
         >
-          <AlertTriangle className="w-4 h-4 text-amber-600" />
-          <span>Delay Intelligence & Causes</span>
+          <AlertTriangle className="w-3.5 h-3.5 text-amber-600" />
+          <span>[DELAY_CAUSES]</span>
         </button>
 
         <button
           onClick={() => setActiveTab('productivity')}
-          className={`px-3.5 py-2.5 transition flex items-center gap-2 border-b-2 ${
+          className={`px-3 py-2 transition flex items-center gap-1.5 rounded-none border-t border-l border-r ${
             activeTab === 'productivity'
-              ? 'border-slate-900 text-slate-900 bg-white font-bold'
-              : 'border-transparent text-slate-500 hover:text-slate-900 hover:bg-slate-50'
+              ? 'border-slate-900 text-slate-950 bg-white font-black border-t-2 border-t-purple-500 shadow-[1px_-1px_0px_#000]'
+              : 'border-transparent text-slate-600 hover:text-slate-950 hover:bg-stone-100'
           }`}
         >
-          <Zap className="w-4 h-4 text-slate-600" />
-          <span>Productivity Rates</span>
+          <Zap className="w-3.5 h-3.5 text-slate-700" />
+          <span>[PRODUCTIVITY]</span>
         </button>
 
         <button
           onClick={() => setActiveTab('projects')}
-          className={`px-3.5 py-2.5 transition flex items-center gap-2 border-b-2 ${
+          className={`px-3 py-2 transition flex items-center gap-1.5 rounded-none border-t border-l border-r ${
             activeTab === 'projects'
-              ? 'border-slate-900 text-slate-900 bg-white font-bold'
-              : 'border-transparent text-slate-500 hover:text-slate-900 hover:bg-slate-50'
+              ? 'border-slate-900 text-slate-950 bg-white font-black border-t-2 border-t-sky-500 shadow-[1px_-1px_0px_#000]'
+              : 'border-transparent text-slate-600 hover:text-slate-950 hover:bg-stone-100'
           }`}
         >
-          <Building2 className="w-4 h-4 text-slate-600" />
-          <span>Cross-Project Comparisons</span>
+          <Building2 className="w-3.5 h-3.5 text-slate-700" />
+          <span>[CROSS_PROJECT]</span>
         </button>
 
         <button
           onClick={() => setActiveTab('search')}
-          className={`px-3.5 py-2.5 transition flex items-center gap-2 border-b-2 ${
+          className={`px-3 py-2 transition flex items-center gap-1.5 rounded-none border-t border-l border-r ${
             activeTab === 'search'
-              ? 'border-slate-900 text-slate-900 bg-white font-bold'
-              : 'border-transparent text-slate-500 hover:text-slate-900 hover:bg-slate-50'
+              ? 'border-slate-900 text-slate-950 bg-white font-black border-t-2 border-t-emerald-500 shadow-[1px_-1px_0px_#000]'
+              : 'border-transparent text-slate-600 hover:text-slate-950 hover:bg-stone-100'
           }`}
         >
-          <Search className="w-4 h-4 text-slate-600" />
-          <span>Search & Lineage Records</span>
+          <Search className="w-3.5 h-3.5 text-slate-700" />
+          <span>[LINEAGE_SEARCH]</span>
         </button>
       </div>
 

@@ -162,10 +162,10 @@ export const CopilotView: React.FC = () => {
   return (
     <div className="space-y-5 pb-12 font-mono">
       {/* Enterprise Top Bar */}
-      <div className="bg-white border-[1.5px] border-slate-900 rounded-none p-4 shadow-[2px_2px_0px_#0f172a] flex flex-col md:flex-row md:items-center justify-between gap-4 font-mono">
+      <div className="bg-white border-[1.5px] border-slate-900 border-t-4 border-t-purple-600 rounded-none p-4 shadow-[2px_2px_0px_#0f172a] flex flex-col md:flex-row md:items-center justify-between gap-4 font-mono">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-[10px] font-bold text-slate-700 uppercase tracking-wider bg-stone-100 px-1 border border-slate-300">
+            <span className="text-[10px] font-bold text-purple-950 uppercase tracking-wider bg-purple-100 px-1.5 py-0.5 border border-purple-900">
               [GROUNDED_SCHEDULE_INTELLIGENCE]
             </span>
             <span className="text-slate-400">|</span>
@@ -254,17 +254,34 @@ export const CopilotView: React.FC = () => {
             </div>
 
             <div className="space-y-1.5">
-              {suggestedQuestions.map((sq, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => handleRunQuery(sq.question)}
-                  disabled={isProcessing}
-                  className="w-full text-left p-2 rounded-none border border-slate-300 hover:border-slate-900 hover:bg-stone-100 text-xs text-slate-900 transition flex items-start justify-between gap-2 group font-mono active:translate-x-[1px] active:translate-y-[1px]"
-                >
-                  <span className="leading-snug text-[11px]">&gt; {sq.question}</span>
-                  <ChevronRight className="w-3.5 h-3.5 text-slate-500 group-hover:text-slate-950 shrink-0 mt-0.5" />
-                </button>
-              ))}
+              {suggestedQuestions.map((sq, idx) => {
+                const isCivil = sq.category.toUpperCase().includes('CIVIL');
+                const isPiping = sq.category.toUpperCase().includes('PIPING');
+                const isMech = sq.category.toUpperCase().includes('MECH');
+                const isRisk = sq.category.toUpperCase().includes('DELAY') || sq.category.toUpperCase().includes('RISK');
+                const badgeColor = isCivil ? 'bg-amber-100 text-amber-950 border-amber-900'
+                  : isPiping ? 'bg-sky-100 text-sky-950 border-sky-900'
+                  : isMech ? 'bg-purple-100 text-purple-950 border-purple-900'
+                  : isRisk ? 'bg-rose-100 text-rose-950 border-rose-900'
+                  : 'bg-emerald-100 text-emerald-950 border-emerald-900';
+
+                return (
+                  <button
+                    key={idx}
+                    onClick={() => handleRunQuery(sq.question)}
+                    disabled={isProcessing}
+                    className="w-full text-left p-2 rounded-none border border-slate-300 hover:border-slate-900 hover:bg-stone-100 text-xs text-slate-900 transition flex flex-col gap-1.5 group font-mono active:translate-x-[1px] active:translate-y-[1px]"
+                  >
+                    <div className="flex items-center justify-between gap-2 w-full">
+                      <span className={`text-[8px] font-black uppercase px-1 py-0.2 border ${badgeColor}`}>
+                        [{sq.category}]
+                      </span>
+                      <ChevronRight className="w-3 h-3 text-slate-500 group-hover:text-slate-950 shrink-0" />
+                    </div>
+                    <span className="leading-snug text-[11px] text-slate-900 font-bold">&gt; {sq.question}</span>
+                  </button>
+                );
+              })}
             </div>
           </div>
 
@@ -419,12 +436,23 @@ export const CopilotView: React.FC = () => {
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  {activeRecord.citations.map((cit, citIdx) => (
-                    <button
-                      key={citIdx}
-                      onClick={() => setSelectedCitation(cit)}
-                      className="p-2.5 rounded-none bg-stone-50 hover:bg-stone-100 border border-slate-900 text-left transition space-y-1 shadow-[1px_1px_0px_#000] active:translate-x-[1px] active:translate-y-[1px]"
-                    >
+                  {activeRecord.citations.map((cit, citIdx) => {
+                    const isCivil = cit.discipline?.toUpperCase().includes('CIVIL');
+                    const isPiping = cit.discipline?.toUpperCase().includes('PIPING');
+                    const isMech = cit.discipline?.toUpperCase().includes('MECH');
+                    const isSchedule = cit.sourceType === 'SCHEDULE';
+                    const borderLeft = isCivil ? 'border-l-4 border-l-amber-500'
+                      : isPiping ? 'border-l-4 border-l-sky-500'
+                      : isMech ? 'border-l-4 border-l-purple-500'
+                      : isSchedule ? 'border-l-4 border-l-emerald-600'
+                      : 'border-l-4 border-l-blue-600';
+
+                    return (
+                      <button
+                        key={citIdx}
+                        onClick={() => setSelectedCitation(cit)}
+                        className={`p-2.5 rounded-none bg-stone-50 hover:bg-stone-100 border border-slate-900 ${borderLeft} text-left transition space-y-1 shadow-[1px_1px_0px_#000] active:translate-x-[1px] active:translate-y-[1px]`}
+                      >
                       <div className="flex items-center justify-between text-xs">
                         <span className="font-bold text-slate-950 uppercase truncate max-w-[200px]">
                           {cit.title}
@@ -445,7 +473,8 @@ export const CopilotView: React.FC = () => {
                         </span>
                       </div>
                     </button>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             )}

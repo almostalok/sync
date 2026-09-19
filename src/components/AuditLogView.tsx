@@ -8,53 +8,83 @@ import {
   UserCheck, 
   Cpu
 } from 'lucide-react';
-import { StatusBadge } from '@sitesync/design-system';
 
 export const AuditLogView: React.FC = () => {
   const { state } = useProject();
 
+  const getActionBadge = (action: string) => {
+    switch (action) {
+      case 'ACCEPTED':
+        return 'bg-emerald-100 text-emerald-950 border-emerald-900';
+      case 'REJECTED':
+        return 'bg-rose-100 text-rose-950 border-rose-900';
+      case 'OVERRIDDEN':
+        return 'bg-amber-100 text-amber-950 border-amber-900';
+      case 'AUTO_LINKED':
+        return 'bg-sky-100 text-sky-950 border-sky-900';
+      default:
+        return 'bg-stone-100 text-slate-950 border-slate-900';
+    }
+  };
+
+  const getActionBorder = (action: string) => {
+    switch (action) {
+      case 'ACCEPTED':
+        return 'border-l-4 border-l-emerald-600';
+      case 'REJECTED':
+        return 'border-l-4 border-l-rose-600';
+      case 'OVERRIDDEN':
+        return 'border-l-4 border-l-amber-500';
+      case 'AUTO_LINKED':
+        return 'border-l-4 border-l-sky-500';
+      default:
+        return 'border-l-4 border-l-slate-900';
+    }
+  };
+
   return (
-    <div className="space-y-5 pb-12">
+    <div className="space-y-5 pb-12 font-mono">
       {/* Top Banner */}
-      <div className="bg-white border border-slate-200 rounded-lg p-5 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="bg-white border-[1.5px] border-slate-900 border-t-4 border-t-amber-500 rounded-none p-4 shadow-[2px_2px_0px_#0f172a] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <span className="px-2 py-0.5 rounded text-[10px] font-bold tracking-wider uppercase bg-slate-100 text-slate-700 border border-slate-200">
-              Immutable Governance Trail
+            <span className="px-1.5 py-0.5 rounded-none text-[9px] font-bold tracking-wider uppercase bg-amber-100 text-amber-950 border border-amber-900">
+              [04 // COMPLIANCE_AUDIT]
             </span>
-            <span className="text-xs text-slate-500 font-mono">FR-09 Compliance & Audit Ledger</span>
+            <span className="text-slate-400">|</span>
+            <span className="text-xs text-slate-600 font-mono">FR-09 COMPLIANCE & AUDIT LEDGER</span>
           </div>
-          <h1 className="text-xl font-bold text-slate-900 tracking-tight">
-            Schedule Verification & Decision Audit Log
+          <h1 className="text-base md:text-lg font-black text-slate-950 tracking-tight uppercase">
+            SCHEDULE VERIFICATION & DECISION AUDIT LOG
           </h1>
-          <p className="text-xs text-slate-600">
-            Cryptographic ledger tracking every human verification, auto-link action, and progress adjustment.
+          <p className="text-xs text-slate-700 font-sans">
+            Cryptographic ledger tracking every human verification, auto-link action, and baseline adjustment.
           </p>
         </div>
 
-        <div className="text-xs text-slate-700 font-mono bg-slate-50 px-3 py-1.5 rounded border border-slate-200">
-          Audit Records: <strong className="text-slate-900">{state.auditLogs.length}</strong>
+        <div className="text-xs text-slate-900 font-mono bg-stone-100 px-3 py-1.5 rounded-none border border-slate-900 shadow-[1px_1px_0px_#000]">
+          AUDIT_RECORDS: <strong className="text-slate-950 font-black">{state.auditLogs.length}</strong>
         </div>
       </div>
 
       {/* Audit Log Table */}
-      <div className="bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden">
+      <div className="bg-white border-[1.5px] border-slate-900 rounded-none shadow-[2px_2px_0px_#0f172a] overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full text-xs text-left">
+          <table className="w-full text-xs text-left font-mono">
             <thead>
-              <tr className="bg-slate-50 border-b border-slate-200 text-slate-600 font-semibold uppercase tracking-wider text-[10px]">
-                <th className="py-2.5 px-3">Timestamp</th>
-                <th className="py-2.5 px-3">Actor / User</th>
-                <th className="py-2.5 px-3">Action</th>
-                <th className="py-2.5 px-3">Target Entity</th>
-                <th className="py-2.5 px-3">Explanation & Verification Rationale</th>
+              <tr className="bg-stone-100 border-b border-slate-900 text-slate-950 font-black uppercase tracking-wider text-[10px]">
+                <th className="py-2.5 px-3">TIMESTAMP</th>
+                <th className="py-2.5 px-3">ACTOR / OPERATOR</th>
+                <th className="py-2.5 px-3">ACTION</th>
+                <th className="py-2.5 px-3">TARGET ENTITY</th>
+                <th className="py-2.5 px-3">RATIONALE & DELTA DIFF</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-200">
+            <tbody className="divide-y divide-slate-300">
               {state.auditLogs.map((log) => {
                 return (
-                  <tr key={log.id} className="hover:bg-slate-50 transition-colors">
-                    <td className="py-3 px-3 font-mono text-slate-500 whitespace-nowrap">
+                  <tr key={log.id} className={`hover:bg-stone-50 transition ${getActionBorder(log.action)}`}>
+                    <td className="py-3 px-3 font-mono text-slate-600 text-[10px] whitespace-nowrap">
                       {new Date(log.timestamp).toLocaleString([], { 
                         month: 'short', 
                         day: '2-digit', 
@@ -64,35 +94,29 @@ export const AuditLogView: React.FC = () => {
                       })}
                     </td>
                     <td className="py-3 px-3">
-                      <div className="font-semibold text-slate-900 flex items-center gap-1.5">
+                      <div className="font-bold text-slate-950 flex items-center gap-1.5 uppercase">
                         {log.userId === 'SYSTEM' || log.userId === 'AUTO_LINK_ENGINE' ? (
-                          <Cpu className="w-3.5 h-3.5 text-slate-500" />
+                          <Cpu className="w-3.5 h-3.5 text-slate-700" />
                         ) : (
-                          <UserCheck className="w-3.5 h-3.5 text-emerald-600" />
+                          <UserCheck className="w-3.5 h-3.5 text-emerald-800" />
                         )}
                         <span>{log.userName}</span>
                       </div>
-                      <span className="text-[10px] text-slate-400 font-mono">{log.userId}</span>
+                      <span className="text-[9px] text-slate-500 font-mono">[{log.userId}]</span>
                     </td>
                     <td className="py-3 px-3">
-                      <span className={`px-2 py-0.5 rounded text-[10px] font-semibold ${
-                        log.action === 'ACCEPTED' ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' :
-                        log.action === 'AUTO_LINKED' ? 'bg-slate-100 text-slate-800 border border-slate-200' :
-                        log.action === 'REJECTED' ? 'bg-rose-50 text-rose-800 border border-rose-200' :
-                        log.action === 'UNMATCHED' ? 'bg-slate-100 text-slate-600 border border-slate-200' :
-                        'bg-slate-100 text-slate-800 border border-slate-200'
-                      }`}>
-                        {log.action}
+                      <span className={`px-1.5 py-0.5 border text-[9px] font-black uppercase ${getActionBadge(log.action)}`}>
+                        [{log.action}]
                       </span>
                     </td>
-                    <td className="py-3 px-3 font-mono font-bold text-slate-800">
+                    <td className="py-3 px-3 font-mono font-bold text-slate-950">
                       {log.entityId}
                     </td>
-                    <td className="py-3 px-3 text-slate-700 leading-relaxed max-w-md">
-                      {log.explanation}
+                    <td className="py-3 px-3 text-slate-800 leading-relaxed max-w-md">
+                      <p className="font-sans text-xs">{log.explanation}</p>
                       {log.beforeState && log.afterState && (
-                        <div className="mt-1 text-[10px] text-slate-500 font-mono bg-slate-50 p-1 rounded border border-slate-200">
-                          Diff: Progress {log.beforeState.actualProgress}% → {log.afterState.actualProgress}%
+                        <div className="mt-1 text-[10px] text-slate-800 font-mono bg-stone-100 p-1.5 border border-slate-400">
+                          DELTA: PROGRESS {log.beforeState.actualProgress}% &rarr; <span className="font-black text-slate-950">{log.afterState.actualProgress}%</span>
                         </div>
                       )}
                     </td>
