@@ -29,15 +29,15 @@ export const colors = {
   // Surfaces & Backgrounds (Architectural raw canvas & stark white panels)
   surface: {
     DEFAULT: '#ffffff',
-    subtle: '#f8f8f6',
-    muted: '#f1f5f9',
-    sunken: '#e2e8f0',
-    sidebar: '#0a0f1d',
-    sidebarHover: '#141c2e',
-    sidebarActive: '#000000',
+    subtle: '#f4f4f0',
+    muted: '#ecece8',
+    sunken: '#e2e2dc',
+    sidebar: '#fbfbf9',
+    sidebarHover: '#f0f0ec',
+    sidebarActive: '#0f172a',
   },
 
-  // Hard Brutalist Borders & Dividers
+  // Defined Architectural Brutalist Borders
   border: {
     DEFAULT: '#0f172a', // Solid dark carbon border
     strong: '#000000',  // Pure black
@@ -47,10 +47,10 @@ export const colors = {
 
   // Text & Typography
   text: {
-    primary: '#000000',      // Pure black text for maximum high contrast
-    secondary: '#334155',    // Deep slate
-    muted: '#64748b',        // Technical metadata
-    light: '#94a3b8',
+    primary: '#0f172a',      // Slate-900: high-contrast, comfortable reading
+    secondary: '#334155',    // Slate-700
+    muted: '#64748b',        // Slate-500: metadata & hints
+    light: '#94a3b8',        // Slate-400
     inverse: '#ffffff',
     inverseMuted: '#cbd5e1',
   },

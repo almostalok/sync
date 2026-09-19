@@ -23,7 +23,7 @@ export default function Home() {
   const [showDemoModal, setShowDemoModal] = useState(false);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#f8fafc] text-slate-900 font-sans">
+    <div className="min-h-screen flex flex-col bg-[#f4f4f0] text-black font-sans">
       {/* Top Application Header */}
       <Header onOpenDemoModal={() => setShowDemoModal(true)} />
 
