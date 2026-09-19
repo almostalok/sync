@@ -103,38 +103,41 @@ export const GanttView: React.FC = () => {
   }
 
   return (
-    <div className="space-y-5 pb-16">
+    <div className="space-y-5 pb-16 font-mono">
       {/* Top Header Information Banner */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-lg bg-white border border-slate-200 shadow-sm">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-none bg-white border-[1.5px] border-slate-900 shadow-[2px_2px_0px_#0f172a] border-t-4 border-t-emerald-600">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase tracking-wider bg-slate-100 text-slate-800 border border-slate-200">
-              Gantt / Schedule Controls
+            <span className="w-2.5 h-2.5 bg-emerald-600 border border-slate-900 inline-block"></span>
+            <span className="px-2 py-0.5 rounded-none text-[9px] font-mono font-bold uppercase tracking-wider bg-stone-100 text-slate-900 border border-slate-900">
+              [GANTT_SCHEDULE_CONTROLS]
             </span>
-            <span className="text-xs text-slate-500 font-medium">Oil India Limited • Compressor Station Expansion</span>
+            <span className="text-[10px] text-slate-600 font-mono">
+              {'// OIL_INDIA_LTD :: CSE-2026-001'}
+            </span>
           </div>
-          <h1 className="text-lg md:text-xl font-bold tracking-tight text-slate-900">
-            Schedule Execution Control &amp; Critical Path Visualizer
+          <h1 className="text-base md:text-lg font-black tracking-tight text-slate-950 uppercase font-mono">
+            SCHEDULE EXECUTION CONTROL &amp; CRITICAL PATH VISUALIZER
           </h1>
-          <p className="text-xs text-slate-600">
+          <p className="text-xs text-slate-700 font-sans leading-relaxed">
             Expand and collapse WBS packages to inspect L5/L6 activities, start/finish variance, verified progress, and downstream dependency cascades.
           </p>
         </div>
 
-        <div className="flex items-center gap-2 shrink-0">
+        <div className="flex items-center gap-2.5 shrink-0">
           <button
             onClick={() => fetchScheduleView(activeFilters)}
             disabled={isRefreshing}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold shadow-sm transition"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-none border-[1.5px] border-slate-900 bg-white hover:bg-stone-100 text-slate-900 text-xs font-bold uppercase tracking-wider shadow-[2px_2px_0px_#0f172a] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition"
           >
-            <RefreshCw className={`w-3.5 h-3.5 ${isRefreshing ? 'animate-spin text-blue-600' : ''}`} />
-            <span>Refresh</span>
+            <RefreshCw className={`w-3.5 h-3.5 text-slate-700 ${isRefreshing ? 'animate-spin text-rose-600' : ''}`} />
+            <span>[SYNC_SCHEDULE]</span>
           </button>
           <button
             onClick={() => setActiveView('review')}
-            className="px-3 py-1.5 rounded bg-amber-50 hover:bg-amber-100 border border-amber-300 text-amber-900 text-xs font-semibold transition"
+            className="px-3 py-1.5 rounded-none bg-amber-300 hover:bg-amber-400 border-[1.5px] border-slate-900 text-black text-xs font-bold uppercase tracking-wider shadow-[2px_2px_0px_#0f172a] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition"
           >
-            Review Queue
+            [REVIEW_QUEUE]
           </button>
         </div>
       </div>

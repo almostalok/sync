@@ -36,10 +36,16 @@ export const Sidebar: React.FC = () => {
 
   const highRiskCount = state.risks.filter(r => r.severity === 'HIGH').length;
 
-  const navGroups: { group: string; prefix: string; items: NavItem[] }[] = [
+  const navGroups: { 
+    group: string; 
+    prefix: string; 
+    colorTheme: { label: string; activeBorder: string; dotColor: string };
+    items: NavItem[] 
+  }[] = [
     {
       group: 'PROJECT_OPERATIONS',
       prefix: '01',
+      colorTheme: { label: 'text-emerald-800', activeBorder: 'border-l-4 border-l-emerald-500', dotColor: 'bg-emerald-500' },
       items: [
         { id: 'dashboard', label: 'COMMAND_CENTER', icon: LayoutDashboard },
         { id: 'gantt', label: 'SCHEDULE_GANTT', icon: CalendarRange },
@@ -57,6 +63,7 @@ export const Sidebar: React.FC = () => {
     {
       group: 'INTELLIGENCE_CONTROLS',
       prefix: '02',
+      colorTheme: { label: 'text-rose-800', activeBorder: 'border-l-4 border-l-rose-500', dotColor: 'bg-rose-500' },
       items: [
         { 
           id: 'risks', 
@@ -72,6 +79,7 @@ export const Sidebar: React.FC = () => {
     {
       group: 'ANALYTICAL_TOOLS',
       prefix: '03',
+      colorTheme: { label: 'text-purple-800', activeBorder: 'border-l-4 border-l-purple-500', dotColor: 'bg-purple-500' },
       items: [
         { id: 'copilot', label: 'SCHEDULE_DOSSIER', icon: Compass },
         { id: 'voice', label: 'VOICE_INGESTION', icon: Mic },
@@ -81,6 +89,7 @@ export const Sidebar: React.FC = () => {
     {
       group: 'COMPLIANCE_AUDIT',
       prefix: '04',
+      colorTheme: { label: 'text-amber-800', activeBorder: 'border-l-4 border-l-amber-500', dotColor: 'bg-amber-500' },
       items: [
         { id: 'audit', label: 'AUDIT_TRAIL', icon: History },
       ]
@@ -92,9 +101,12 @@ export const Sidebar: React.FC = () => {
       <div className="space-y-4 flex-1">
         {navGroups.map((grp, gIdx) => (
           <div key={gIdx} className="space-y-1">
-            <h2 className="px-2 text-[9px] font-bold uppercase tracking-widest text-slate-500 flex items-center gap-1.5 border-b border-slate-300 pb-0.5">
-              <span>{`${grp.prefix} //`}</span>
-              <span>{grp.group}</span>
+            <h2 className="px-2 text-[9px] font-bold uppercase tracking-widest flex items-center justify-between border-b border-slate-300 pb-0.5">
+              <span className="flex items-center gap-1.5 text-slate-700">
+                <span className={`w-1.5 h-1.5 ${grp.colorTheme.dotColor} inline-block`} />
+                <span>{`${grp.prefix} //`}</span>
+                <span>{grp.group}</span>
+              </span>
             </h2>
             <div className="space-y-1 pt-1">
               {grp.items.map(item => {
@@ -107,7 +119,7 @@ export const Sidebar: React.FC = () => {
                     onClick={() => setActiveView(item.id)}
                     className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-none text-xs font-mono font-bold transition uppercase tracking-wider ${
                       isActive
-                        ? 'bg-black text-white border-[1.5px] border-black shadow-[2px_2px_0px_#0f172a]'
+                        ? `bg-black text-white border-[1.5px] border-black shadow-[2px_2px_0px_#0f172a] ${grp.colorTheme.activeBorder}`
                         : 'text-slate-800 hover:bg-stone-200 border border-transparent hover:border-slate-400'
                     }`}
                   >
@@ -120,11 +132,11 @@ export const Sidebar: React.FC = () => {
                       <span
                         className={`px-1.5 py-0.2 rounded-none text-[9px] font-bold font-mono border ${
                           isActive
-                            ? 'bg-white text-black border-white'
+                            ? 'bg-amber-300 text-black border-amber-400'
                             : item.badgeVariant === 'warning'
                             ? 'bg-amber-300 text-black border-slate-900'
                             : item.badgeVariant === 'critical'
-                            ? 'bg-red-600 text-white border-slate-900'
+                            ? 'bg-rose-600 text-white border-slate-900'
                             : 'bg-stone-200 text-slate-800 border-slate-400'
                         }`}
                       >
