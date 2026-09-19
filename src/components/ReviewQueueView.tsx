@@ -78,9 +78,10 @@ export const ReviewQueueView: React.FC = () => {
   return (
     <div className="space-y-5 pb-16 font-mono">
       {/* Top Banner with Filter Controls */}
-      <div className="bg-white rounded-none border-[1.5px] border-slate-900 p-4 shadow-[2px_2px_0px_#0f172a] flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-white rounded-none border-[1.5px] border-slate-900 p-4 shadow-[2px_2px_0px_#0f172a] flex flex-col md:flex-row md:items-center justify-between gap-4 border-t-4 border-t-amber-500">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
+            <span className="w-2.5 h-2.5 bg-amber-400 border border-slate-900 inline-block"></span>
             <span className="px-2 py-0.5 rounded-none text-[9px] font-bold tracking-widest uppercase bg-amber-300 text-black border border-slate-900">
               [PLANNER_VERIFICATION_QUEUE]
             </span>
@@ -117,7 +118,7 @@ export const ReviewQueueView: React.FC = () => {
           <select
             value={disciplineFilter}
             onChange={(e) => setDisciplineFilter(e.target.value)}
-            className="rounded-none border-[1.5px] border-slate-900 bg-white py-1 px-2.5 text-xs font-mono text-slate-900 font-bold uppercase focus:outline-none focus:bg-amber-50"
+            className="rounded-none border-[1.5px] border-slate-900 bg-white py-1 px-2.5 text-xs font-mono text-slate-900 font-bold uppercase focus:outline-none focus:bg-amber-50 shadow-[1px_1px_0px_#0f172a]"
           >
             <option value="ALL">ALL_DISCIPLINES</option>
             <option value="CIVIL">CIVIL</option>
@@ -131,7 +132,7 @@ export const ReviewQueueView: React.FC = () => {
       {/* Main Review Queue Workspace: Left Queue List vs Right Match Review Item */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
         {/* Left Column: Work Items Queue */}
-        <div className="lg:col-span-4 bg-white rounded-none border-[1.5px] border-slate-900 p-4 space-y-3 shadow-[2px_2px_0px_#0f172a] flex flex-col justify-between">
+        <div className="lg:col-span-4 bg-white rounded-none border-[1.5px] border-slate-900 p-4 space-y-3 shadow-[2px_2px_0px_#0f172a] flex flex-col justify-between border-t-4 border-t-slate-900">
           <div className="space-y-2">
             <div className="flex items-center justify-between border-b-[1.5px] border-slate-900 pb-2">
               <span className="text-[10px] font-bold text-slate-950 uppercase tracking-wider">
@@ -151,6 +152,12 @@ export const ReviewQueueView: React.FC = () => {
                   const isSelected = evt.id === currentEvent?.id;
                   const conf = m ? (m.confidence * 100).toFixed(0) : (evt.extractionConfidence * 100).toFixed(0);
 
+                  const discBorder = 
+                    evt.discipline === 'CIVIL' ? 'border-l-4 border-l-amber-500' :
+                    evt.discipline === 'PIPING' ? 'border-l-4 border-l-sky-500' :
+                    evt.discipline === 'MECHANICAL' ? 'border-l-4 border-l-purple-500' :
+                    evt.discipline === 'ELECTRICAL' ? 'border-l-4 border-l-yellow-500' : 'border-l-4 border-l-slate-400';
+
                   return (
                     <div
                       key={evt.id}
@@ -158,21 +165,21 @@ export const ReviewQueueView: React.FC = () => {
                         setSelectedEventId(evt.id);
                         selectEvent(evt.id);
                       }}
-                      className={`p-2.5 rounded-none border cursor-pointer transition text-xs space-y-1.5 font-mono ${
+                      className={`p-2.5 rounded-none border-[1.5px] cursor-pointer transition text-xs space-y-1.5 font-mono ${discBorder} ${
                         isSelected
-                          ? 'bg-amber-100/70 border-slate-900 shadow-[2px_2px_0px_#0f172a]'
+                          ? 'bg-amber-100/70 border-slate-900 shadow-[2px_2px_0px_#0f172a] ring-2 ring-black'
                           : 'bg-white border-slate-300 hover:border-slate-900 hover:bg-stone-50'
                       }`}
                     >
                       <div className="flex items-center justify-between">
                         <span className="font-mono text-[11px] font-black text-slate-950">[{evt.id}]</span>
                         <div className="flex items-center gap-1.5">
-                          <span className={`px-1.5 py-0.2 rounded-none text-[9px] font-mono font-bold border ${
+                          <span className={`px-1.5 py-0.2 rounded-none text-[9px] font-mono font-black border ${
                             Number(conf) >= 90
-                              ? 'bg-emerald-100 text-emerald-950 border-emerald-900'
+                              ? 'bg-emerald-200 text-emerald-950 border-emerald-700'
                               : Number(conf) >= 70
-                              ? 'bg-amber-100 text-amber-950 border-amber-900'
-                              : 'bg-rose-100 text-rose-950 border-rose-900'
+                              ? 'bg-amber-300 text-black border-slate-900'
+                              : 'bg-rose-200 text-rose-950 border-rose-700'
                           }`}>
                             [{conf}% MATCH]
                           </span>
