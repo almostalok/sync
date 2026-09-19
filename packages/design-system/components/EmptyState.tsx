@@ -24,7 +24,9 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
         {icon || <Inbox className="w-6 h-6" />}
       </div>
       <div className="space-y-1 max-w-sm">
-        <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900">[{title}]</h3>
+        <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900">
+          [{title.replace(/^\[|\]$/g, '')}]
+        </h3>
         <p className="text-xs text-slate-600 leading-relaxed font-sans">{description}</p>
       </div>
       {action && <div className="pt-2">{action}</div>}

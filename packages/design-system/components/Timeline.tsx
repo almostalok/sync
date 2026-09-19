@@ -21,23 +21,29 @@ export const Timeline: React.FC<TimelineProps> = ({ items, className = '' }) => 
       {items.map((item, idx) => (
         <div key={item.id || idx} className="relative flex items-start gap-4 pl-8">
           {/* Square Node Stamp */}
-          <div className="absolute left-1.5 top-2 w-3.5 h-3.5 rounded-none border border-slate-900 bg-black shadow-[1px_1px_0px_#000]" />
+          <div className="absolute left-1.5 top-2.5 w-3.5 h-3.5 rounded-none border border-slate-900 bg-black shadow-[1px_1px_0px_#000]" />
 
           {/* Content Block */}
-          <div className="flex-1 bg-white border-[1.5px] border-slate-900 rounded-none p-3 text-xs font-mono shadow-[2px_2px_0px_#0f172a] space-y-1">
-            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-1">
+          <div className="flex-1 bg-white border-[1.5px] border-slate-900 rounded-none p-3.5 text-xs font-mono shadow-[2px_2px_0px_#0f172a] space-y-1.5">
+            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-1.5">
               <div className="flex items-center gap-2">
-                <span className="font-bold text-slate-900 uppercase">[{item.title}]</span>
+                <span className="font-bold text-slate-900 uppercase">
+                  {item.title.replace(/^\[|\]$/g, '')}
+                </span>
                 {item.badge}
               </div>
-              <span className="text-[10px] text-slate-600 font-mono font-bold bg-stone-100 px-1 border border-slate-300">{item.timestamp}</span>
+              <span className="text-[10px] text-slate-600 font-mono font-bold bg-stone-100 px-1.5 py-0.5 border border-slate-300">
+                {item.timestamp}
+              </span>
             </div>
+
             {item.description && (
-              <p className="text-slate-800 leading-relaxed pt-1">{item.description}</p>
+              <p className="text-slate-800 leading-relaxed font-sans text-xs">{item.description}</p>
             )}
+
             {item.actor && (
               <div className="text-[10px] text-slate-600 pt-1 border-t border-dashed border-slate-200">
-                ACTOR: <span className="font-bold text-slate-950 font-mono">{item.actor}</span>
+                BY: <span className="font-bold text-slate-950 font-mono">{item.actor}</span>
               </div>
             )}
           </div>

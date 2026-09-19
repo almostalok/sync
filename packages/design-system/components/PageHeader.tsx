@@ -1,4 +1,5 @@
 import React from 'react';
+import { ChevronRight } from 'lucide-react';
 
 interface PageHeaderProps {
   title: string;
@@ -18,10 +19,10 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
   className = '',
 }) => {
   return (
-    <div className={`bg-white border-b-[1.5px] border-slate-900 px-6 py-4 shadow-sm ${className}`}>
+    <div className={`bg-white border-[1.5px] border-slate-900 px-6 py-4 rounded-none shadow-[2px_2px_0px_#0f172a] mb-5 ${className}`}>
       {/* Breadcrumbs */}
       {breadcrumbs && breadcrumbs.length > 0 && (
-        <nav className="flex items-center gap-2 text-xs font-mono text-slate-500 mb-2 font-medium">
+        <nav className="flex items-center gap-1.5 text-xs text-slate-600 mb-2 font-mono font-medium">
           {breadcrumbs.map((crumb, idx) => {
             const isLast = idx === breadcrumbs.length - 1;
             return (
@@ -38,7 +39,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
                     {crumb.label}
                   </span>
                 )}
-                {!isLast && <span className="text-slate-400 font-bold">&gt;</span>}
+                {!isLast && <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />}
               </React.Fragment>
             );
           })}
@@ -48,14 +49,14 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
       {/* Main Row: Title & Actions */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="space-y-1">
-          <div className="flex flex-wrap items-center gap-2.5">
-            <h1 className="text-xl md:text-2xl font-bold tracking-tight text-slate-950 font-sans">
+          <div className="flex flex-wrap items-center gap-3">
+            <h1 className="text-xl md:text-2xl font-black tracking-tight text-slate-950 font-sans">
               {title}
             </h1>
-            {badges && <div className="flex items-center gap-1.5">{badges}</div>}
+            {badges && <div className="flex items-center gap-2">{badges}</div>}
           </div>
           {description && (
-            <p className="text-xs md:text-sm text-slate-600 max-w-3xl leading-relaxed">
+            <p className="text-xs md:text-sm text-slate-700 max-w-3xl leading-relaxed font-sans">
               {description}
             </p>
           )}
