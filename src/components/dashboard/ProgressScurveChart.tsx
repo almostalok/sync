@@ -11,9 +11,7 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  ReferenceLine,
 } from 'recharts';
-import { TrendingUp, Info } from 'lucide-react';
 
 interface ProgressScurveChartProps {
   timeSeries: ProgressTimeSeriesDTO;
@@ -52,15 +50,15 @@ export const ProgressScurveChart: React.FC<ProgressScurveChartProps> = ({ timeSe
           <div className="flex items-center gap-2.5 bg-stone-100 px-2.5 py-1 border border-slate-900 text-xs font-mono">
             <div>
               <span className="text-slate-600 uppercase text-[9px] font-bold">ACTUAL: </span>
-              <strong className="text-slate-950 font-mono font-bold">{latestPoint.actualProgress}%</strong>
+              <strong className="text-slate-950 font-mono font-bold tabular-nums">{latestPoint.actualProgress}%</strong>
             </div>
             <div className="border-l border-slate-400 pl-2.5">
               <span className="text-slate-600 uppercase text-[9px] font-bold">PLAN: </span>
-              <strong className="text-slate-950 font-mono font-bold">{latestPoint.plannedProgress}%</strong>
+              <strong className="text-slate-950 font-mono font-bold tabular-nums">{latestPoint.plannedProgress}%</strong>
             </div>
             <div className="border-l border-slate-400 pl-2.5">
               <span className="text-slate-600 uppercase text-[9px] font-bold">VAR: </span>
-              <strong className={`font-mono font-bold ${latestPoint.variance < 0 ? 'text-red-700' : 'text-emerald-800'}`}>
+              <strong className={`font-mono font-bold tabular-nums ${latestPoint.variance < 0 ? 'text-rose-700' : 'text-emerald-800'}`}>
                 {latestPoint.variance > 0 ? '+' : ''}{latestPoint.variance}%
               </strong>
             </div>
@@ -91,7 +89,7 @@ export const ProgressScurveChart: React.FC<ProgressScurveChartProps> = ({ timeSe
               fontFamily="monospace"
             />
             <Tooltip
-              content={({ active, payload, label }) => {
+              content={({ active, payload }) => {
                 if (active && payload && payload.length) {
                   const data = payload[0].payload;
                   return (
@@ -99,17 +97,17 @@ export const ProgressScurveChart: React.FC<ProgressScurveChartProps> = ({ timeSe
                       <div className="font-bold text-slate-950 border-b border-slate-900 pb-0.5 uppercase">[{data.date}]</div>
                       <div className="text-slate-700 flex justify-between gap-4">
                         <span>PLANNED:</span>
-                        <strong className="text-slate-950 font-mono">{data.plannedProgress}%</strong>
+                        <strong className="text-slate-950 font-mono tabular-nums">{data.plannedProgress}%</strong>
                       </div>
                       {data.actualProgress !== null && (
                         <div className="text-slate-950 flex justify-between gap-4 font-bold">
                           <span>VERIFIED:</span>
-                          <strong className="font-mono">{data.actualProgress}%</strong>
+                          <strong className="font-mono tabular-nums">{data.actualProgress}%</strong>
                         </div>
                       )}
                       <div className="text-slate-700 flex justify-between gap-4 border-t border-slate-300 pt-0.5">
                         <span>VARIANCE:</span>
-                        <strong className={`font-mono ${data.variance < 0 ? 'text-red-700' : 'text-emerald-800'}`}>
+                        <strong className={`font-mono tabular-nums ${data.variance < 0 ? 'text-rose-700' : 'text-emerald-800'}`}>
                           {data.variance > 0 ? '+' : ''}{data.variance}%
                         </strong>
                       </div>
@@ -124,7 +122,7 @@ export const ProgressScurveChart: React.FC<ProgressScurveChartProps> = ({ timeSe
               align="right"
               wrapperStyle={{ paddingBottom: '8px', fontSize: '10px', fontFamily: 'monospace' }}
             />
-            {/* Planned Baseline: Slate Dashed Line */}
+            {/* Planned Baseline */}
             <Line
               name="[PLANNED_BASELINE]"
               type="stepAfter"
@@ -135,7 +133,7 @@ export const ProgressScurveChart: React.FC<ProgressScurveChartProps> = ({ timeSe
               dot={false}
               activeDot={{ r: 3, stroke: '#0f172a', strokeWidth: 1 }}
             />
-            {/* Verified Actual Progress: High-contrast Solid Line */}
+            {/* Verified Actual Progress */}
             <Line
               name="[VERIFIED_ACTUAL]"
               type="linear"

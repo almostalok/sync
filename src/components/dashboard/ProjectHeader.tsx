@@ -4,17 +4,10 @@ import React from 'react';
 import { ProjectHeaderDTO, ProjectStatus } from '@sitesync/types';
 import { 
   Building2, 
-  Calendar, 
-  Clock, 
-  CheckCircle2, 
-  AlertTriangle, 
-  AlertOctagon, 
-  User, 
+  MapPin, 
   RefreshCw,
-  MapPin,
-  Layers,
-  ShieldCheck
 } from 'lucide-react';
+import { StatusBadge } from '../../../packages/design-system/components/StatusBadge';
 
 interface ProjectHeaderProps {
   header: ProjectHeaderDTO;
@@ -27,42 +20,18 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({
   onRefresh,
   isRefreshing = false,
 }) => {
-  const getStatusBadge = (status: ProjectStatus) => {
+  const getStatusVariant = (status: ProjectStatus) => {
     switch (status) {
       case ProjectStatus.ON_TRACK:
-        return (
-          <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-none text-[10px] font-bold uppercase tracking-wider bg-emerald-100 text-emerald-950 border border-emerald-900 font-mono">
-            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-950" />
-            [ON_TRACK]
-          </span>
-        );
+        return 'verified';
       case ProjectStatus.AT_RISK:
-        return (
-          <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-none text-[10px] font-bold uppercase tracking-wider bg-amber-200 text-amber-950 border border-amber-900 font-mono">
-            <AlertTriangle className="w-3.5 h-3.5 text-amber-950" />
-            [AT_RISK]
-          </span>
-        );
+        return 'warning';
       case ProjectStatus.DELAYED:
-        return (
-          <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-none text-[10px] font-bold uppercase tracking-wider bg-amber-300 text-black border border-slate-900 font-mono">
-            <Clock className="w-3.5 h-3.5 text-black" />
-            [DELAYED]
-          </span>
-        );
+        return 'warning';
       case ProjectStatus.CRITICAL:
-        return (
-          <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-none text-[10px] font-bold uppercase tracking-wider bg-red-200 text-red-950 border border-red-900 font-mono">
-            <AlertOctagon className="w-3.5 h-3.5 text-red-950" />
-            [CRITICAL_ALERT]
-          </span>
-        );
+        return 'critical';
       default:
-        return (
-          <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-none text-[10px] font-bold uppercase tracking-wider bg-stone-100 text-slate-900 border border-slate-900 font-mono">
-            [{status}]
-          </span>
-        );
+        return 'neutral';
     }
   };
 
@@ -77,12 +46,12 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({
   };
 
   return (
-    <div className="rounded-none bg-white border-[1.5px] border-slate-900 p-4 shadow-[2px_2px_0px_#0f172a] font-mono">
+    <div className="rounded-none bg-white border-[1.5px] border-slate-900 p-4 shadow-[2px_2px_0px_#0f172a] font-mono border-t-4 border-t-slate-950">
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         {/* Left Section: Project Title & Identity */}
         <div className="space-y-2 max-w-3xl">
           <div className="flex flex-wrap items-center gap-2 text-xs text-slate-600 font-mono">
-            <span className="px-1.5 py-0.5 rounded-none font-mono font-bold bg-amber-100/60 text-slate-950 border border-slate-400">
+            <span className="px-2 py-0.5 rounded-none font-mono font-black bg-amber-300 text-slate-950 border-[1.5px] border-slate-900 shadow-[1px_1px_0px_#000]">
               [{header.projectCode}]
             </span>
             <span>|</span>
@@ -126,9 +95,13 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({
           </div>
         </div>
 
-        {/* Right Section: Operational Status & Controls */}
+        {/* Right Section: Status Badge & Refresh Action */}
         <div className="flex flex-wrap items-center gap-3 shrink-0">
-          <div>{getStatusBadge(header.currentStatus)}</div>
+          <StatusBadge
+            status={getStatusVariant(header.currentStatus)}
+            label={header.currentStatus.replace(/_/g, ' ')}
+            size="md"
+          />
 
           {onRefresh && (
             <button
@@ -137,7 +110,7 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-none border-[1.5px] border-slate-900 bg-white hover:bg-stone-100 text-slate-900 text-xs font-bold uppercase tracking-wider shadow-[2px_2px_0px_#0f172a] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition"
               title="Refresh project telemetry"
             >
-              <RefreshCw className={`w-3.5 h-3.5 ${isRefreshing ? 'animate-spin text-red-600' : ''}`} />
+              <RefreshCw className={`w-3.5 h-3.5 text-slate-700 ${isRefreshing ? 'animate-spin text-rose-600' : ''}`} />
               <span className="hidden sm:inline">[SYNC_TELEMETRY]</span>
             </button>
           )}
