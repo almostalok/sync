@@ -134,7 +134,7 @@ export const CommandCenterView: React.FC<{ onOpenDemoModal: () => void }> = ({ o
       {/* Operational Control Header Strip */}
       <div className="bg-white rounded-none border-[1.5px] border-slate-900 p-4 shadow-[2px_2px_0px_#0f172a] font-mono">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-          <div className="space-y-1 max-w-3xl">
+          <div className="space-y-1.5 max-w-3xl">
             <div className="flex items-center gap-2">
               <span className="px-2 py-0.5 rounded-none text-[9px] font-bold tracking-widest uppercase bg-stone-100 text-slate-900 border border-slate-900">
                 [PROJECT_CONTROL_ROOM]
@@ -154,7 +154,7 @@ export const CommandCenterView: React.FC<{ onOpenDemoModal: () => void }> = ({ o
           <div className="flex flex-wrap items-center gap-2.5 shrink-0">
             <button
               onClick={onOpenDemoModal}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-none bg-black hover:bg-slate-800 text-white text-xs font-bold uppercase tracking-wider border-[1.5px] border-black shadow-[2px_2px_0px_#0f172a] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-none bg-black hover:bg-slate-800 text-white text-xs font-bold uppercase tracking-wider border-[1.5px] border-black shadow-[2px_2px_0px_#0f172a] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition"
             >
               <Play className="w-3 h-3 fill-white" />
               <span>[LAUNCH_DEMO]</span>
@@ -162,7 +162,7 @@ export const CommandCenterView: React.FC<{ onOpenDemoModal: () => void }> = ({ o
 
             <button
               onClick={() => setActiveView('review')}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-none bg-amber-300 hover:bg-amber-400 border-[1.5px] border-slate-900 text-black text-xs font-bold uppercase tracking-wider shadow-[2px_2px_0px_#0f172a] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-none bg-amber-300 hover:bg-amber-400 border-[1.5px] border-slate-900 text-black text-xs font-bold uppercase tracking-wider shadow-[2px_2px_0px_#0f172a] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition"
             >
               <AlertTriangle className="w-3.5 h-3.5 text-black" />
               <span>[REVIEW_QUEUE: {attention?.totalReviewCount || 37}]</span>
@@ -170,7 +170,7 @@ export const CommandCenterView: React.FC<{ onOpenDemoModal: () => void }> = ({ o
 
             <button
               onClick={() => setActiveView('copilot')}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-none bg-stone-100 hover:bg-stone-200 border-[1.5px] border-slate-900 text-slate-900 text-xs font-bold uppercase tracking-wider shadow-[2px_2px_0px_#0f172a] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-none bg-stone-100 hover:bg-stone-200 border-[1.5px] border-slate-900 text-slate-900 text-xs font-bold uppercase tracking-wider shadow-[2px_2px_0px_#0f172a] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition"
             >
               <Compass className="w-3.5 h-3.5 text-slate-900" />
               <span>[DOSSIER_INTEL]</span>

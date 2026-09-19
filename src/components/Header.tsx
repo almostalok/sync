@@ -4,15 +4,11 @@ import React, { useState } from 'react';
 import { useProject } from '@/context/ProjectContext';
 import { 
   Building2, 
-  Search, 
   Play, 
   RotateCcw, 
   ChevronDown, 
   AlertTriangle, 
-  CheckCircle2, 
-  Clock, 
-  User,
-  ShieldCheck
+  Layers
 } from 'lucide-react';
 
 export const Header: React.FC<{ onOpenDemoModal: () => void }> = ({ onOpenDemoModal }) => {
@@ -31,21 +27,24 @@ export const Header: React.FC<{ onOpenDemoModal: () => void }> = ({ onOpenDemoMo
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b-[2px] border-slate-900 bg-white px-4 lg:px-6 py-2.5 font-mono">
+    <header className="sticky top-0 z-40 w-full border-b-[2px] border-slate-900 bg-white px-4 lg:px-6 py-2.5 font-mono shadow-sm">
       <div className="flex items-center justify-between gap-4">
         {/* Left: Brand Identity & Project Selector */}
         <div className="flex items-center gap-4">
           {/* SiteSync Technical Stencil Mark */}
-          <div className="flex items-center gap-2.5 cursor-pointer select-none" onClick={() => setActiveView('dashboard')}>
-            <div className="w-8 h-8 rounded-none bg-black text-white flex items-center justify-center font-bold font-mono text-sm tracking-widest border border-black shadow-[2px_2px_0px_#0f172a]">
+          <div 
+            className="flex items-center gap-2.5 cursor-pointer select-none group" 
+            onClick={() => setActiveView('dashboard')}
+          >
+            <div className="w-8 h-8 rounded-none bg-black text-white flex items-center justify-center font-bold text-xs tracking-widest border border-black shadow-[2px_2px_0px_#0f172a]">
               SS
             </div>
             <div>
               <div className="flex items-center gap-2 leading-none">
                 <span className="text-sm font-black tracking-wider text-slate-950 uppercase font-mono">
-                  [SITESYNC]
+                  SITESYNC
                 </span>
-                <span className="text-[9px] uppercase font-bold tracking-wider px-1 py-0.5 rounded-none bg-stone-100 text-slate-900 border border-slate-900">
+                <span className="text-[9px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded-none bg-stone-100 text-slate-900 border border-slate-900">
                   CTRL::V2.4
                 </span>
               </div>
@@ -61,7 +60,7 @@ export const Header: React.FC<{ onOpenDemoModal: () => void }> = ({ onOpenDemoMo
           <div className="relative">
             <button
               onClick={() => setProjectDropdownOpen(!projectDropdownOpen)}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-none border-[1.5px] border-slate-900 bg-stone-50 hover:bg-white text-left transition shadow-[2px_2px_0px_#0f172a] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none"
+              className="flex items-center gap-2.5 px-3 py-1.5 rounded-none border-[1.5px] border-slate-900 bg-stone-50 hover:bg-white text-left transition shadow-[2px_2px_0px_#0f172a] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none"
             >
               <Building2 className="w-3.5 h-3.5 text-slate-900 shrink-0" />
               <div className="max-w-[200px] lg:max-w-xs truncate font-mono">
@@ -69,7 +68,7 @@ export const Header: React.FC<{ onOpenDemoModal: () => void }> = ({ onOpenDemoMo
                   {state.project.name}
                 </div>
                 <div className="text-[10px] text-slate-600 font-mono leading-tight">
-                  [{state.project.id}] // DULIAJAN_GT
+                  [{state.project.id}] · DULIAJAN_GT
                 </div>
               </div>
               <ChevronDown className="w-3.5 h-3.5 text-slate-900 shrink-0 ml-1" />
@@ -77,11 +76,11 @@ export const Header: React.FC<{ onOpenDemoModal: () => void }> = ({ onOpenDemoMo
 
             {/* Dropdown Menu */}
             {projectDropdownOpen && (
-              <div className="absolute left-0 mt-1.5 w-80 bg-white border-[1.5px] border-slate-900 rounded-none shadow-[3px_3px_0px_#0f172a] z-50 py-1 text-xs font-mono">
-                <div className="px-3 py-1 text-[9px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-900 bg-stone-100">
+              <div className="absolute left-0 mt-1.5 w-84 bg-white border-[1.5px] border-slate-900 rounded-none shadow-[3px_3px_0px_#0f172a] z-50 py-1 text-xs font-mono">
+                <div className="px-3 py-1.5 text-[9px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-900 bg-stone-100">
                   {'// SELECT_ACTIVE_PROJECT'}
                 </div>
-                <div className="px-3 py-2 bg-amber-50/70 border-l-[3px] border-slate-900 cursor-pointer">
+                <div className="px-3 py-2 bg-amber-50/80 border-l-[3px] border-slate-900 cursor-pointer">
                   <div className="font-bold text-slate-950 uppercase">{state.project.name}</div>
                   <div className="text-[10px] text-slate-600 font-mono">[CSE-2026-001] · OIL INDIA LTD · ACTIVE</div>
                 </div>
@@ -95,7 +94,7 @@ export const Header: React.FC<{ onOpenDemoModal: () => void }> = ({ onOpenDemoMo
         </div>
 
         {/* Middle: Operational Ticker */}
-        <div className="hidden xl:flex items-center gap-3 border-[1.5px] border-slate-900 bg-stone-50 px-4 py-1 text-xs text-slate-900 shadow-[2px_2px_0px_#0f172a]">
+        <div className="hidden xl:flex items-center gap-3 border-[1.5px] border-slate-900 bg-stone-50 px-3.5 py-1 text-xs text-slate-900 shadow-[2px_2px_0px_#0f172a]">
           <div className="flex items-center gap-1.5">
             <span className="text-slate-600 uppercase text-[10px] font-bold">PROGRESS:</span>
             <strong className="text-slate-950 font-mono font-bold">{state.project.actualProgress}%</strong>
@@ -106,7 +105,9 @@ export const Header: React.FC<{ onOpenDemoModal: () => void }> = ({ onOpenDemoMo
 
           <div className="flex items-center gap-1.5">
             <span className="text-slate-600 uppercase text-[10px] font-bold">VARIANCE:</span>
-            <strong className="text-red-700 font-mono font-bold bg-red-100 px-1 border border-red-300">+{state.scheduleMetrics.overallScheduleVarianceDays}D</strong>
+            <strong className="text-rose-700 font-mono font-bold bg-rose-100 px-1 border border-rose-300">
+              +{state.scheduleMetrics.overallScheduleVarianceDays}D
+            </strong>
           </div>
 
           <span className="text-slate-400 font-bold">|</span>
@@ -116,19 +117,19 @@ export const Header: React.FC<{ onOpenDemoModal: () => void }> = ({ onOpenDemoMo
             className="flex items-center gap-1.5 text-slate-900 font-bold hover:bg-amber-100 px-1 transition"
           >
             <AlertTriangle className="w-3.5 h-3.5 text-amber-700" />
-            <span className="text-[10px] uppercase">REVIEW_QUEUE:</span>
-            <span className="bg-amber-400 text-black px-1.5 py-0.2 border border-slate-900 font-mono font-black text-[10px]">
+            <span className="text-[10px] uppercase font-bold">REVIEW_QUEUE:</span>
+            <span className="bg-amber-300 text-black px-1.5 py-0.2 border border-slate-900 font-mono font-black text-[10px]">
               [{pendingReviewCount}]
             </span>
           </button>
         </div>
 
-        {/* Right: Actions & User Menu */}
+        {/* Right: Actions & User Profile */}
         <div className="flex items-center gap-2.5">
           {/* Demo Script Walkthrough */}
           <button
             onClick={onOpenDemoModal}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-none bg-black hover:bg-slate-800 text-white text-xs font-bold uppercase tracking-wider border-[1.5px] border-black shadow-[2px_2px_0px_#0f172a] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-none bg-black hover:bg-slate-800 text-white text-xs font-bold uppercase tracking-wider border-[1.5px] border-black shadow-[2px_2px_0px_#0f172a] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition"
             title="Open Presentation Script Walkthrough"
           >
             <Play className="w-3 h-3 fill-white" />
@@ -142,7 +143,7 @@ export const Header: React.FC<{ onOpenDemoModal: () => void }> = ({ onOpenDemoMo
             className="p-1.5 rounded-none border-[1.5px] border-slate-900 bg-white hover:bg-stone-100 text-slate-900 shadow-[2px_2px_0px_#0f172a] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition"
             title="Reset Project State to Baseline"
           >
-            <RotateCcw className={`w-3.5 h-3.5 ${isResetting ? 'animate-spin text-red-600' : ''}`} />
+            <RotateCcw className={`w-3.5 h-3.5 ${isResetting ? 'animate-spin text-rose-600' : ''}`} />
           </button>
 
           {/* User Profile */}

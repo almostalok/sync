@@ -18,6 +18,7 @@ import {
   RotateCcw,
   CheckCheck
 } from 'lucide-react';
+import { StatusBadge } from '../../packages/design-system/components/StatusBadge';
 
 export const ReviewQueueView: React.FC = () => {
   const { 
@@ -64,19 +65,19 @@ export const ReviewQueueView: React.FC = () => {
     rejectMatch(currentEvent.id, currentMatch.id);
   };
 
+  const handleSelectAlt = (activityId: string) => {
+    if (!currentEvent || !currentMatch) return;
+    selectAlternativeCandidate(currentEvent.id, currentMatch.id, activityId);
+  };
+
   const handleMarkUnmatched = () => {
     if (!currentEvent || !currentMatch) return;
     markUnmatched(currentEvent.id, currentMatch.id);
   };
 
-  const handleSelectAlt = (altActId: string) => {
-    if (!currentEvent || !currentMatch) return;
-    selectAlternativeCandidate(currentEvent.id, currentMatch.id, altActId);
-  };
-
   return (
     <div className="space-y-5 pb-16 font-mono">
-      {/* Top Banner with Safety Principle */}
+      {/* Top Banner with Filter Controls */}
       <div className="bg-white rounded-none border-[1.5px] border-slate-900 p-4 shadow-[2px_2px_0px_#0f172a] flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
@@ -106,7 +107,9 @@ export const ReviewQueueView: React.FC = () => {
                     : 'text-slate-800 hover:bg-stone-200'
                 }`}
               >
-                {mode === 'PENDING' ? `[PENDING: ${state.events.filter(e => e.match?.decision === 'PENDING_REVIEW').length}]` : `[${mode}]`}
+                {mode === 'PENDING'
+                  ? `[PENDING: ${state.events.filter(e => e.match?.decision === 'PENDING_REVIEW').length}]`
+                  : `[${mode}]`}
               </button>
             ))}
           </div>
@@ -169,7 +172,7 @@ export const ReviewQueueView: React.FC = () => {
                               ? 'bg-emerald-100 text-emerald-950 border-emerald-900'
                               : Number(conf) >= 70
                               ? 'bg-amber-100 text-amber-950 border-amber-900'
-                              : 'bg-red-100 text-red-950 border-red-900'
+                              : 'bg-rose-100 text-rose-950 border-rose-900'
                           }`}>
                             [{conf}% MATCH]
                           </span>
@@ -179,7 +182,7 @@ export const ReviewQueueView: React.FC = () => {
                         </div>
                       </div>
 
-                      <div className="font-bold text-slate-900 truncate" title={evt.description}>
+                      <div className="font-bold text-slate-900 truncate font-sans" title={evt.description}>
                         {evt.description}
                       </div>
 
@@ -223,17 +226,19 @@ export const ReviewQueueView: React.FC = () => {
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <span className={`px-2.5 py-1 rounded-none text-[10px] font-bold uppercase tracking-wider border-[1.5px] ${
-                    currentMatch.decision === 'ACCEPTED'
-                      ? 'bg-emerald-100 text-emerald-950 border-emerald-900'
-                      : currentMatch.decision === 'AUTO_LINKED'
-                      ? 'bg-blue-100 text-blue-950 border-blue-900'
-                      : currentMatch.decision === 'REJECTED'
-                      ? 'bg-red-100 text-red-950 border-red-900'
-                      : 'bg-amber-200 text-amber-950 border-amber-900'
-                  }`}>
-                    [{currentMatch.decision.replace(/_/g, ' ')}]
-                  </span>
+                  <StatusBadge
+                    status={
+                      currentMatch.decision === 'ACCEPTED'
+                        ? 'verified'
+                        : currentMatch.decision === 'AUTO_LINKED'
+                        ? 'info'
+                        : currentMatch.decision === 'REJECTED'
+                        ? 'critical'
+                        : 'warning'
+                    }
+                    label={currentMatch.decision.replace(/_/g, ' ')}
+                    size="md"
+                  />
                 </div>
               </div>
 
@@ -275,7 +280,7 @@ export const ReviewQueueView: React.FC = () => {
                   </div>
                   <div className="p-2 border border-slate-300 bg-white">
                     <span className="text-[9px] text-slate-500 uppercase font-bold block">PROGRESS:</span>
-                    <strong className="text-slate-950 font-black">{currentEvent.progress || 0}%</strong>
+                    <strong className="text-slate-950 font-black tabular-nums">{currentEvent.progress || 0}%</strong>
                   </div>
                 </div>
               </div>
@@ -302,7 +307,7 @@ export const ReviewQueueView: React.FC = () => {
                     </div>
 
                     <div className="text-right shrink-0">
-                      <div className="text-lg font-black font-mono text-slate-950">
+                      <div className="text-lg font-black font-mono text-slate-950 tabular-nums">
                         [{(currentMatch.confidence * 100).toFixed(1)}%]
                       </div>
                       <span className="text-[9px] font-bold uppercase tracking-wider text-slate-700">
@@ -319,19 +324,19 @@ export const ReviewQueueView: React.FC = () => {
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 text-[10px] font-mono">
                       <div className="p-1.5 bg-white border border-slate-300 flex justify-between">
                         <span className="text-slate-600">SEMANTIC:</span>
-                        <strong className="text-slate-950">{((currentMatch.signals?.semanticScore || 0.92) * 100).toFixed(0)}%</strong>
+                        <strong className="text-slate-950 tabular-nums">{((currentMatch.signals?.semanticScore || 0.92) * 100).toFixed(0)}%</strong>
                       </div>
                       <div className="p-1.5 bg-white border border-slate-300 flex justify-between">
                         <span className="text-slate-600">DISCIPLINE:</span>
-                        <strong className="text-slate-950">{((currentMatch.signals?.disciplineScore || 1.0) * 100).toFixed(0)}%</strong>
+                        <strong className="text-slate-950 tabular-nums">{((currentMatch.signals?.disciplineScore || 1.0) * 100).toFixed(0)}%</strong>
                       </div>
                       <div className="p-1.5 bg-white border border-slate-300 flex justify-between">
                         <span className="text-slate-600">LOCATION:</span>
-                        <strong className="text-slate-950">{((currentMatch.signals?.locationScore || 0.85) * 100).toFixed(0)}%</strong>
+                        <strong className="text-slate-950 tabular-nums">{((currentMatch.signals?.locationScore || 0.85) * 100).toFixed(0)}%</strong>
                       </div>
                       <div className="p-1.5 bg-white border border-slate-300 flex justify-between">
                         <span className="text-slate-600">TEMPORAL:</span>
-                        <strong className="text-slate-950">{((currentMatch.signals?.temporalScore || 0.90) * 100).toFixed(0)}%</strong>
+                        <strong className="text-slate-950 tabular-nums">{((currentMatch.signals?.temporalScore || 0.90) * 100).toFixed(0)}%</strong>
                       </div>
                     </div>
                   </div>
@@ -352,10 +357,10 @@ export const ReviewQueueView: React.FC = () => {
                       >
                         <div className="truncate pr-2">
                           <span className="font-mono font-bold text-slate-950 mr-2">[{alt.activityCode}]</span>
-                          <span className="text-slate-800 uppercase">{alt.activityName}</span>
+                          <span className="text-slate-800 uppercase font-sans">{alt.activityName}</span>
                         </div>
                         <div className="flex items-center gap-3 shrink-0">
-                          <span className="font-mono text-slate-700 font-bold">{(alt.finalScore * 100).toFixed(1)}%</span>
+                          <span className="font-mono text-slate-700 font-bold tabular-nums">{(alt.finalScore * 100).toFixed(1)}%</span>
                           <button
                             onClick={() => handleSelectAlt(alt.activityId)}
                             className="px-2 py-0.5 rounded-none border border-slate-900 bg-white hover:bg-stone-200 text-slate-950 font-bold text-[10px] uppercase active:translate-x-[1px] active:translate-y-[1px]"
@@ -374,7 +379,7 @@ export const ReviewQueueView: React.FC = () => {
                 <div className="flex items-center gap-2">
                   <button
                     onClick={handleReject}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-none border-[1.5px] border-red-800 bg-white hover:bg-red-50 text-red-950 font-bold text-xs uppercase shadow-[2px_2px_0px_#991b1b] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition"
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-none border-[1.5px] border-rose-800 bg-white hover:bg-rose-50 text-rose-950 font-bold text-xs uppercase shadow-[2px_2px_0px_#991b1b] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition"
                   >
                     <X className="w-3.5 h-3.5" />
                     <span>[REJECT_MATCH]</span>
@@ -382,7 +387,7 @@ export const ReviewQueueView: React.FC = () => {
 
                   <button
                     onClick={handleMarkUnmatched}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-none border-[1.5px] border-slate-900 bg-stone-100 hover:bg-stone-200 text-slate-900 font-bold text-xs uppercase shadow-[2px_2px_0px_#0f172a] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition"
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-none border-[1.5px] border-slate-900 bg-stone-100 hover:bg-stone-200 text-slate-900 font-bold text-xs uppercase shadow-[2px_2px_0px_#0f172a] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition"
                   >
                     <HelpCircle className="w-3.5 h-3.5" />
                     <span>[NEW_SCOPE_UNMATCHED]</span>
@@ -391,7 +396,7 @@ export const ReviewQueueView: React.FC = () => {
 
                 <button
                   onClick={handleAccept}
-                  className="flex items-center gap-1.5 px-4 py-2 rounded-none bg-black hover:bg-slate-800 text-white font-black text-xs uppercase tracking-wider border-[1.5px] border-black shadow-[2px_2px_0px_#0f172a] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition"
+                  className="flex items-center gap-1.5 px-4 py-2 rounded-none bg-black hover:bg-slate-800 text-white font-black text-xs uppercase tracking-wider border-[1.5px] border-black shadow-[2px_2px_0px_#0f172a] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition"
                 >
                   <CheckCheck className="w-4 h-4 text-emerald-400" />
                   <span>[VERIFY_&_COMMIT_SCHEDULE]</span>
@@ -402,7 +407,7 @@ export const ReviewQueueView: React.FC = () => {
             <div className="p-12 text-center text-slate-500 space-y-2">
               <CheckCircle2 className="w-8 h-8 text-slate-400 mx-auto" />
               <div className="text-xs font-bold text-slate-800 uppercase">{'// NO_ITEM_SELECTED'}</div>
-              <div className="text-[11px] text-slate-600">Select an item from the queue to review evidence and confirm linkage.</div>
+              <div className="text-[11px] text-slate-600 font-sans">Select an item from the queue to review evidence and confirm linkage.</div>
             </div>
           )}
         </div>
