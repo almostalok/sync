@@ -7,3 +7,4 @@ export * from './EvidencePanel';
 export * from './Timeline';
 export * from './EmptyState';
 export * from './ErrorState';
+export * from './SiteSyncLogo';

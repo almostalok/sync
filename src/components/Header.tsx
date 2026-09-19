@@ -10,6 +10,7 @@ import {
   AlertTriangle, 
   Layers
 } from 'lucide-react';
+import { SiteSyncLogo } from '../../packages/design-system/components/SiteSyncLogo';
 
 export const Header: React.FC<{ onOpenDemoModal: () => void }> = ({ onOpenDemoModal }) => {
   const { state, setActiveView, resetDemoScenario } = useProject();
@@ -31,30 +32,15 @@ export const Header: React.FC<{ onOpenDemoModal: () => void }> = ({ onOpenDemoMo
       <div className="flex items-center justify-between gap-4">
         {/* Left: Brand Identity & Project Selector */}
         <div className="flex items-center gap-4">
-          {/* SiteSync Technical Stencil Mark */}
+          {/* SiteSync Cool Minimalist Logo */}
           <div 
-            className="flex items-center gap-2.5 cursor-pointer select-none group" 
+            className="cursor-pointer group" 
             onClick={() => setActiveView('dashboard')}
           >
-            <div className="w-8 h-8 rounded-none bg-black text-white flex items-center justify-center font-bold text-xs tracking-widest border border-black shadow-[2px_2px_0px_#0f172a]">
-              SS
-            </div>
-            <div>
-              <div className="flex items-center gap-2 leading-none">
-                <span className="text-sm font-black tracking-wider text-slate-950 uppercase font-mono">
-                  SITESYNC
-                </span>
-                <span className="text-[9px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded-none bg-stone-100 text-slate-900 border border-slate-900">
-                  CTRL::V2.4
-                </span>
-              </div>
-              <span className="text-[10px] text-slate-600 font-mono tracking-normal block mt-0.5 uppercase">
-                {'// INDUSTRIAL_SCHEDULE_INTEL'}
-              </span>
-            </div>
+            <SiteSyncLogo size="md" showSubtitle={true} />
           </div>
 
-          <div className="h-6 w-[1.5px] bg-slate-900 hidden sm:block" />
+          <div className="h-7 w-[1.5px] bg-slate-900 hidden sm:block" />
 
           {/* Prominent Project Selector */}
           <div className="relative">

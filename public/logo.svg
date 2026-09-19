@@ -1,0 +1,24 @@
+<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Carbon Black Monolithic Base -->
+  <rect width="48" height="48" fill="#0f172a" />
+  <rect x="0.75" y="0.75" width="46.5" height="46.5" stroke="#000000" stroke-width="1.5" />
+
+  <!-- Subtle Blueprint Reticle -->
+  <line x1="0" y1="24" x2="48" y2="24" stroke="#1e293b" stroke-width="1" stroke-dasharray="3 3" />
+  <line x1="24" y1="0" x2="24" y2="48" stroke="#1e293b" stroke-width="1" stroke-dasharray="3 3" />
+
+  <!-- Plan Baseline Bracket (White) -->
+  <path d="M10 20V10H20" stroke="#ffffff" stroke-width="3.5" stroke-linecap="square" />
+
+  <!-- Field Reality Bracket (White) -->
+  <path d="M38 28V38H28" stroke="#ffffff" stroke-width="3.5" stroke-linecap="square" />
+
+  <!-- Baseline Pulse Square (White) -->
+  <rect x="14" y="19" width="7" height="7" fill="#ffffff" />
+
+  <!-- Reality Sync Pulse Square (Vivid Amber) -->
+  <rect x="27" y="22" width="7" height="7" fill="#f59e0b" />
+
+  <!-- Telemetry Connector Line -->
+  <path d="M21 22.5H27" stroke="#f59e0b" stroke-width="3" stroke-linecap="square" />
+</svg>
